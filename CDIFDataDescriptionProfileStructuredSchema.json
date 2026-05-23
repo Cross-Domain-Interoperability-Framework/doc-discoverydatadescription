@@ -139,7 +139,7 @@
             }
           },
           {
-            "$ref": "#/$defs/LabeledLink"
+            "$ref": "#/$defs/Reference"
           }
         ]
       }
@@ -163,7 +163,7 @@
             }
           },
           {
-            "$ref": "#/$defs/LabeledLink"
+            "$ref": "#/$defs/Reference"
           }
         ]
       }
@@ -213,6 +213,10 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "schema:contentSize": {
+                "type": "string",
+                "description": "File size of this distribution, e.g. '2.5 MB' or a byte count. Per schema.org/contentSize."
               },
               "spdx:checksum": {
                 "type": "object",
@@ -319,7 +323,7 @@
                     "default": "not specified"
                   },
                   {
-                    "$ref": "#/$defs/LabeledLink"
+                    "$ref": "#/$defs/Reference"
                   }
                 ]
               },
@@ -330,7 +334,7 @@
                     "type": "string"
                   },
                   {
-                    "$ref": "#/$defs/LabeledLink"
+                    "$ref": "#/$defs/Reference"
                   }
                 ]
               },
@@ -427,8 +431,9 @@
                       ]
                     },
                     "schema:result": {
+                      "title": "Action result",
+                      "description": "specifies the serialization scheme (encoding format, information model) for the expected representation of the data - documentation of the serialization format for the API response. See the actionResult building block.",
                       "type": "object",
-                      "description": "specifies the serialization scheme (encoding format, information model) for expected representation of the data. Documentation of the serialization format for the API response.",
                       "properties": {
                         "@type": {
                           "type": "array",
@@ -441,14 +446,32 @@
                           },
                           "minItems": 1
                         },
+                        "schema:name": {
+                          "type": "string",
+                          "description": "text label for the result/response format."
+                        },
+                        "schema:description": {
+                          "type": "string",
+                          "description": "description of the result/response representation."
+                        },
                         "schema:encodingFormat": {
                           "type": "array",
+                          "description": "MIME type(s) of the response serialization.",
                           "items": {
                             "type": "string"
                           }
                         },
-                        "schema:description": {
-                          "type": "string"
+                        "dcterms:conformsTo": {
+                          "type": "array",
+                          "description": "identifier(s) for a standard or specification the response conforms to.",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "@id": {
+                                "type": "string"
+                              }
+                            }
+                          }
                         }
                       }
                     },
@@ -525,165 +548,178 @@
             ]
           }
         ],
-        "properties": {
-          "cdif:hasPhysicalMapping": {
-            "type": "array",
-            "description": "Per-field physical mappings linking the variables measured by this distribution to their physical representation in the file - column index, format, physical data type, length, null sequence, etc. Applies to schema:DataDownload items typed as cdi:PhysicalDataSet or one of its subclasses. Each item is a cdifPhysicalMapping.",
-            "items": {
-              "title": "Physical Mapping Type",
-              "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
-              "type": "object",
+        "allOf": [
+          {
+            "if": {
               "properties": {
-                "cdif:index": {
-                  "type": "integer",
-                  "minimum": 0,
-                  "description": "Non-negative integer that orders the fields in the data structure (column number)."
-                },
-                "cdif:format": {
-                  "type": "string",
-                  "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
-                },
-                "cdif:physicalDataType": {
-                  "type": "string"
-                },
-                "cdi:length": {
-                  "type": "integer",
-                  "description": "The column width if the tabular text is fixed width."
-                },
-                "cdi:nullSequence": {
-                  "type": "string",
-                  "description": "The value of this property becomes the null annotation for the described column."
-                },
-                "cdi:defaultValue": {
-                  "type": "string",
-                  "description": "A default string indicating the value to substitute for an empty string."
-                },
-                "cdi:scale": {
-                  "type": "integer"
-                },
-                "cdi:decimalPositions": {
-                  "type": "integer"
-                },
-                "cdi:minimumLength": {
-                  "type": "integer"
-                },
-                "cdi:maximumLength": {
-                  "type": "integer"
-                },
-                "cdi:isRequired": {
-                  "type": "boolean",
-                  "default": false
-                },
-                "cdif:formats_InstanceVariable": {
-                  "type": "object",
-                  "description": "Reference to a variable defined in schema:variableMeasured.",
-                  "properties": {
-                    "@id": {
-                      "type": "string",
-                      "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                "@type": {
+                  "contains": {
+                    "const": "schema:DataDownload"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "cdif:hasPhysicalMapping": {
+                  "type": "array",
+                  "description": "Per-field physical mappings linking the variables measured by this DataDownload distribution to their physical representation in the file - column index, format, physical data type, length, null sequence, etc. Each item is a cdifPhysicalMapping.",
+                  "items": {
+                    "title": "Physical Mapping Type",
+                    "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                    "type": "object",
+                    "properties": {
+                      "cdif:index": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                      },
+                      "cdif:format": {
+                        "type": "string",
+                        "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                      },
+                      "cdif:physicalDataType": {
+                        "type": "string"
+                      },
+                      "cdi:length": {
+                        "type": "integer",
+                        "description": "The column width if the tabular text is fixed width."
+                      },
+                      "cdi:nullSequence": {
+                        "type": "string",
+                        "description": "The value of this property becomes the null annotation for the described column."
+                      },
+                      "cdi:defaultValue": {
+                        "type": "string",
+                        "description": "A default string indicating the value to substitute for an empty string."
+                      },
+                      "cdi:scale": {
+                        "type": "integer"
+                      },
+                      "cdi:decimalPositions": {
+                        "type": "integer"
+                      },
+                      "cdi:minimumLength": {
+                        "type": "integer"
+                      },
+                      "cdi:maximumLength": {
+                        "type": "integer"
+                      },
+                      "cdi:isRequired": {
+                        "type": "boolean",
+                        "default": false
+                      },
+                      "cdif:formats_InstanceVariable": {
+                        "type": "object",
+                        "description": "Reference to a variable defined in schema:variableMeasured.",
+                        "properties": {
+                          "@id": {
+                            "type": "string",
+                            "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                          }
+                        }
+                      }
                     }
                   }
+                },
+                "cdi:characterSet": {
+                  "type": "string",
+                  "description": "The character set used in the distribution (e.g., UTF-8, ASCII)."
                 }
               }
             }
           },
-          "cdi:characterSet": {
-            "type": "string",
-            "description": "The character set used in the distribution (e.g., UTF-8, ASCII)."
-          },
-          "cdif:fileSize": {
-            "type": "number",
-            "description": "The size of the distribution file."
-          },
-          "cdif:fileSizeUofM": {
-            "type": "string",
-            "description": "Unit of measure for the file size (e.g., bytes, KB, MB, GB)."
-          },
-          "schema:potentialAction": {
-            "description": "For schema:WebAPI distributions, the potentialAction.result describes the physical realization of the API response bytes - analogous to a DataDownload distribution. The result MAY be additionally typed as cdi:PhysicalDataSet or one of its subclasses, and MAY carry the same physical-realization properties (cdif:hasPhysicalMapping, cdi:characterSet, cdif:fileSize, cdif:fileSizeUofM) as a DataDownload distribution. cdi:PhysicalDataSet typing belongs on the result, NOT on the WebAPI distribution itself - the WebAPI distribution describes the service; the result describes the bytes the service produces.",
-            "items": {
+          {
+            "if": {
               "properties": {
-                "schema:result": {
-                  "properties": {
-                    "cdif:hasPhysicalMapping": {
-                      "type": "array",
-                      "description": "Per-field physical mappings for the API response bytes. cdif:formats_InstanceVariable should reference the @ids of variables in the parent dataset's schema:variableMeasured (the API response is another physical realization of those same InstanceVariables).",
-                      "items": {
-                        "title": "Physical Mapping Type",
-                        "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
-                        "type": "object",
+                "@type": {
+                  "contains": {
+                    "const": "schema:WebAPI"
+                  }
+                }
+              }
+            },
+            "then": {
+              "properties": {
+                "schema:potentialAction": {
+                  "items": {
+                    "properties": {
+                      "schema:result": {
                         "properties": {
-                          "cdif:index": {
-                            "type": "integer",
-                            "minimum": 0,
-                            "description": "Non-negative integer that orders the fields in the data structure (column number)."
-                          },
-                          "cdif:format": {
-                            "type": "string",
-                            "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
-                          },
-                          "cdif:physicalDataType": {
-                            "type": "string"
-                          },
-                          "cdi:length": {
-                            "type": "integer",
-                            "description": "The column width if the tabular text is fixed width."
-                          },
-                          "cdi:nullSequence": {
-                            "type": "string",
-                            "description": "The value of this property becomes the null annotation for the described column."
-                          },
-                          "cdi:defaultValue": {
-                            "type": "string",
-                            "description": "A default string indicating the value to substitute for an empty string."
-                          },
-                          "cdi:scale": {
-                            "type": "integer"
-                          },
-                          "cdi:decimalPositions": {
-                            "type": "integer"
-                          },
-                          "cdi:minimumLength": {
-                            "type": "integer"
-                          },
-                          "cdi:maximumLength": {
-                            "type": "integer"
-                          },
-                          "cdi:isRequired": {
-                            "type": "boolean",
-                            "default": false
-                          },
-                          "cdif:formats_InstanceVariable": {
-                            "type": "object",
-                            "description": "Reference to a variable defined in schema:variableMeasured.",
-                            "properties": {
-                              "@id": {
-                                "type": "string",
-                                "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                          "cdif:hasPhysicalMapping": {
+                            "type": "array",
+                            "description": "Per-field physical mappings for the API response - the response is another physical realization of the dataset's variables. Each item is a cdifPhysicalMapping.",
+                            "items": {
+                              "title": "Physical Mapping Type",
+                              "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+                              "type": "object",
+                              "properties": {
+                                "cdif:index": {
+                                  "type": "integer",
+                                  "minimum": 0,
+                                  "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                                },
+                                "cdif:format": {
+                                  "type": "string",
+                                  "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+                                },
+                                "cdif:physicalDataType": {
+                                  "type": "string"
+                                },
+                                "cdi:length": {
+                                  "type": "integer",
+                                  "description": "The column width if the tabular text is fixed width."
+                                },
+                                "cdi:nullSequence": {
+                                  "type": "string",
+                                  "description": "The value of this property becomes the null annotation for the described column."
+                                },
+                                "cdi:defaultValue": {
+                                  "type": "string",
+                                  "description": "A default string indicating the value to substitute for an empty string."
+                                },
+                                "cdi:scale": {
+                                  "type": "integer"
+                                },
+                                "cdi:decimalPositions": {
+                                  "type": "integer"
+                                },
+                                "cdi:minimumLength": {
+                                  "type": "integer"
+                                },
+                                "cdi:maximumLength": {
+                                  "type": "integer"
+                                },
+                                "cdi:isRequired": {
+                                  "type": "boolean",
+                                  "default": false
+                                },
+                                "cdif:formats_InstanceVariable": {
+                                  "type": "object",
+                                  "description": "Reference to a variable defined in schema:variableMeasured.",
+                                  "properties": {
+                                    "@id": {
+                                      "type": "string",
+                                      "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                    }
+                                  }
+                                }
                               }
                             }
+                          },
+                          "cdi:characterSet": {
+                            "type": "string",
+                            "description": "The character set used in the API response (e.g., UTF-8)."
                           }
                         }
                       }
-                    },
-                    "cdi:characterSet": {
-                      "type": "string",
-                      "description": "The character set used in the API response (e.g., UTF-8)."
-                    },
-                    "cdif:fileSize": {
-                      "type": "number",
-                      "description": "The size of the API response payload."
-                    },
-                    "cdif:fileSizeUofM": {
-                      "type": "string",
-                      "description": "Unit of measure for the response size (e.g., bytes, KB, MB)."
                     }
                   }
                 }
               }
             }
           }
-        }
+        ]
       }
     },
     "schema:relatedLink": {
@@ -760,7 +796,7 @@
             }
           },
           {
-            "$ref": "#/$defs/LabeledLink"
+            "$ref": "#/$defs/Reference"
           }
         ]
       }
@@ -1072,7 +1108,7 @@
             }
           },
           {
-            "$ref": "#/$defs/LabeledLink"
+            "$ref": "#/$defs/Reference"
           }
         ]
       }
@@ -1118,13 +1154,26 @@
         "dcterms:conformsTo": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "@id": {
-                "type": "string",
-                "description": "uri for specifications that this metadata record conforms to"
+            "allOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "uri for specifications that this metadata record conforms to"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "uri for specifications that this metadata record conforms to"
+                  }
+                }
               }
-            }
+            ]
           },
           "minItems": 1,
           "allOf": [
@@ -1212,7 +1261,7 @@
       "anyOf": [
         {
           "title": "CDIF Key",
-          "description": "Profile of ddi-cdi Key/PrimaryKey: a CDIF Key is the role of an ordered set of cdi:InstanceVariables (referenced via cdifInstanceVariable) that uniquely identify a data instance. Each variable's position in the key is recorded with an explicit cdi:ComponentPosition wrapper carrying cdi:indexes (the variable) and cdi:value (the integer position), matching the canonical DDI-CDI PrimaryKey structure in ddi-cdif-data-structure.",
+          "description": "Profile of ddi-cdi Key/PrimaryKey: a CDIF Key is the role of an ordered set of cdi:InstanceVariables (referenced via cdifInstanceVariable) that uniquely identify a data instance. Each variable's position in the key is recorded with an explicit cdi:ComponentPosition wrapper carrying cdi:indexes (the variable) and cdi:value (the integer position), matching the canonical DDI-CDI PrimaryKey structure in ddicdiDataStructure.",
           "type": "object",
           "properties": {
             "@type": {
@@ -1414,52 +1463,37 @@
                                   "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
                                 },
                                 "cdif:references": {
-                                  "description": "SKOS concept scheme that contains concepts defining the allowed values of this enumeration domain.",
+                                  "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
                                   "anyOf": [
                                     {
-                                      "title": "SKOS Concept Scheme",
-                                      "description": "JSON Schema for a SKOS ConceptScheme in JSON-LD form. Validates the root object as a skos:ConceptScheme with prefLabel, hasTopConcept, and nested skos:Concept items. References the skosConcept and skosCollection building blocks. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/) and the SKOS RDF vocabulary (https://www.w3.org/2004/02/skos/core.rdf).",
                                       "type": "object",
+                                      "title": "CDIF Codelist",
+                                      "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
                                       "properties": {
                                         "@context": {
                                           "description": "JSON-LD context declaring the skos namespace prefix and any additional prefixes used in concept URIs. May be a single object or an array of strings and objects.",
-                                          "anyOf": [
-                                            {
-                                              "type": "object",
-                                              "properties": {
-                                                "skos": {
-                                                  "const": "http://www.w3.org/2004/02/skos/core#"
-                                                }
+                                          "type": "array",
+                                          "items": {
+                                            "anyOf": [
+                                              {
+                                                "type": "string"
                                               },
-                                              "required": [
-                                                "skos"
-                                              ]
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "type": "object"
-                                                  }
-                                                ]
-                                              },
-                                              "contains": {
-                                                "type": "object",
-                                                "properties": {
-                                                  "skos": {
-                                                    "const": "http://www.w3.org/2004/02/skos/core#"
-                                                  }
-                                                },
-                                                "required": [
-                                                  "skos"
-                                                ]
+                                              {
+                                                "type": "object"
                                               }
-                                            }
-                                          ]
+                                            ]
+                                          },
+                                          "contains": {
+                                            "type": "object",
+                                            "properties": {
+                                              "skos": {
+                                                "const": "http://www.w3.org/2004/02/skos/core#"
+                                              }
+                                            },
+                                            "required": [
+                                              "skos"
+                                            ]
+                                          }
                                         },
                                         "@id": {
                                           "type": "string",
@@ -1475,371 +1509,111 @@
                                           },
                                           "minItems": 1
                                         },
-                                        "skos:prefLabel": {
-                                          "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+                                        "schema:identifier": {
+                                          "description": "Primary identifier for the codelist. May be a string URI or a structured PropertyValue.",
                                           "anyOf": [
                                             {
                                               "type": "string"
                                             },
                                             {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "$ref": "#/$defs/SkosConcept"
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:altLabel": {
-                                          "description": "Alternative lexical labels (acronyms, abbreviations, spelling variants).",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
+                                              "type": "object",
+                                              "properties": {
+                                                "@type": {
+                                                  "type": "array",
+                                                  "items": {
                                                     "type": "string"
                                                   },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
+                                                  "contains": {
+                                                    "const": "schema:PropertyValue"
                                                   }
-                                                ]
+                                                },
+                                                "schema:propertyID": {
+                                                  "type": "string"
+                                                },
+                                                "schema:value": {
+                                                  "type": "string"
+                                                },
+                                                "schema:url": {
+                                                  "type": "string"
+                                                }
                                               }
                                             }
                                           ]
                                         },
-                                        "skos:hiddenLabel": {
-                                          "description": "Labels accessible to free-text search but not displayed.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
+                                        "schema:dateModified": {
+                                          "type": "string",
+                                          "description": "ISO 8601 date when the codelist was last modified."
                                         },
-                                        "skos:definition": {
-                                          "description": "Formal explanation of the meaning or purpose of this concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
+                                        "schema:url": {
+                                          "type": "string",
+                                          "format": "uri",
+                                          "description": "Web location of a page describing the codelist.",
+                                          "default": "missing"
                                         },
-                                        "skos:notation": {
-                                          "description": "Classification code or notation for this concept scheme.",
+                                        "schema:license": {
+                                          "description": "License for the codelist.",
                                           "type": "array",
-                                          "items": {
-                                            "type": "string"
-                                          }
-                                        },
-                                        "skos:note": {
-                                          "description": "General note about the concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:scopeNote": {
-                                          "description": "Note clarifying the intended scope of the concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:historyNote": {
-                                          "description": "Note about the history of the concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:changeNote": {
-                                          "description": "Note documenting a change to the concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:editorialNote": {
-                                          "description": "Note for editors, translators, and maintainers.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:example": {
-                                          "description": "Example of the use of this concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "$ref": "#/$defs/SkosConcept"
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "skos:hasTopConcept": {
-                                          "description": "Top-level concepts in this scheme. Each item is a skos:Concept (inline or @id reference).",
-                                          "type": "array",
-                                          "minItems": 1,
                                           "items": {
                                             "anyOf": [
                                               {
-                                                "$ref": "#/$defs/SkosConcept"
+                                                "type": "string"
                                               },
                                               {
                                                 "type": "object",
                                                 "properties": {
                                                   "@id": {
-                                                    "type": "string",
-                                                    "description": "URI reference to a concept defined elsewhere"
+                                                    "type": "string"
                                                   }
-                                                },
-                                                "required": [
-                                                  "@id"
-                                                ]
+                                                }
                                               }
                                             ]
                                           }
                                         },
-                                        "dcterms:creator": {
-                                          "description": "Agent(s) who created this concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "type": "object",
-                                              "properties": {
-                                                "@id": {
-                                                  "type": "string"
-                                                },
-                                                "schema:name": {
-                                                  "type": "string"
-                                                }
-                                              }
-                                            },
-                                            {
-                                              "type": "array",
-                                              "items": {
-                                                "anyOf": [
-                                                  {
-                                                    "type": "string"
-                                                  },
-                                                  {
-                                                    "type": "object",
-                                                    "properties": {
-                                                      "@id": {
-                                                        "type": "string"
-                                                      },
-                                                      "schema:name": {
-                                                        "type": "string"
-                                                      }
-                                                    }
-                                                  }
-                                                ]
-                                              }
-                                            }
-                                          ]
+                                        "schema:conditionsOfAccess": {
+                                          "description": "Text statement of access conditions for the codelist.",
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          }
                                         },
-                                        "dcterms:created": {
-                                          "type": "string",
-                                          "description": "Date the concept scheme was created (ISO 8601)."
-                                        },
-                                        "dcterms:modified": {
-                                          "type": "string",
-                                          "description": "Date the concept scheme was last modified (ISO 8601)."
-                                        },
-                                        "dcterms:title": {
-                                          "description": "Title of the concept scheme (Dublin Core). Prefer skos:prefLabel for the SKOS label; dcterms:title may be used for additional metadata.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            }
-                                          ]
-                                        },
-                                        "dcterms:description": {
-                                          "description": "Description of the concept scheme (Dublin Core).",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            }
-                                          ]
-                                        },
-                                        "dcterms:license": {
-                                          "description": "License for the concept scheme.",
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "type": "object",
-                                              "properties": {
-                                                "@id": {
-                                                  "type": "string"
-                                                }
-                                              }
-                                            }
-                                          ]
-                                        },
-                                        "dcterms:rights": {
-                                          "description": "Rights statement for the concept scheme.",
+                                        "skos:prefLabel": {
+                                          "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
                                           "type": "string"
                                         },
-                                        "schema:version": {
-                                          "description": "Version identifier for the concept scheme.",
-                                          "type": [
-                                            "string",
-                                            "number"
-                                          ]
+                                        "skos:definition": {
+                                          "description": "Formal explanation of the meaning or purpose of this concept scheme.",
+                                          "type": "string"
+                                        },
+                                        "skos:note": {
+                                          "description": "General note about the concept scheme.",
+                                          "type": "string"
+                                        },
+                                        "skos:hasTopConcept": {
+                                          "description": "Top-level concepts that have no skos:broader in this scheme. Required for hierarchical codelists.",
+                                          "type": "array",
+                                          "minItems": 1,
+                                          "items": {
+                                            "$ref": "#/$defs/CdifCodelistConcept"
+                                          }
                                         }
                                       },
+                                      "anyOf": [
+                                        {
+                                          "required": [
+                                            "schema:license"
+                                          ]
+                                        },
+                                        {
+                                          "required": [
+                                            "schema:conditionsOfAccess"
+                                          ]
+                                        }
+                                      ],
                                       "required": [
-                                        "@type",
-                                        "skos:prefLabel"
+                                        "@id",
+                                        "schema:identifier",
+                                        "schema:dateModified",
+                                        "skos:hasTopConcept"
                                       ]
                                     },
                                     {
@@ -2009,52 +1783,37 @@
                                 "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
                               },
                               "cdif:references": {
-                                "description": "SKOS concept scheme that contains concepts defining the allowed values of this enumeration domain.",
+                                "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
                                 "anyOf": [
                                   {
-                                    "title": "SKOS Concept Scheme",
-                                    "description": "JSON Schema for a SKOS ConceptScheme in JSON-LD form. Validates the root object as a skos:ConceptScheme with prefLabel, hasTopConcept, and nested skos:Concept items. References the skosConcept and skosCollection building blocks. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/) and the SKOS RDF vocabulary (https://www.w3.org/2004/02/skos/core.rdf).",
                                     "type": "object",
+                                    "title": "CDIF Codelist",
+                                    "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
                                     "properties": {
                                       "@context": {
                                         "description": "JSON-LD context declaring the skos namespace prefix and any additional prefixes used in concept URIs. May be a single object or an array of strings and objects.",
-                                        "anyOf": [
-                                          {
-                                            "type": "object",
-                                            "properties": {
-                                              "skos": {
-                                                "const": "http://www.w3.org/2004/02/skos/core#"
-                                              }
+                                        "type": "array",
+                                        "items": {
+                                          "anyOf": [
+                                            {
+                                              "type": "string"
                                             },
-                                            "required": [
-                                              "skos"
-                                            ]
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "type": "object"
-                                                }
-                                              ]
-                                            },
-                                            "contains": {
-                                              "type": "object",
-                                              "properties": {
-                                                "skos": {
-                                                  "const": "http://www.w3.org/2004/02/skos/core#"
-                                                }
-                                              },
-                                              "required": [
-                                                "skos"
-                                              ]
+                                            {
+                                              "type": "object"
                                             }
-                                          }
-                                        ]
+                                          ]
+                                        },
+                                        "contains": {
+                                          "type": "object",
+                                          "properties": {
+                                            "skos": {
+                                              "const": "http://www.w3.org/2004/02/skos/core#"
+                                            }
+                                          },
+                                          "required": [
+                                            "skos"
+                                          ]
+                                        }
                                       },
                                       "@id": {
                                         "type": "string",
@@ -2070,371 +1829,111 @@
                                         },
                                         "minItems": 1
                                       },
-                                      "skos:prefLabel": {
-                                        "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+                                      "schema:identifier": {
+                                        "description": "Primary identifier for the codelist. May be a string URI or a structured PropertyValue.",
                                         "anyOf": [
                                           {
                                             "type": "string"
                                           },
                                           {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "$ref": "#/$defs/SkosConcept"
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:altLabel": {
-                                        "description": "Alternative lexical labels (acronyms, abbreviations, spelling variants).",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
+                                            "type": "object",
+                                            "properties": {
+                                              "@type": {
+                                                "type": "array",
+                                                "items": {
                                                   "type": "string"
                                                 },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
+                                                "contains": {
+                                                  "const": "schema:PropertyValue"
                                                 }
-                                              ]
+                                              },
+                                              "schema:propertyID": {
+                                                "type": "string"
+                                              },
+                                              "schema:value": {
+                                                "type": "string"
+                                              },
+                                              "schema:url": {
+                                                "type": "string"
+                                              }
                                             }
                                           }
                                         ]
                                       },
-                                      "skos:hiddenLabel": {
-                                        "description": "Labels accessible to free-text search but not displayed.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
+                                      "schema:dateModified": {
+                                        "type": "string",
+                                        "description": "ISO 8601 date when the codelist was last modified."
                                       },
-                                      "skos:definition": {
-                                        "description": "Formal explanation of the meaning or purpose of this concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
+                                      "schema:url": {
+                                        "type": "string",
+                                        "format": "uri",
+                                        "description": "Web location of a page describing the codelist.",
+                                        "default": "missing"
                                       },
-                                      "skos:notation": {
-                                        "description": "Classification code or notation for this concept scheme.",
+                                      "schema:license": {
+                                        "description": "License for the codelist.",
                                         "type": "array",
-                                        "items": {
-                                          "type": "string"
-                                        }
-                                      },
-                                      "skos:note": {
-                                        "description": "General note about the concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:scopeNote": {
-                                        "description": "Note clarifying the intended scope of the concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:historyNote": {
-                                        "description": "Note about the history of the concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:changeNote": {
-                                        "description": "Note documenting a change to the concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:editorialNote": {
-                                        "description": "Note for editors, translators, and maintainers.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:example": {
-                                        "description": "Example of the use of this concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "$ref": "#/$defs/SkosConcept"
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "skos:hasTopConcept": {
-                                        "description": "Top-level concepts in this scheme. Each item is a skos:Concept (inline or @id reference).",
-                                        "type": "array",
-                                        "minItems": 1,
                                         "items": {
                                           "anyOf": [
                                             {
-                                              "$ref": "#/$defs/SkosConcept"
+                                              "type": "string"
                                             },
                                             {
                                               "type": "object",
                                               "properties": {
                                                 "@id": {
-                                                  "type": "string",
-                                                  "description": "URI reference to a concept defined elsewhere"
+                                                  "type": "string"
                                                 }
-                                              },
-                                              "required": [
-                                                "@id"
-                                              ]
+                                              }
                                             }
                                           ]
                                         }
                                       },
-                                      "dcterms:creator": {
-                                        "description": "Agent(s) who created this concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "type": "object",
-                                            "properties": {
-                                              "@id": {
-                                                "type": "string"
-                                              },
-                                              "schema:name": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          },
-                                          {
-                                            "type": "array",
-                                            "items": {
-                                              "anyOf": [
-                                                {
-                                                  "type": "string"
-                                                },
-                                                {
-                                                  "type": "object",
-                                                  "properties": {
-                                                    "@id": {
-                                                      "type": "string"
-                                                    },
-                                                    "schema:name": {
-                                                      "type": "string"
-                                                    }
-                                                  }
-                                                }
-                                              ]
-                                            }
-                                          }
-                                        ]
+                                      "schema:conditionsOfAccess": {
+                                        "description": "Text statement of access conditions for the codelist.",
+                                        "type": "array",
+                                        "items": {
+                                          "type": "string"
+                                        }
                                       },
-                                      "dcterms:created": {
-                                        "type": "string",
-                                        "description": "Date the concept scheme was created (ISO 8601)."
-                                      },
-                                      "dcterms:modified": {
-                                        "type": "string",
-                                        "description": "Date the concept scheme was last modified (ISO 8601)."
-                                      },
-                                      "dcterms:title": {
-                                        "description": "Title of the concept scheme (Dublin Core). Prefer skos:prefLabel for the SKOS label; dcterms:title may be used for additional metadata.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          }
-                                        ]
-                                      },
-                                      "dcterms:description": {
-                                        "description": "Description of the concept scheme (Dublin Core).",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "$ref": "#/$defs/SkosConcept"
-                                          }
-                                        ]
-                                      },
-                                      "dcterms:license": {
-                                        "description": "License for the concept scheme.",
-                                        "anyOf": [
-                                          {
-                                            "type": "string"
-                                          },
-                                          {
-                                            "type": "object",
-                                            "properties": {
-                                              "@id": {
-                                                "type": "string"
-                                              }
-                                            }
-                                          }
-                                        ]
-                                      },
-                                      "dcterms:rights": {
-                                        "description": "Rights statement for the concept scheme.",
+                                      "skos:prefLabel": {
+                                        "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
                                         "type": "string"
                                       },
-                                      "schema:version": {
-                                        "description": "Version identifier for the concept scheme.",
-                                        "type": [
-                                          "string",
-                                          "number"
-                                        ]
+                                      "skos:definition": {
+                                        "description": "Formal explanation of the meaning or purpose of this concept scheme.",
+                                        "type": "string"
+                                      },
+                                      "skos:note": {
+                                        "description": "General note about the concept scheme.",
+                                        "type": "string"
+                                      },
+                                      "skos:hasTopConcept": {
+                                        "description": "Top-level concepts that have no skos:broader in this scheme. Required for hierarchical codelists.",
+                                        "type": "array",
+                                        "minItems": 1,
+                                        "items": {
+                                          "$ref": "#/$defs/CdifCodelistConcept"
+                                        }
                                       }
                                     },
+                                    "anyOf": [
+                                      {
+                                        "required": [
+                                          "schema:license"
+                                        ]
+                                      },
+                                      {
+                                        "required": [
+                                          "schema:conditionsOfAccess"
+                                        ]
+                                      }
+                                    ],
                                     "required": [
-                                      "@type",
-                                      "skos:prefLabel"
+                                      "@id",
+                                      "schema:identifier",
+                                      "schema:dateModified",
+                                      "skos:hasTopConcept"
                                     ]
                                   },
                                   {
@@ -3127,39 +2626,413 @@
     }
   ],
   "$defs": {
-    "LabeledLink": {
-      "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
+    "Reference": {
+      "type": "object",
+      "description": "Building block to implement relations to other resources using a URL and some semantics.",
+      "allOf": [
+        {
+          "description": "schema for a labeled link, a profile of schema.org/CreativeWork",
+          "type": "object",
+          "properties": {
+            "@type": {
+              "default": "schema:CreativeWork",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "const": "schema:CreativeWork"
+              },
+              "minItems": 1
+            },
+            "schema:name": {
+              "type": "string"
+            },
+            "schema:description": {
+              "type": "string"
+            },
+            "schema:url": {
+              "type": "string",
+              "format": "uri"
+            }
+          },
+          "required": [
+            "@type",
+            "schema:url"
+          ]
+        },
+        {
+          "type": "object",
+          "description": "DCAT Relationship surface added on top of the schema.org labeled link construct.",
+          "properties": {
+            "@type": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "contains": {
+                "const": "dcat:Relationship"
+              },
+              "minItems": 1
+            },
+            "dcat:hadRole": {
+              "$ref": "#/$defs/SkosConcept",
+              "description": "Role of the related resource as a SKOS Concept (DCAT canonical role slot)."
+            },
+            "dcterms:relation": {
+              "type": "string",
+              "format": "uri",
+              "description": "URI of the related resource (DCAT canonical pointer to what is being related to; distinct from schema:url which is the presentation URL inherited from labeledLink)."
+            }
+          }
+        }
+      ]
+    },
+    "SkosConcept": {
+      "title": "SKOS Concept",
+      "description": "JSON Schema for a SKOS Concept in JSON-LD form. A unit of thought within a concept scheme. Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/).",
       "type": "object",
       "properties": {
+        "@context": {
+          "description": "JSON-LD context declaring the skos namespace prefix. May be a single object or an array of strings and objects.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "skos": {
+                  "const": "http://www.w3.org/2004/02/skos/core#"
+                }
+              },
+              "required": [
+                "skos"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "type": "object"
+                  }
+                ]
+              },
+              "contains": {
+                "type": "object",
+                "properties": {
+                  "skos": {
+                    "const": "http://www.w3.org/2004/02/skos/core#"
+                  }
+                },
+                "required": [
+                  "skos"
+                ]
+              }
+            }
+          ]
+        },
+        "@id": {
+          "type": "string",
+          "description": "URI identifier for this concept."
+        },
         "@type": {
-          "default": "schema:CreativeWork",
           "type": "array",
           "items": {
             "type": "string"
           },
           "contains": {
-            "const": "schema:CreativeWork"
+            "const": "skos:Concept"
           },
           "minItems": 1
         },
-        "schema:name": {
-          "type": "string"
+        "skos:prefLabel": {
+          "description": "Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "$ref": "#/$defs/LanguageTaggedValue"
+              }
+            }
+          ]
         },
-        "schema:description": {
-          "type": "string"
+        "skos:notation": {
+          "description": "Classification code for this concept within a scheme.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
-        "schema:url": {
-          "type": "string",
-          "format": "uri"
+        "skos:definition": {
+          "description": "Formal explanation of the meaning of this concept.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:scopeNote": {
+          "description": "Note clarifying meaning and/or intended use.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:note": {
+          "description": "General note about this concept.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:historyNote": {
+          "description": "Note about past state or use.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:changeNote": {
+          "description": "Note documenting a change.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:editorialNote": {
+          "description": "Note for editors and maintainers.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "$ref": "#/$defs/LanguageTaggedValue"
+            },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  {
+                    "type": "string"
+                  },
+                  {
+                    "$ref": "#/$defs/LanguageTaggedValue"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "skos:inScheme": {
+          "description": "Concept scheme(s) this concept belongs to.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              }
+            }
+          ]
+        },
+        "skos:topConceptOf": {
+          "description": "Concept scheme(s) for which this is a top concept.",
+          "anyOf": [
+            {
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "@id"
+              ]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              }
+            }
+          ]
+        },
+        "skos:broader": {
+          "description": "Broader (parent) concepts in the hierarchy. Items are inline concept objects or @id references.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "description": "A reference to a SKOS Concept by URI.",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "URI of the referenced concept."
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              },
+              {
+                "$comment": "circular-ref"
+              }
+            ]
+          }
+        },
+        "skos:narrower": {
+          "description": "Narrower (child) concepts in the hierarchy. Items are inline concept objects or @id references.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "description": "A reference to a SKOS Concept by URI.",
+                "properties": {
+                  "@id": {
+                    "type": "string",
+                    "description": "URI of the referenced concept."
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              },
+              {
+                "$comment": "circular-ref"
+              }
+            ]
+          }
         }
       },
       "required": [
         "@type",
-        "schema:url"
+        "skos:prefLabel",
+        "skos:definition",
+        "skos:inScheme"
       ]
     },
     "Identifier": {
-      "description": "Properties for a schema.org identifier",
+      "description": "Properties for a schema.org identifier (schema:PropertyValue pattern).\n\n**Union-type policy:** In CDIF profile UML models an attribute typed as\nschema:Identifier / schema:PropertyValue is represented by a single attribute\nof that class type. The JSON Schema implementation permits the property value\nto be EITHER a plain string (interpreted as the bare identifier value) OR a\nfull schema:PropertyValue object (with explicit @type, propertyID, value).\nConsumers should accept either form.\n",
       "type": "object",
       "properties": {
         "@type": {
@@ -3209,7 +3082,7 @@
       ]
     },
     "DefinedTerm": {
-      "description": "schema.org Defined Term schema",
+      "description": "schema.org Defined Term schema.\n\n**Union-type policy:** In CDIF profile UML models an attribute typed as\nschema:DefinedTerm is represented by a single attribute of that class type.\nThe JSON Schema implementation permits the property value to be EITHER a\nplain string (interpreted as schema:name or schema:termCode in the default\nvocabulary) OR a full schema:DefinedTerm object (with explicit @type, name,\nidentifier, termCode, inDefinedTermSet). Consumers should accept either form.\n\nNote that this differs from the cdif Concept policy: a Concept (skos:Concept)\nin CDIF profiles MUST be a controlled-vocabulary entry (object form or\n@id-reference) — plain strings are not permitted for Concept-typed values\nbecause vocabulary identity cannot be recovered from an unscoped label.\n",
       "type": "object",
       "properties": {
         "@type": {
@@ -3824,7 +3697,7 @@
                   "description": "link to a web page useful for interpreting the variable"
                 },
                 {
-                  "$ref": "#/$defs/LabeledLink"
+                  "$ref": "#/$defs/Reference"
                 }
               ]
             }
@@ -3836,446 +3709,22 @@
         }
       ]
     },
-    "SkosConcept": {
-      "title": "SKOS Concept",
-      "description": "JSON Schema for a SKOS Concept in JSON-LD form. A unit of thought within a concept scheme. Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes. Based on the W3C SKOS Reference (https://www.w3.org/TR/skos-reference/).",
+    "LanguageTaggedValue": {
       "type": "object",
+      "description": "An RDF literal value with a language tag, serialized as a JSON-LD value object.",
       "properties": {
-        "@context": {
-          "description": "JSON-LD context declaring the skos namespace prefix. May be a single object or an array of strings and objects.",
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {
-                "skos": {
-                  "const": "http://www.w3.org/2004/02/skos/core#"
-                }
-              },
-              "required": [
-                "skos"
-              ]
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "type": "object"
-                  }
-                ]
-              },
-              "contains": {
-                "type": "object",
-                "properties": {
-                  "skos": {
-                    "const": "http://www.w3.org/2004/02/skos/core#"
-                  }
-                },
-                "required": [
-                  "skos"
-                ]
-              }
-            }
-          ]
-        },
-        "@id": {
+        "@value": {
           "type": "string",
-          "description": "URI identifier for this concept."
+          "description": "The text content."
         },
-        "@type": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "contains": {
-            "const": "skos:Concept"
-          },
-          "minItems": 1
-        },
-        "skos:prefLabel": {
-          "description": "Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "$ref": "#/$defs/LanguageTaggedValue"
-              }
-            }
-          ]
-        },
-        "skos:altLabel": {
-          "description": "Alternative lexical labels (acronyms, abbreviations, variants).",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:hiddenLabel": {
-          "description": "Labels accessible to free-text search but not displayed.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:notation": {
-          "description": "Classification code for this concept within a scheme.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "skos:definition": {
-          "description": "Formal explanation of the meaning of this concept.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:scopeNote": {
-          "description": "Note clarifying meaning and/or intended use.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:note": {
-          "description": "General note about this concept.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:historyNote": {
-          "description": "Note about past state or use.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:changeNote": {
-          "description": "Note documenting a change.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:editorialNote": {
-          "description": "Note for editors and maintainers.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:example": {
-          "description": "Example of use of this concept.",
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "$ref": "#/$defs/LanguageTaggedValue"
-            },
-            {
-              "type": "array",
-              "items": {
-                "anyOf": [
-                  {
-                    "type": "string"
-                  },
-                  {
-                    "$ref": "#/$defs/LanguageTaggedValue"
-                  }
-                ]
-              }
-            }
-          ]
-        },
-        "skos:inScheme": {
-          "description": "Concept scheme(s) this concept belongs to.",
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {
-                "@id": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "@id"
-              ]
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "@id"
-                ]
-              }
-            }
-          ]
-        },
-        "skos:topConceptOf": {
-          "description": "Concept scheme(s) for which this is a top concept.",
-          "anyOf": [
-            {
-              "type": "object",
-              "properties": {
-                "@id": {
-                  "type": "string"
-                }
-              },
-              "required": [
-                "@id"
-              ]
-            },
-            {
-              "type": "array",
-              "items": {
-                "type": "object",
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "@id"
-                ]
-              }
-            }
-          ]
-        },
-        "skos:broader": {
-          "description": "Broader (parent) concepts in the hierarchy. Items are inline concept objects or @id references.",
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/$defs/ConceptRef"
-              },
-              {
-                "$comment": "circular-ref"
-              }
-            ]
-          }
-        },
-        "skos:narrower": {
-          "description": "Narrower (child) concepts in the hierarchy. Items are inline concept objects or @id references.",
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/$defs/ConceptRef"
-              },
-              {
-                "$comment": "circular-ref"
-              }
-            ]
-          }
-        },
-        "skos:related": {
-          "description": "Associatively related concepts.",
-          "type": "array",
-          "items": {
-            "anyOf": [
-              {
-                "$ref": "#/$defs/ConceptRef"
-              },
-              {
-                "$comment": "circular-ref"
-              }
-            ]
-          }
-        },
-        "skos:exactMatch": {
-          "description": "Concepts in other schemes with equivalent meaning.",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ConceptRef"
-          }
-        },
-        "skos:closeMatch": {
-          "description": "Concepts in other schemes with similar meaning.",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ConceptRef"
-          }
-        },
-        "skos:broadMatch": {
-          "description": "Broader concepts in other schemes.",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ConceptRef"
-          }
-        },
-        "skos:narrowMatch": {
-          "description": "Narrower concepts in other schemes.",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ConceptRef"
-          }
-        },
-        "skos:relatedMatch": {
-          "description": "Related concepts in other schemes.",
-          "type": "array",
-          "items": {
-            "$ref": "#/$defs/ConceptRef"
-          }
+        "@language": {
+          "type": "string",
+          "description": "BCP 47 language tag (e.g. en, fr, de)."
         }
       },
       "required": [
-        "@type",
-        "skos:prefLabel"
+        "@value",
+        "@language"
       ]
     },
     "CdifInstanceVariable_DefinedTerm": {
@@ -4398,12 +3847,9 @@
           "minItems": 1
         },
         "cdi:typeOfStatistic": {
-          "title": "ControlledVocabularyEntry",
+          "title": "SKOS Concept (CDIF vocabulary-bound term reference)",
           "description": "Controlled-vocabulary entry naming the kind of statistic — e.g. mean, median, count, sum, stdDev.",
           "anyOf": [
-            {
-              "type": "string"
-            },
             {
               "type": "object",
               "properties": {
@@ -4417,6 +3863,9 @@
             },
             {
               "$ref": "#/$defs/DefinedTerm"
+            },
+            {
+              "$ref": "#/$defs/SkosConcept"
             }
           ]
         },
@@ -4587,12 +4036,9 @@
           ]
         },
         "cdi:typeOfStatistic": {
-          "title": "ControlledVocabularyEntry",
+          "title": "SKOS Concept (CDIF vocabulary-bound term reference)",
           "description": "Controlled-vocabulary entry naming the kind of statistic.",
           "anyOf": [
-            {
-              "type": "string"
-            },
             {
               "type": "object",
               "properties": {
@@ -4606,6 +4052,9 @@
             },
             {
               "$ref": "#/$defs/DefinedTerm"
+            },
+            {
+              "$ref": "#/$defs/SkosConcept"
             }
           ]
         },
@@ -4669,35 +4118,93 @@
         "cdi:statistic"
       ]
     },
-    "LanguageTaggedValue": {
+    "CdifCodelistConcept": {
+      "description": "A SKOS Concept constrained for CDIF codelist use. Must have a resolvable @id, skos:inScheme, skos:notation, and skos:prefLabel. Becasue JSON-LD is an open-world implementation, any other skos properties may be included.",
       "type": "object",
-      "description": "An RDF literal value with a language tag, serialized as a JSON-LD value object.",
-      "properties": {
-        "@value": {
-          "type": "string",
-          "description": "The text content."
-        },
-        "@language": {
-          "type": "string",
-          "description": "BCP 47 language tag (e.g. en, fr, de)."
-        }
-      },
-      "required": [
-        "@value",
-        "@language"
-      ]
-    },
-    "ConceptRef": {
-      "type": "object",
-      "description": "A reference to a SKOS Concept by URI.",
       "properties": {
         "@id": {
           "type": "string",
-          "description": "URI of the referenced concept."
+          "description": "Globally unique, resolvable URI for this concept."
+        },
+        "skos:inScheme": {
+          "description": "The concept scheme this concept belongs to. Required for CDIF codelist concepts.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@id"
+            ]
+          }
+        },
+        "skos:prefLabel": {
+          "description": "Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+          "type": "string"
+        },
+        "skos:notation": {
+          "description": "Classification code for this concept within a scheme.",
+          "type": "string"
+        },
+        "skos:definition": {
+          "description": "Formal definition of this concept. Optional for CDIF codelist concepts. A plain string.",
+          "type": "string"
+        },
+        "skos:narrower": {
+          "description": "Narrower (child) concepts. If present, each inline concept must also declare skos:broader pointing back to the parent concept. Both skos:narrower and skos:broader must be explicit in CDIF codelists.",
+          "type": "array",
+          "items": {
+            "anyOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "@id"
+                ]
+              },
+              {
+                "allOf": [
+                  {
+                    "$ref": "#/$defs/CdifCodelistConcept"
+                  },
+                  {
+                    "required": [
+                      "skos:broader"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        "skos:broader": {
+          "description": "Broader (parent) concepts. Required on any concept that appears as a skos:narrower value of another concept. CDIF requires both directions to be explicit for hierarchy traversal.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "@id": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "@id"
+            ]
+          }
         }
       },
       "required": [
-        "@id"
+        "@id",
+        "skos:inScheme",
+        "skos:prefLabel",
+        "skos:notation"
       ]
     }
   }

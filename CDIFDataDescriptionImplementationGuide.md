@@ -103,7 +103,7 @@ This profile applies to description of resources that can be described using the
 
 **Content:** [DataDownload](#sec-datadownload) or [WebAPI](#sec-webapi)
 
-**Description:** specifies how to download the data in a specific format or access via a web API. This property describes where to get the data and in what format by using the schema:DataDownload type. If user must access data through a landing page, provide link to landing page in the \'url\' property for the dataset, not a distribution contentUrl. At the Data Description level, distribution items gain additional properties: cdi:characterSet, cdi:fileSize, and cdi:fileSizeUofM for file characterization.
+**Description:** specifies how to download the data in a specific format or access via a web API. This property describes where to get the data and in what format by using the schema:DataDownload type. If user must access data through a landing page, provide link to landing page in the \'url\' property for the dataset, not a distribution contentUrl. At the Data Description level, a DataDownload distribution gains cdi:characterSet and cdif:hasPhysicalMapping (per-field physical mappings); file size is recorded with the Core schema:contentSize property. A WebAPI distribution gains these on its potentialAction's schema:result rather than on the distribution itself.
 
 
 #### subjectOf
@@ -434,22 +434,7 @@ file-based access to a resource via URL; the DataDownload object provides a link
 **Description:** The character set used in the distribution file (e.g. `UTF-8`, `ASCII`, `ISO-8859-1`). Aids parsers in decoding the byte stream correctly.
 
 
-#### cdi:fileSize
-
-**Cardinality:** Optional
-
-**Content:** number
-
-**Description:** Size of the distribution file as a numeric value, in the units identified by `cdi:fileSizeUofM`. Useful to clients for bandwidth estimation and integrity checks alongside `spdx:checksum`.
-
-
-#### cdi:fileSizeUofM
-
-**Cardinality:** Optional
-
-**Content:** string
-
-**Description:** Unit of measure for `cdi:fileSize` (e.g. `bytes`, `KB`, `MB`, `GB`).
+> **Note:** File size is recorded with the Core `schema:contentSize` property (a string, e.g. `'2.5 MB'` or a byte count) on the DataDownload distribution. The earlier `cdi:fileSize` / `cdi:fileSizeUofM` properties have been removed.
 
 
 ### Web API {#sec-webapi}
@@ -525,12 +510,11 @@ Provides information to request data through a web accessible service endpoint. 
 
 **Cardinality:** Optional
 
-**Content:** [DataDownload](#sec-datadownload), optionally additionally typed as `cdi:PhysicalDataSet` (or one of its subclasses `cdi:TabularTextDataSet`, `cdi:StructuredDataSet`)
+**Content:** an action result object (the `actionResult` building block) -- typed `schema:DataDownload` but, unlike a file distribution, with **no** `schema:contentUrl` or `schema:contentSize` (the response is generated per request). It carries `schema:name`, `schema:description`, `schema:encodingFormat`, `dcterms:conformsTo`. It may optionally additionally be typed `cdi:PhysicalDataSet` (or a subclass `cdi:TabularTextDataSet` / `cdi:StructuredDataSet`).
 
-**Description:** specifies the serialization scheme (encoding format, information model) for the expected representation of the API response. The result describes the *bytes* the service produces; the WebAPI distribution itself describes the *service*. At the Data Description level, when the result is additionally typed `cdi:PhysicalDataSet`, it may carry the same physical-realization properties as a DataDownload distribution:
+**Description:** specifies the serialization scheme (encoding format, information model) for the expected representation of the API response. The result describes the *bytes* the service produces; the WebAPI distribution itself describes the *service*. At the Data Description level, when the result is additionally typed `cdi:PhysicalDataSet`, it may carry the physical-realization properties:
 
 - `cdi:characterSet` — character encoding of the response
-- `cdif:fileSize`, `cdif:fileSizeUofM` — payload size and unit
 - `cdif:hasPhysicalMapping` — see [CdifPhysicalMapping](#sec-cdifphysicalmapping). The `cdif:formats_InstanceVariable` references inside each mapping point at `@id`s in the parent Dataset's `schema:variableMeasured` (the API response is another physical realization of those same InstanceVariables; do not redeclare the variables on the result).
 
 At the Data Structure level, the result also carries `cdi:isStructuredBy` (an inline `cdi:DataStructure` or `@id`-reference to one declared elsewhere). The Data Structure referenced from a WebAPI's `schema:result` MAY differ from the one referenced by sibling DataDownload distributions — e.g., the API may serve a long-format variant of a wide-format file download. `cdi:PhysicalDataSet` typing belongs on the result, NOT on the WebAPI distribution itself.

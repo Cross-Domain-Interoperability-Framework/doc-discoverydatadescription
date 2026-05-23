@@ -412,7 +412,8 @@
       "schema:termsOfService": "Open access, no authentication required",
       "schema:documentation": {
         "@type": [
-          "schema:CreativeWork"
+          "schema:CreativeWork",
+          "dcat:Relationship"
         ],
         "schema:name": "OpenAPI specification for Cascadia geochemistry data service",
         "schema:url": "https://example.org/api/v1/openapi.json"
