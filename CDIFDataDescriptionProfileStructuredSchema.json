@@ -6,12 +6,30 @@
   "properties": {
     "@context": {
       "type": "object",
-      "description": "Additional namespace prefix for data description properties.",
+      "description": "JSON-LD context declaring namespace prefixes used in the metadata record.",
       "properties": {
-        "csvw": {
-          "const": "http://www.w3.org/ns/csvw#"
+        "schema": {
+          "const": "http://schema.org/"
+        },
+        "dcterms": {
+          "const": "http://purl.org/dc/terms/"
+        },
+        "spdx": {
+          "const": "http://spdx.org/rdf/terms#"
+        },
+        "dcat": {
+          "const": "http://www.w3.org/ns/dcat#"
+        },
+        "prov": {
+          "const": "http://www.w3.org/ns/prov#"
         }
-      }
+      },
+      "required": [
+        "schema",
+        "dcterms",
+        "dcat",
+        "prov"
+      ]
     },
     "@id": {
       "type": "string",
@@ -563,68 +581,242 @@
               "properties": {
                 "cdif:hasPhysicalMapping": {
                   "type": "array",
-                  "description": "Per-field physical mappings linking the variables measured by this DataDownload distribution to their physical representation in the file - column index, format, physical data type, length, null sequence, etc. Each item is a cdifPhysicalMapping.",
+                  "description": "Per-field physical mappings linking the variables measured by this DataDownload distribution to their physical representation in the file - column index, format, physical data type, null sequence, etc. Each item is a cdifPhysicalMapping or one of its specializations (cdifTextMapping for tabular text, cdifLocatorMapping for structured data); the dataset-type branches below tighten the item type.",
                   "items": {
-                    "title": "Physical Mapping Type",
-                    "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
-                    "type": "object",
-                    "properties": {
-                      "cdif:index": {
-                        "type": "integer",
-                        "minimum": 0,
-                        "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                    "anyOf": [
+                      {
+                        "$ref": "#/$defs/CdifPhysicalMapping"
                       },
-                      "cdif:format": {
-                        "type": "string",
-                        "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
-                      },
-                      "cdif:physicalDataType": {
-                        "type": "string"
-                      },
-                      "cdi:length": {
-                        "type": "integer",
-                        "description": "The column width if the tabular text is fixed width."
-                      },
-                      "cdi:nullSequence": {
-                        "type": "string",
-                        "description": "The value of this property becomes the null annotation for the described column."
-                      },
-                      "cdi:defaultValue": {
-                        "type": "string",
-                        "description": "A default string indicating the value to substitute for an empty string."
-                      },
-                      "cdi:scale": {
-                        "type": "integer"
-                      },
-                      "cdi:decimalPositions": {
-                        "type": "integer"
-                      },
-                      "cdi:minimumLength": {
-                        "type": "integer"
-                      },
-                      "cdi:maximumLength": {
-                        "type": "integer"
-                      },
-                      "cdi:isRequired": {
-                        "type": "boolean",
-                        "default": false
-                      },
-                      "cdif:formats_InstanceVariable": {
-                        "type": "object",
-                        "description": "Reference to a variable defined in schema:variableMeasured.",
-                        "properties": {
-                          "@id": {
-                            "type": "string",
-                            "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                      {
+                        "title": "Text Mapping Type",
+                        "description": "Physical mapping for a variable in a delimited or fixed-width text dataset. Extends cdifPhysicalMapping with text-format properties (column width and number formatting). DDI-CDI TextMapping.",
+                        "allOf": [
+                          {
+                            "$ref": "#/$defs/CdifPhysicalMapping"
+                          },
+                          {
+                            "type": "object",
+                            "properties": {
+                              "cdi:length": {
+                                "type": "integer",
+                                "description": "The column width if the tabular text is fixed width (TextMapping.length)."
+                              },
+                              "cdi:defaultDecimalSeparator": {
+                                "type": "string",
+                                "description": "Decimal separator used when not otherwise specified (TextMapping.defaultDecimalSeparator)."
+                              },
+                              "cdi:defaultDigitGroupSeparator": {
+                                "type": "string",
+                                "description": "Digit-group (thousands) separator (TextMapping.defaultDigitGroupSeparator)."
+                              },
+                              "cdif:displayLabel": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "description": "Human-readable label(s) for display. CDIF simplification (plain string) of DDI-CDI TextMapping.displayLabel, whose model type is LabelForDisplay. Per the cdi/cdif namespace policy a structured-string type simplified to a plain string is in the cdif namespace."
+                              }
+                            }
                           }
-                        }
+                        ]
+                      },
+                      {
+                        "title": "Locator Mapping Type",
+                        "description": "Locates a variable's value(s) within a structured (hierarchical) dataset such as XML or JSON, via a locator expression (e.g., XPath or JSONPath). DDI-CDI LocatorMapping. Used in place of column-index/text mappings for cdi:StructuredDataSet distributions.",
+                        "type": "object",
+                        "properties": {
+                          "cdi:locator": {
+                            "type": "string",
+                            "description": "Expression locating the variable's value(s) in the structured document (XPath, JSONPath, pointer, etc.). LocatorMapping.locator."
+                          },
+                          "cdif:formats_InstanceVariable": {
+                            "type": "object",
+                            "description": "Reference to a variable defined in schema:variableMeasured.",
+                            "properties": {
+                              "@id": {
+                                "type": "string",
+                                "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                              }
+                            }
+                          }
+                        },
+                        "required": [
+                          "cdi:locator"
+                        ]
                       }
-                    }
+                    ]
                   }
                 },
                 "cdi:characterSet": {
                   "type": "string",
                   "description": "The character set used in the distribution (e.g., UTF-8, ASCII)."
+                },
+                "cdi:fingerprint": {
+                  "title": "Data Fingerprint",
+                  "description": "Integrity fingerprint (checksum/hash) of this distribution's bytes (DDI-CDI DataFingerprint).",
+                  "type": "object",
+                  "properties": {
+                    "cdi:value": {
+                      "type": "string",
+                      "description": "The fingerprint value (e.g., the hex digest). DataFingerprint.value."
+                    },
+                    "cdi:algorithmSpecification": {
+                      "type": "string",
+                      "description": "Identifier or name of the algorithm specification (e.g., SHA-256, MD5). DataFingerprint.algorithmSpecification."
+                    },
+                    "cdi:algorithmVersion": {
+                      "type": "string",
+                      "description": "Version of the fingerprint algorithm/specification. DataFingerprint.algorithmVersion."
+                    },
+                    "cdi:typeOfFingerprint": {
+                      "type": "string",
+                      "description": "The kind of fingerprint (e.g., checksum, hash, digest). DataFingerprint.typeOfFingerprint."
+                    }
+                  },
+                  "required": [
+                    "cdi:value"
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "@type": {
+                  "contains": {
+                    "const": "cdi:TabularTextDataSet"
+                  }
+                }
+              }
+            },
+            "then": {
+              "title": "Tabular Text DataSet",
+              "description": "Dataset-level physical layout properties of a delimited or fixed-width text dataset (CSV, TSV, fixed-width). A subclass of cdi:PhysicalDataSet, carried on a schema:DataDownload distribution dual-typed cdi:TabularTextDataSet. DDI-CDI TabularTextDataSet. This is an attribute mixin (no @type of its own); the @type token is carried by the distribution. Per-field mappings are cdifTextMapping (on cdif:hasPhysicalMapping).",
+              "type": "object",
+              "properties": {
+                "cdi:arrayBase": {
+                  "type": "integer",
+                  "default": 1,
+                  "description": "Index of the first element/column (TabularTextDataSet.arrayBase)."
+                },
+                "cdi:commentPrefix": {
+                  "type": "string",
+                  "description": "Character(s) that mark a line as a comment."
+                },
+                "cdi:delimiter": {
+                  "type": "string",
+                  "description": "Field delimiter (e.g., \",\" or tab)."
+                },
+                "cdi:escapeCharacter": {
+                  "type": "string"
+                },
+                "cdi:hasHeader": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "cdi:headerIsCaseSensitive": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "cdi:headerRowCount": {
+                  "type": "integer",
+                  "default": 1
+                },
+                "cdi:isDelimited": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "cdi:isFixedWidth": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "cdi:lineTerminator": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Allowed line terminators, in order (default [CRLF, LF])."
+                },
+                "cdi:nullSequence": {
+                  "type": "string",
+                  "description": "Value interpreted as null at the dataset level."
+                },
+                "cdi:quoteCharacter": {
+                  "type": "string",
+                  "default": "\""
+                },
+                "cdi:skipBlankRows": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "cdi:skipDataColumns": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "cdi:skipInitialSpace": {
+                  "type": "boolean",
+                  "default": true
+                },
+                "cdi:skipRows": {
+                  "type": "integer",
+                  "default": 0
+                },
+                "cdi:tableDirection": {
+                  "type": "string",
+                  "default": "Auto",
+                  "enum": [
+                    "Auto",
+                    "Ltr",
+                    "Rtl"
+                  ],
+                  "description": "Direction in which columns are arranged in each row (DDI-CDI TabularTextDataSet.tableDirection, TableDirectionValues enumeration)."
+                },
+                "cdi:textDirection": {
+                  "type": "string",
+                  "enum": [
+                    "Auto",
+                    "Inherit",
+                    "Ltr",
+                    "Rtl"
+                  ],
+                  "description": "Reading order of text within cells (DDI-CDI TabularTextDataSet.textDirection, TextDirectionValues enumeration)."
+                },
+                "cdi:treatConsecutiveDelimitersAsOne": {
+                  "type": "boolean",
+                  "default": false
+                },
+                "cdi:trim": {
+                  "type": "string",
+                  "enum": [
+                    "Both",
+                    "End",
+                    "Neither",
+                    "Start"
+                  ],
+                  "description": "Which spaces to remove from a data value (DDI-CDI TabularTextDataSet.trim, TrimValues enumeration)."
+                }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "@type": {
+                  "contains": {
+                    "const": "cdi:StructuredDataSet"
+                  }
+                }
+              }
+            },
+            "then": {
+              "title": "Structured DataSet",
+              "description": "Dataset-level marker for a structured (hierarchical) dataset such as XML or JSON. A subclass of cdi:PhysicalDataSet, carried on a schema:DataDownload distribution dual-typed cdi:StructuredDataSet. DDI-CDI StructuredDataSet. It has no distinct tabular-layout attributes; fields are located with cdifLocatorMapping values of cdif:hasPhysicalMapping (rather than column-index/text mappings). This is an attribute mixin (no @type of its own; the token is carried by the distribution).",
+              "type": "object",
+              "properties": {
+                "cdif:encoding": {
+                  "type": "string",
+                  "description": "Character encoding / serialization of the structured document (e.g., utf-8, application/json). CDIF simplification (plain charset string) of DDI-CDI PhysicalDataSet.encoding, whose model type is ControlledVocabularyEntry. The cdi/cdif namespace policy does not allow a ControlledVocabularyEntry as a plain string in the cdi namespace, so this property is in the cdif namespace."
                 }
               }
             }
@@ -648,63 +840,70 @@
                         "properties": {
                           "cdif:hasPhysicalMapping": {
                             "type": "array",
-                            "description": "Per-field physical mappings for the API response - the response is another physical realization of the dataset's variables. Each item is a cdifPhysicalMapping.",
+                            "description": "Per-field physical mappings for the API response - the response is another physical realization of the dataset's variables. Each item is a cdifPhysicalMapping or one of its specializations (cdifTextMapping / cdifLocatorMapping).",
                             "items": {
-                              "title": "Physical Mapping Type",
-                              "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
-                              "type": "object",
-                              "properties": {
-                                "cdif:index": {
-                                  "type": "integer",
-                                  "minimum": 0,
-                                  "description": "Non-negative integer that orders the fields in the data structure (column number)."
+                              "anyOf": [
+                                {
+                                  "$ref": "#/$defs/CdifPhysicalMapping"
                                 },
-                                "cdif:format": {
-                                  "type": "string",
-                                  "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
-                                },
-                                "cdif:physicalDataType": {
-                                  "type": "string"
-                                },
-                                "cdi:length": {
-                                  "type": "integer",
-                                  "description": "The column width if the tabular text is fixed width."
-                                },
-                                "cdi:nullSequence": {
-                                  "type": "string",
-                                  "description": "The value of this property becomes the null annotation for the described column."
-                                },
-                                "cdi:defaultValue": {
-                                  "type": "string",
-                                  "description": "A default string indicating the value to substitute for an empty string."
-                                },
-                                "cdi:scale": {
-                                  "type": "integer"
-                                },
-                                "cdi:decimalPositions": {
-                                  "type": "integer"
-                                },
-                                "cdi:minimumLength": {
-                                  "type": "integer"
-                                },
-                                "cdi:maximumLength": {
-                                  "type": "integer"
-                                },
-                                "cdi:isRequired": {
-                                  "type": "boolean",
-                                  "default": false
-                                },
-                                "cdif:formats_InstanceVariable": {
-                                  "type": "object",
-                                  "description": "Reference to a variable defined in schema:variableMeasured.",
-                                  "properties": {
-                                    "@id": {
-                                      "type": "string",
-                                      "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                {
+                                  "title": "Text Mapping Type",
+                                  "description": "Physical mapping for a variable in a delimited or fixed-width text dataset. Extends cdifPhysicalMapping with text-format properties (column width and number formatting). DDI-CDI TextMapping.",
+                                  "allOf": [
+                                    {
+                                      "$ref": "#/$defs/CdifPhysicalMapping"
+                                    },
+                                    {
+                                      "type": "object",
+                                      "properties": {
+                                        "cdi:length": {
+                                          "type": "integer",
+                                          "description": "The column width if the tabular text is fixed width (TextMapping.length)."
+                                        },
+                                        "cdi:defaultDecimalSeparator": {
+                                          "type": "string",
+                                          "description": "Decimal separator used when not otherwise specified (TextMapping.defaultDecimalSeparator)."
+                                        },
+                                        "cdi:defaultDigitGroupSeparator": {
+                                          "type": "string",
+                                          "description": "Digit-group (thousands) separator (TextMapping.defaultDigitGroupSeparator)."
+                                        },
+                                        "cdif:displayLabel": {
+                                          "type": "array",
+                                          "items": {
+                                            "type": "string"
+                                          },
+                                          "description": "Human-readable label(s) for display. CDIF simplification (plain string) of DDI-CDI TextMapping.displayLabel, whose model type is LabelForDisplay. Per the cdi/cdif namespace policy a structured-string type simplified to a plain string is in the cdif namespace."
+                                        }
+                                      }
                                     }
-                                  }
+                                  ]
+                                },
+                                {
+                                  "title": "Locator Mapping Type",
+                                  "description": "Locates a variable's value(s) within a structured (hierarchical) dataset such as XML or JSON, via a locator expression (e.g., XPath or JSONPath). DDI-CDI LocatorMapping. Used in place of column-index/text mappings for cdi:StructuredDataSet distributions.",
+                                  "type": "object",
+                                  "properties": {
+                                    "cdi:locator": {
+                                      "type": "string",
+                                      "description": "Expression locating the variable's value(s) in the structured document (XPath, JSONPath, pointer, etc.). LocatorMapping.locator."
+                                    },
+                                    "cdif:formats_InstanceVariable": {
+                                      "type": "object",
+                                      "description": "Reference to a variable defined in schema:variableMeasured.",
+                                      "properties": {
+                                        "@id": {
+                                          "type": "string",
+                                          "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+                                        }
+                                      }
+                                    }
+                                  },
+                                  "required": [
+                                    "cdi:locator"
+                                  ]
                                 }
-                              }
+                              ]
                             }
                           },
                           "cdi:characterSet": {
@@ -1471,29 +1670,16 @@
                                       "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
                                       "properties": {
                                         "@context": {
-                                          "description": "JSON-LD context declaring the skos namespace prefix and any additional prefixes used in concept URIs. May be a single object or an array of strings and objects.",
-                                          "type": "array",
-                                          "items": {
-                                            "anyOf": [
-                                              {
-                                                "type": "string"
-                                              },
-                                              {
-                                                "type": "object"
-                                              }
-                                            ]
+                                          "description": "JSON-LD context (an object) declaring the skos namespace prefix and any additional prefixes used in concept URIs.",
+                                          "type": "object",
+                                          "properties": {
+                                            "skos": {
+                                              "const": "http://www.w3.org/2004/02/skos/core#"
+                                            }
                                           },
-                                          "contains": {
-                                            "type": "object",
-                                            "properties": {
-                                              "skos": {
-                                                "const": "http://www.w3.org/2004/02/skos/core#"
-                                              }
-                                            },
-                                            "required": [
-                                              "skos"
-                                            ]
-                                          }
+                                          "required": [
+                                            "skos"
+                                          ]
                                         },
                                         "@id": {
                                           "type": "string",
@@ -1700,6 +1886,94 @@
                             ]
                           },
                           "minItems": 1
+                        },
+                        "cdi:isDescribedBy": {
+                          "description": "A ValueAndConceptDescription giving the formal description (ranges, patterns, classification level, expressions) of the values this domain admits.",
+                          "anyOf": [
+                            {
+                              "type": "object",
+                              "description": "Formal description of a set of values.",
+                              "properties": {
+                                "@type": {
+                                  "type": "array",
+                                  "items": {
+                                    "type": "string"
+                                  },
+                                  "contains": {
+                                    "const": "cdi:ValueAndConceptDescription"
+                                  },
+                                  "minItems": 1
+                                },
+                                "@id": {
+                                  "type": "string",
+                                  "description": "Identifier for this ValueAndConceptDescription node"
+                                },
+                                "cdi:classificationLevel": {
+                                  "type": "string",
+                                  "enum": [
+                                    "Continuous",
+                                    "Interval",
+                                    "Nominal",
+                                    "Ordinal",
+                                    "Ratio"
+                                  ],
+                                  "description": "Indicates the type of relationship, nominal, ordinal, interval, ratio, or continuous. Use where appropriate for the representation type."
+                                },
+                                "cdi:description": {
+                                  "type": "string",
+                                  "description": "A formal description of the set of values in human-readable language."
+                                },
+                                "cdi:formatPattern": {
+                                  "$ref": "#/$defs/SkosConcept",
+                                  "description": "A pattern for a number as described in Unicode Locale Data Markup Language (LDML) (http://www.unicode.org/reports/tr35/tr35.html) Part 3: Numbers (http://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns) and Part 4. Dates (http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns) . Examples would be #,##0.### to describe the pattern for a decimal number, or yyyy.MM.dd G 'at' HH:mm:ss zzz for a datetime pattern."
+                                },
+                                "cdi:identifier": {
+                                  "$ref": "#/$defs/Identifier",
+                                  "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+                                },
+                                "cdi:logicalExpression": {
+                                  "$ref": "#/$defs/SkosConcept",
+                                  "description": "A logical expression where the values of \"x\" making the expression true are the members of the set of valid values. For example, \"(all reals x such that x > 0)\" describes the real numbers greater than 0."
+                                },
+                                "cdi:maximumValueExclusive": {
+                                  "type": "string",
+                                  "description": "A string denoting the maximum possible value (excluding this value). From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"maxExclusive: An atomic property that contains a single number or string that is the maximum valid value (exclusive). The value of this property becomes the maximum exclusive annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                                },
+                                "cdi:maximumValueInclusive": {
+                                  "type": "string",
+                                  "description": "A string denoting the maximum possible value. From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"maximum: An atomic property that contains a single number or string that is the maximum valid value (inclusive); equivalent to maxInclusive. The value of this property becomes the maximum annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                                },
+                                "cdi:minimumValueExclusive": {
+                                  "type": "string",
+                                  "description": "A string denoting the minimum possible value (excluding this value). From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"minExclusive: An atomic property that contains a single number or string that is the minimum valid value (exclusive). The value of this property becomes the minimum exclusive annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                                },
+                                "cdi:minimumValueInclusive": {
+                                  "type": "string",
+                                  "description": "A string denoting the minimum possible value. From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"minimum: An atomic property that contains a single number or string that is the minimum valid value (inclusive); equivalent to minInclusive. The value of this property becomes the minimum annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                                },
+                                "cdi:regularExpression": {
+                                  "type": "string",
+                                  "description": "A regular expression where strings matching the expression belong to the set of valid values."
+                                }
+                              },
+                              "required": [
+                                "@type"
+                              ]
+                            },
+                            {
+                              "type": "object",
+                              "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
+                              "properties": {
+                                "@id": {
+                                  "type": "string",
+                                  "description": "IRI or blank node identifier of the referenced node"
+                                }
+                              },
+                              "required": [
+                                "@id"
+                              ]
+                            }
+                          ]
                         }
                       },
                       "required": [
@@ -1791,29 +2065,16 @@
                                     "description": "A controlled-vocabulary codelist implemented as a skos:ConceptScheme constrained for CDIF use. The scheme must have a resolvable @id and identify its top concepts via skos:hasTopConcept; each concept (CdifCodelistConcept) must have a resolvable @id, skos:inScheme, skos:prefLabel, and skos:notation. Hierarchical concepts must declare both skos:narrower (for JSON tree traversal) and skos:broader (for upward navigation) where hierarchy exists. CDIF metadata properties (schema:identifier, schema:dateModified, schema:license or schema:conditionsOfAccess) take precedence over the equivalent dcterms properties from the base skos:ConceptScheme.",
                                     "properties": {
                                       "@context": {
-                                        "description": "JSON-LD context declaring the skos namespace prefix and any additional prefixes used in concept URIs. May be a single object or an array of strings and objects.",
-                                        "type": "array",
-                                        "items": {
-                                          "anyOf": [
-                                            {
-                                              "type": "string"
-                                            },
-                                            {
-                                              "type": "object"
-                                            }
-                                          ]
+                                        "description": "JSON-LD context (an object) declaring the skos namespace prefix and any additional prefixes used in concept URIs.",
+                                        "type": "object",
+                                        "properties": {
+                                          "skos": {
+                                            "const": "http://www.w3.org/2004/02/skos/core#"
+                                          }
                                         },
-                                        "contains": {
-                                          "type": "object",
-                                          "properties": {
-                                            "skos": {
-                                              "const": "http://www.w3.org/2004/02/skos/core#"
-                                            }
-                                          },
-                                          "required": [
-                                            "skos"
-                                          ]
-                                        }
+                                        "required": [
+                                          "skos"
+                                        ]
                                       },
                                       "@id": {
                                         "type": "string",
@@ -2020,6 +2281,94 @@
                           ]
                         },
                         "minItems": 1
+                      },
+                      "cdi:isDescribedBy": {
+                        "description": "A ValueAndConceptDescription giving the formal description (ranges, patterns, classification level, expressions) of the values this domain admits.",
+                        "anyOf": [
+                          {
+                            "type": "object",
+                            "description": "Formal description of a set of values.",
+                            "properties": {
+                              "@type": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                },
+                                "contains": {
+                                  "const": "cdi:ValueAndConceptDescription"
+                                },
+                                "minItems": 1
+                              },
+                              "@id": {
+                                "type": "string",
+                                "description": "Identifier for this ValueAndConceptDescription node"
+                              },
+                              "cdi:classificationLevel": {
+                                "type": "string",
+                                "enum": [
+                                  "Continuous",
+                                  "Interval",
+                                  "Nominal",
+                                  "Ordinal",
+                                  "Ratio"
+                                ],
+                                "description": "Indicates the type of relationship, nominal, ordinal, interval, ratio, or continuous. Use where appropriate for the representation type."
+                              },
+                              "cdi:description": {
+                                "type": "string",
+                                "description": "A formal description of the set of values in human-readable language."
+                              },
+                              "cdi:formatPattern": {
+                                "$ref": "#/$defs/SkosConcept",
+                                "description": "A pattern for a number as described in Unicode Locale Data Markup Language (LDML) (http://www.unicode.org/reports/tr35/tr35.html) Part 3: Numbers (http://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns) and Part 4. Dates (http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns) . Examples would be #,##0.### to describe the pattern for a decimal number, or yyyy.MM.dd G 'at' HH:mm:ss zzz for a datetime pattern."
+                              },
+                              "cdi:identifier": {
+                                "$ref": "#/$defs/Identifier",
+                                "description": "Identifier for objects requiring short- or long-lasting referencing and management."
+                              },
+                              "cdi:logicalExpression": {
+                                "$ref": "#/$defs/SkosConcept",
+                                "description": "A logical expression where the values of \"x\" making the expression true are the members of the set of valid values. For example, \"(all reals x such that x > 0)\" describes the real numbers greater than 0."
+                              },
+                              "cdi:maximumValueExclusive": {
+                                "type": "string",
+                                "description": "A string denoting the maximum possible value (excluding this value). From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"maxExclusive: An atomic property that contains a single number or string that is the maximum valid value (exclusive). The value of this property becomes the maximum exclusive annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                              },
+                              "cdi:maximumValueInclusive": {
+                                "type": "string",
+                                "description": "A string denoting the maximum possible value. From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"maximum: An atomic property that contains a single number or string that is the maximum valid value (inclusive); equivalent to maxInclusive. The value of this property becomes the maximum annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                              },
+                              "cdi:minimumValueExclusive": {
+                                "type": "string",
+                                "description": "A string denoting the minimum possible value (excluding this value). From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"minExclusive: An atomic property that contains a single number or string that is the minimum valid value (exclusive). The value of this property becomes the minimum exclusive annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                              },
+                              "cdi:minimumValueInclusive": {
+                                "type": "string",
+                                "description": "A string denoting the minimum possible value. From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"minimum: An atomic property that contains a single number or string that is the minimum valid value (inclusive); equivalent to minInclusive. The value of this property becomes the minimum annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
+                              },
+                              "cdi:regularExpression": {
+                                "type": "string",
+                                "description": "A regular expression where strings matching the expression belong to the set of valid values."
+                              }
+                            },
+                            "required": [
+                              "@type"
+                            ]
+                          },
+                          {
+                            "type": "object",
+                            "description": "JSON-LD @id reference to a node defined elsewhere in the graph",
+                            "properties": {
+                              "@id": {
+                                "type": "string",
+                                "description": "IRI or blank node identifier of the referenced node"
+                              }
+                            },
+                            "required": [
+                              "@id"
+                            ]
+                          }
+                        ]
                       }
                     },
                     "required": [
@@ -3708,6 +4057,63 @@
           ]
         }
       ]
+    },
+    "CdifPhysicalMapping": {
+      "title": "Physical Mapping Type",
+      "description": "Defines implementation-specific properties for the representation of a variable in a dataset. Aligned with CDIF 2026 schema using DDI-CDI flat per-column mapping structure.",
+      "type": "object",
+      "properties": {
+        "cdif:index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Non-negative integer that orders the fields in the data structure (column number)."
+        },
+        "cdif:format": {
+          "type": "string",
+          "description": "A format for number expressed as a string, or date format like YYYY/MM or MM-DD-YY."
+        },
+        "cdif:physicalDataType": {
+          "type": "string"
+        },
+        "cdi:numberPattern": {
+          "type": "string",
+          "description": "Number format pattern for the field (PhysicalMapping.numberPattern). Text-format properties (column width, decimal/digit-group separators, display label) live on cdifTextMapping."
+        },
+        "cdi:nullSequence": {
+          "type": "string",
+          "description": "The value of this property becomes the null annotation for the described column."
+        },
+        "cdi:defaultValue": {
+          "type": "string",
+          "description": "A default string indicating the value to substitute for an empty string."
+        },
+        "cdi:scale": {
+          "type": "integer"
+        },
+        "cdi:decimalPositions": {
+          "type": "integer"
+        },
+        "cdi:minimumLength": {
+          "type": "integer"
+        },
+        "cdi:maximumLength": {
+          "type": "integer"
+        },
+        "cdi:isRequired": {
+          "type": "boolean",
+          "default": false
+        },
+        "cdif:formats_InstanceVariable": {
+          "type": "object",
+          "description": "Reference to a variable defined in schema:variableMeasured.",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "This should be a reference to a variable defined in the schema:variableMeasured section."
+            }
+          }
+        }
+      }
     },
     "LanguageTaggedValue": {
       "type": "object",

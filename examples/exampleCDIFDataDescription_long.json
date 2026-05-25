@@ -1,0 +1,386 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "ex": "https://example.org/",
+    "cdif": "https://cdif.org/0.1/"
+  },
+  "@id": "ex:gom-water-quality-long-2025",
+  "@type": [
+    "schema:Dataset"
+  ],
+  "schema:name": "Gulf of Maine water-quality monitoring stations, 2025 (long form)",
+  "schema:description": "Same monthly water-quality observations from 12 buoys as the wide-form release, recast in long (narrow) form. Each row is one observation: station, date, parameter name (descriptor), value, and reporting unit.",
+  "schema:identifier": {
+    "@type": [
+      "schema:PropertyValue"
+    ],
+    "schema:propertyID": "https://doi.org",
+    "schema:value": "10.5281/zenodo.5151516",
+    "schema:url": "https://doi.org/10.5281/zenodo.5151516"
+  },
+  "schema:version": "2025.10",
+  "schema:dateModified": "2025-10-20",
+  "schema:datePublished": "2025-10-20",
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:keywords": [
+    "water quality",
+    "Gulf of Maine",
+    "long format",
+    "tidy data"
+  ],
+  "schema:creator": {
+    "@list": [
+      {
+        "@id": "https://ror.org/03m2x1q45",
+        "@type": [
+          "schema:Organization"
+        ],
+        "schema:name": "University of Arizona"
+      }
+    ]
+  },
+  "schema:publisher": {
+    "@id": "https://ror.org/03m2x1q45",
+    "@type": [
+      "schema:Organization"
+    ],
+    "schema:name": "University of Arizona"
+  },
+  "prov:wasDerivedFrom": [
+    {
+      "@id": "ex:gom-water-quality-wide-2025",
+      "schema:name": "Wide-form release of the same observations"
+    }
+  ],
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "cdi:LongStructureDataSet",
+        "cdi:PhysicalDataSet"
+      ],
+      "schema:name": "Long-form water-quality observations (CSV)",
+      "schema:contentUrl": "https://example.org/data/gom-water-quality-long-2025.csv",
+      "schema:encodingFormat": [
+        "text/csv"
+      ],
+      "cdi:characterSet": "UTF-8",
+      "cdif:fileSize": 712,
+      "cdif:fileSizeUofM": "KB",
+      "spdx:checksum": {
+        "@type": [
+          "spdx:Checksum"
+        ],
+        "spdx:algorithm": "SHA256",
+        "spdx:checksumValue": "8b1a7c3e5d9f0a2b4c6d8e0f1a3b5c7d9e1f2a4b6c8d0e2f4a6b8c0d2e4f6a8b"
+      },
+      "cdi:isDelimited": true,
+      "csvw:delimiter": ",",
+      "csvw:header": true,
+      "csvw:headerRowCount": 1,
+      "csvw:quoteChar": "\"",
+      "csvw:skipBlankRows": true,
+      "countRows": 576,
+      "countColumns": 5,
+      "cdif:hasPhysicalMapping": [
+        {
+          "cdif:index": 0,
+          "cdif:format": "string",
+          "cdif:physicalDataType": "string",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-station"
+          }
+        },
+        {
+          "cdif:index": 1,
+          "cdif:format": "YYYY-MM-DD",
+          "cdif:physicalDataType": "date",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-sample-date"
+          }
+        },
+        {
+          "cdif:index": 2,
+          "cdif:format": "string",
+          "cdif:physicalDataType": "string",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-parameter"
+          }
+        },
+        {
+          "cdif:index": 3,
+          "cdif:format": "decimal",
+          "cdif:physicalDataType": "float64",
+          "cdi:nullSequence": "NA",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-value"
+          }
+        },
+        {
+          "cdif:index": 4,
+          "cdif:format": "string",
+          "cdif:physicalDataType": "string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-unit"
+          }
+        }
+      ]
+    }
+  ],
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:var-station",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "station_id",
+      "schema:description": "Monitoring station identifier; unit of observation.",
+      "cdif:physicalDataType": [
+        "string"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
+      "cdif:role": "UnitIdentifier",
+      "cdif:displayLabel": [
+        "Monitoring station"
+      ]
+    },
+    {
+      "@id": "ex:var-sample-date",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "sample_date",
+      "schema:description": "Date the water sample was collected.",
+      "cdif:physicalDataType": [
+        "date"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#date",
+      "cdif:role": "Dimension",
+      "cdif:displayLabel": [
+        "Sampling date"
+      ]
+    },
+    {
+      "@id": "ex:var-parameter",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "parameter",
+      "schema:description": "Descriptor column. Each value names the measured property whose numeric reading is recorded in the value column. Permitted codes are ph, temperature, salinity, dissolved_oxygen.",
+      "cdif:physicalDataType": [
+        "string"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
+      "cdif:role": "Descriptor",
+      "cdif:displayLabel": [
+        "Parameter"
+      ]
+    },
+    {
+      "@id": "ex:var-value",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "value",
+      "schema:description": "Reference column. Holds the numeric value of whichever parameter is named in the descriptor column for that row.",
+      "cdif:physicalDataType": [
+        "float64"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdif:role": "ReferenceVariable",
+      "cdif:displayLabel": [
+        "Measured value"
+      ]
+    },
+    {
+      "@id": "ex:var-unit",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "unit",
+      "schema:description": "Reporting unit symbol for the row's value (e.g., Cel, 1, mg/L).",
+      "cdif:physicalDataType": [
+        "string"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
+      "cdif:role": "Attribute",
+      "cdif:displayLabel": [
+        "Unit of measure"
+      ],
+      "cdi:qualifies": {
+        "@id": "ex:var-value"
+      }
+    },
+    {
+      "@id": "ex:var-ph",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "ph",
+      "schema:description": "pH parameter. Rows whose descriptor column equals 'ph' record values for this variable.",
+      "schema:measurementTechnique": "Glass electrode, two-point calibration",
+      "cdif:physicalDataType": [
+        "float64"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdif:role": "Measure",
+      "schema:minValue": 0.0,
+      "schema:maxValue": 14.0,
+      "cdif:displayLabel": [
+        "pH"
+      ],
+      "cdif:simpleUnitOfMeasure": "1",
+      "cdif:uses": [
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P01/current/PHXXZZXX/"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var-temperature",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "temperature",
+      "schema:description": "Temperature parameter. Rows whose descriptor column equals 'temperature' record values for this variable.",
+      "schema:measurementTechnique": "CTD profiler",
+      "cdif:physicalDataType": [
+        "float64"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdif:role": "Measure",
+      "schema:minValue": -2.0,
+      "schema:maxValue": 30.0,
+      "cdif:displayLabel": [
+        "Sea-water temperature"
+      ],
+      "cdi:describedUnitOfMeasure": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "degree Celsius",
+        "schema:identifier": "http://qudt.org/vocab/unit/DEG_C"
+      },
+      "cdif:simpleUnitOfMeasure": "Cel"
+    },
+    {
+      "@id": "ex:var-salinity",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "salinity",
+      "schema:description": "Practical salinity parameter. Rows whose descriptor column equals 'salinity' record values for this variable.",
+      "schema:measurementTechnique": "CTD profiler",
+      "cdif:physicalDataType": [
+        "float64"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdif:role": "Measure",
+      "schema:minValue": 0.0,
+      "schema:maxValue": 42.0,
+      "cdif:displayLabel": [
+        "Practical salinity"
+      ],
+      "cdif:simpleUnitOfMeasure": "1",
+      "cdif:uses": [
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P01/current/PSALST01/"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var-dissolved-oxygen",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "dissolved_oxygen",
+      "schema:description": "Dissolved oxygen parameter. Rows whose descriptor column equals 'dissolved_oxygen' record values for this variable.",
+      "schema:measurementTechnique": "Optode sensor",
+      "cdif:physicalDataType": [
+        "float64"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
+      "cdif:role": "Measure",
+      "schema:minValue": 0.0,
+      "schema:maxValue": 15.0,
+      "cdif:displayLabel": [
+        "Dissolved oxygen"
+      ],
+      "cdi:describedUnitOfMeasure": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "milligram per litre",
+        "schema:identifier": "http://qudt.org/vocab/unit/MilliGM-PER-L"
+      },
+      "cdif:simpleUnitOfMeasure": "mg/L"
+    }
+  ],
+  "schema:measurementTechnique": [
+    "CTD profiler",
+    "Glass electrode pH meter",
+    "Optode dissolved-oxygen sensor"
+  ],
+  "schema:spatialCoverage": [
+    {
+      "@type": [
+        "schema:Place"
+      ],
+      "schema:name": "Gulf of Maine",
+      "schema:geo": {
+        "@type": [
+          "schema:GeoShape"
+        ],
+        "schema:box": "41.0 -71.0 45.0 -65.0"
+      }
+    }
+  ],
+  "schema:temporalCoverage": [
+    "2025-01-01/2025-12-31"
+  ],
+  "schema:subjectOf": {
+    "@id": "ex:gom-water-quality-long-2025/catalog-record",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "schema:additionalType": [
+      "dcat:CatalogRecord"
+    ],
+    "schema:about": {
+      "@id": "ex:gom-water-quality-long-2025"
+    },
+    "schema:sdDatePublished": "2025-10-20",
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.0"
+      }
+    ]
+  }
+}

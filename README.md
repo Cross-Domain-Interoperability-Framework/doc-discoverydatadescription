@@ -101,16 +101,16 @@ The script uses **`CDIFDataDescription-frame.jsonld`** to frame JSON-LD document
 
 ## SHACL Validation
 
-**`dataDescriptionRules.shacl`** contains self-contained SHACL shapes for validating CDIF Data Description profile instances (renamed from generic `rules.shacl` so it is discoverable in the release repo without ambiguity). The file is **merged** from the per-Building-Block source SHACL files in [`metadataBuildingBlocks/_sources/`](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks/tree/main/_sources):
+**`dataDescriptionRules.shacl`** contains self-contained SHACL shapes for validating CDIF Data Description profile instances (renamed from generic `rules.shacl` so it is discoverable in the release repo without ambiguity). The file is **generated**, not hand-curated: it bundles the `rules.shacl` of every Building Block in the profile's `$ref`-closure — i.e. exactly the BBs the profile actually composes (`schema.yaml` `$ref` graph), and nothing else. (Notably this does **not** include `cdifArchiveDistribution`, which the Data Description profile does not compose; its `CDIFManifestConformsToShape` therefore is not pulled in.)
 
-- `cdifProperties/`: `cdifCore`, `cdifDataDescription`, `cdifInstanceVariable`, `cdifPhysicalMapping`, `cdifTabularData`, `cdifLongData`, `cdifDataCube`, `cdifArchiveDistribution`
-- `schemaorgProperties/`: `variableMeasured`, `definedTerm`, `spatialExtent`, `temporalExtent`, `webAPI`
-- `qualityProperties/`: `qualityMeasure`
-- `profiles/cdifProfiles/CDIFDataDescriptionProfile`
+Regenerate it from [`metadataBuildingBlocks`](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks) whenever a source `rules.shacl` changes:
 
-The merge uses **shape-name precedence**: when the same named SHACL shape is defined in multiple sources, the later (higher-precedence) source wins and earlier-source blank-node subgraphs are dropped — this is what allows the profile-level rules.shacl to override base-level shapes like `cdifd:rightsProperty`, `cdifd:CDIFDatasetMandatoryShape`, `cdifd:CDIFCatalogRecordShape` without producing the "PropertyShape with multiple sh:path" error pyshacl raises on a naive merge.
+```bash
+python tools/validate_shacl.py CDIFDataDescriptionProfile \
+  --emit-shapes <path-to>/datadescription/dataDescriptionRules.shacl
+```
 
-Regenerate by re-running the merge from the source repository when source shapes change.
+The merge uses **shape-name precedence**: when the same named SHACL shape is defined in multiple sources, the profile's own `rules.shacl` wins (so it can override base shapes like `cdifd:CDIFDatasetMandatoryShape` / `cdifd:CDIFCatalogRecordShape`), otherwise the BB whose directory name appears in the shape's local name wins (e.g. `definedTerm` owns `cdifd:CDIFDefinedTermShape`); the winner's full subgraph is emitted and the losers dropped. This avoids the "PropertyShape with multiple sh:path" error pyshacl raises on a naive union.
 
 ## Related repositories
 

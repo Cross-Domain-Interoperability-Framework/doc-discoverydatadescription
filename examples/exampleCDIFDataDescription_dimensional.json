@@ -1,0 +1,306 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "ex": "https://example.org/",
+    "cdif": "https://cdif.org/0.1/"
+  },
+  "@id": "ex:gom-temp-cube-2025",
+  "@type": [
+    "schema:Dataset"
+  ],
+  "schema:name": "Gulf of Maine gridded sea temperature, 2024-2025",
+  "schema:description": "Monthly sea-water temperature regridded onto a 0.1-degree lat/lon mesh at 24 standard depth levels. Single NetCDF file with a 4-D measurement array indexed by time, depth, latitude, and longitude.",
+  "schema:identifier": {
+    "@type": [
+      "schema:PropertyValue"
+    ],
+    "schema:propertyID": "https://doi.org",
+    "schema:value": "10.5281/zenodo.4242424",
+    "schema:url": "https://doi.org/10.5281/zenodo.4242424"
+  },
+  "schema:version": "1.0.0",
+  "schema:dateModified": "2025-10-02",
+  "schema:datePublished": "2025-10-15",
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:keywords": [
+    "ocean temperature",
+    "Gulf of Maine",
+    "gridded data",
+    "reanalysis"
+  ],
+  "schema:creator": {
+    "@list": [
+      {
+        "@id": "https://ror.org/03m2x1q45",
+        "@type": [
+          "schema:Organization"
+        ],
+        "schema:name": "University of Arizona"
+      }
+    ]
+  },
+  "schema:publisher": {
+    "@id": "https://ror.org/03m2x1q45",
+    "@type": [
+      "schema:Organization"
+    ],
+    "schema:name": "University of Arizona"
+  },
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "cdi:StructuredDataSet",
+        "cdi:PhysicalDataSet"
+      ],
+      "schema:name": "Gulf of Maine temperature cube (NetCDF-4)",
+      "schema:contentUrl": "https://example.org/data/gom-temp-cube-2025.nc",
+      "schema:encodingFormat": [
+        "application/x-netcdf"
+      ],
+      "cdif:fileSize": 184.6,
+      "cdif:fileSizeUofM": "MB",
+      "spdx:checksum": {
+        "@type": [
+          "spdx:Checksum"
+        ],
+        "spdx:algorithm": "SHA256",
+        "spdx:checksumValue": "9f3c1a0b4e8d2f1e7a6c5b4d3a2918f0e1d2c3b4a5968778a9b0c1d2e3f40516"
+      },
+      "cdif:hasPhysicalMapping": [
+        {
+          "cdi:locator": "/time",
+          "cdif:format": "days since 2024-01-01",
+          "cdif:physicalDataType": "int32",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-time"
+          }
+        },
+        {
+          "cdi:locator": "/depth",
+          "cdif:format": "decimal",
+          "cdif:physicalDataType": "float32",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-depth"
+          }
+        },
+        {
+          "cdi:locator": "/lat",
+          "cdif:format": "decimal",
+          "cdif:physicalDataType": "float32",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-lat"
+          }
+        },
+        {
+          "cdi:locator": "/lon",
+          "cdif:format": "decimal",
+          "cdif:physicalDataType": "float32",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-lon"
+          }
+        },
+        {
+          "cdi:locator": "/temperature",
+          "cdif:format": "decimal",
+          "cdif:physicalDataType": "float32",
+          "cdi:nullSequence": "NaN",
+          "cdi:isRequired": true,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-temperature"
+          }
+        }
+      ]
+    }
+  ],
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:var-time",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "time",
+      "schema:description": "Mid-month timestamp of the monthly mean field.",
+      "cdif:physicalDataType": [
+        "int32"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#date",
+      "cdif:role": "Dimension",
+      "cdif:displayLabel": [
+        "Time"
+      ],
+      "cdif:simpleUnitOfMeasure": "d",
+      "cdi:describedUnitOfMeasure": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "days since 2024-01-01",
+        "schema:identifier": "http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"
+      }
+    },
+    {
+      "@id": "ex:var-depth",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "depth",
+      "schema:description": "Standard ocean depth level below sea surface.",
+      "cdif:physicalDataType": [
+        "float32"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
+      "cdif:role": "Dimension",
+      "schema:minValue": 0.0,
+      "schema:maxValue": 4000.0,
+      "cdif:displayLabel": [
+        "Depth below sea surface"
+      ],
+      "cdif:simpleUnitOfMeasure": "m",
+      "cdif:uses": [
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P01/current/DEPHPR01/"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var-lat",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "latitude",
+      "schema:description": "Cell-centre latitude (WGS84).",
+      "cdif:physicalDataType": [
+        "float32"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
+      "cdif:role": "Dimension",
+      "schema:minValue": 41.0,
+      "schema:maxValue": 45.0,
+      "cdif:displayLabel": [
+        "Latitude"
+      ],
+      "cdif:simpleUnitOfMeasure": "deg",
+      "cdif:uses": [
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P02/current/SDN_LAT/"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var-lon",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "longitude",
+      "schema:description": "Cell-centre longitude (WGS84).",
+      "cdif:physicalDataType": [
+        "float32"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
+      "cdif:role": "Dimension",
+      "schema:minValue": -71.0,
+      "schema:maxValue": -65.0,
+      "cdif:displayLabel": [
+        "Longitude"
+      ],
+      "cdif:simpleUnitOfMeasure": "deg",
+      "cdif:uses": [
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P02/current/SDN_LON/"
+        }
+      ]
+    },
+    {
+      "@id": "ex:var-temperature",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "sea_water_temperature",
+      "schema:description": "Monthly mean in-situ sea-water temperature for the cell.",
+      "schema:measurementTechnique": "Optimal interpolation of CTD and ARGO float observations",
+      "schema:propertyID": [
+        "http://vocab.nerc.ac.uk/collection/P01/current/TEMPST01/"
+      ],
+      "cdif:physicalDataType": [
+        "float32"
+      ],
+      "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
+      "cdif:role": "Measure",
+      "schema:minValue": -2.0,
+      "schema:maxValue": 28.0,
+      "cdif:displayLabel": [
+        "Sea-water temperature"
+      ],
+      "cdi:describedUnitOfMeasure": {
+        "@type": [
+          "schema:DefinedTerm"
+        ],
+        "schema:name": "degree Celsius",
+        "schema:identifier": "http://qudt.org/vocab/unit/DEG_C"
+      },
+      "cdif:simpleUnitOfMeasure": "Cel",
+      "cdif:uses": [
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPST01/"
+        }
+      ]
+    }
+  ],
+  "schema:spatialCoverage": [
+    {
+      "@type": [
+        "schema:Place"
+      ],
+      "schema:name": "Gulf of Maine",
+      "schema:geo": {
+        "@type": [
+          "schema:GeoShape"
+        ],
+        "schema:box": "41.0 -71.0 45.0 -65.0"
+      }
+    }
+  ],
+  "schema:temporalCoverage": [
+    "2024-01-01/2025-09-30"
+  ],
+  "schema:subjectOf": {
+    "@id": "ex:gom-temp-cube-2025/catalog-record",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "schema:additionalType": [
+      "dcat:CatalogRecord"
+    ],
+    "schema:about": {
+      "@id": "ex:gom-temp-cube-2025"
+    },
+    "schema:sdDatePublished": "2025-10-15",
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.0"
+      }
+    ]
+  }
+}

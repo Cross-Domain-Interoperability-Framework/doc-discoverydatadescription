@@ -1,0 +1,56 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://cdif.org/0.1/",
+    "ex": "https://example.org/",
+    "prov": "http://www.w3.org/ns/prov#"
+  },
+  "@id": "ex:dataset/snowDepth-2024",
+  "@type": [
+    "schema:Dataset"
+  ],
+  "schema:name": "Snow depth in Northern Arizona, water year 2024",
+  "schema:identifier": "https://doi.org/10.1234/snowdepth-az-2024",
+  "schema:dateModified": "2024-10-15",
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:url": "https://example.org/datasets/snowdepth-az-2024",
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:var/snowDepth",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "snow_depth",
+      "schema:propertyID": [
+        "https://qudt.org/vocab/quantitykind/Depth"
+      ],
+      "schema:unitText": "cm"
+    }
+  ],
+  "schema:subjectOf": {
+    "@id": "ex:dataset/snowDepth-2024/metadata",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "schema:additionalType": [
+      "dcat:CatalogRecord"
+    ],
+    "schema:about": {
+      "@id": "ex:dataset/snowDepth-2024"
+    },
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.0"
+      }
+    ]
+  }
+}
