@@ -15,7 +15,7 @@ All classes and properties are implemented with schema.org types and attributes 
 
 ## Base Class
 
-### DataSet {#sec-dataset}
+### DataSet
 
 This profile applies to description of resources that can be described using the properties defined in the [CDIF discovery information model](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/contentmodel.html#basic-discovery-metadata-content-model) . For implementation using the schema.org vocabulary, these are typed as schema:Dataset.
 
@@ -52,7 +52,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Required
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 **Description:** The primary identifier for the described resource; other identifiers should be listed in the sameAs field. CDIF recommends that if the identifier is a resolvable URI, use the string option; if the identifier is a string that is not a resolvable URI, use the schema:PropertyValue class to provide context for interpreting the identifier. Schema.org property, in namepace \'http://schema.org/\'.
 
@@ -72,7 +72,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Required if no license, Repeatable
 
-**Content:** string, [object reference](#object-reference), or [LabeledLink](#sec-labeledlink)
+**Content:** string, [object reference](#object-reference), or [LabeledLink](#labeled-link)
 
 **Description:** Text statement of conditions for use and access; if an online resource documents the restrictions or a URI is used to identify the conditions, recommend using the LabeledLink option, implemented as schema:CreativeWork, to provide a label (name) and an identifier (URI or URL).
 
@@ -81,9 +81,9 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Required if no conditionsOfAccess
 
-**Content:** string, [object reference](#object-reference), or [LabeledLink](#sec-labeledlink)
+**Content:** string, [object reference](#object-reference), or [LabeledLink](#labeled-link)
 
-**Description:** Legal statement of conditions for use and access; recommend using the [LabeledLink](#sec-labeledlink) option, implemented by schema:CreativeWork to provide a label (name) for the license, and an identifier. Sources of license identifiers: https://opensource.org/licenses/, https://creativecommons.org/about/cclicenses/, https://spdx.org/licenses/, http://cor.esipfed.org/ont/earthcube/swl. If only a string is provided, it should be recognizable name for the license. If resolvable URI is available, use the object reference.
+**Description:** Legal statement of conditions for use and access; recommend using the [LabeledLink](#labeled-link) option, implemented by schema:CreativeWork to provide a label (name) for the license, and an identifier. Sources of license identifiers: https://opensource.org/licenses/, https://creativecommons.org/about/cclicenses/, https://spdx.org/licenses/, http://cor.esipfed.org/ont/earthcube/swl. If only a string is provided, it should be recognizable name for the license. If resolvable URI is available, use the object reference.
 
 
 **CHOICE at least one of two options:**
@@ -101,7 +101,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Required if no url
 
-**Content:** [DataDownload](#sec-datadownload) or [WebAPI](#sec-webapi)
+**Content:** [DataDownload](#data-download) or [WebAPI](#web-api)
 
 **Description:** specifies how to download the data in a specific format or access via a web API. This property describes where to get the data and in what format by using the schema:DataDownload type. If user must access data through a landing page, provide link to landing page in the \'url\' property for the dataset, not a distribution contentUrl. At the Data Description level, a DataDownload distribution gains cdi:characterSet and cdif:hasPhysicalMapping (per-field physical mappings); file size is recorded with the Core schema:contentSize property. A WebAPI distribution gains these on its potentialAction's schema:result rather than on the distribution itself.
 
@@ -110,7 +110,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Required
 
-**Content:** [Dataset/dcat:CatalogRecord](#sec-catalogrecord)
+**Content:** [Dataset/dcat:CatalogRecord](#datasetdcatcatalogrecord)
 
 **Description:** This property contains information about the metadata record itself, as opposed to the resource the record describes. See Uses of dcat:CatalogRecord and https://github.com/Cross-Domain-Interoperability-Framework/Discovery/issues/13 for discussion on how to make assertion about the metadata record distinct from statements about the described resource. Use the dcat:CatalogRecord as additionalType to distinguish this schema:Dataset from the schema:Dataset about a described external resource. see <https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/contentmodel.html#properties-for-metadata-management>. Introduction of this is novel for schema.org implementations.
 
@@ -130,7 +130,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** Use to assert semantics for the JSON object using concepts from other vocabularies. Type assertions here are purely for semantic information, and do not imply presence of properties assigned to a class in some other vocabulary.
 
@@ -175,7 +175,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [LinkRole](#sec-linkrole)
+**Content:** [LinkRole](#linkrole)
 
 **Description:** links to related resources; linkRelationship specifies how the resource is related. Use schema.org LinkRole type for values, with a linkRelationship and target that documents the url and encoding format of the linked content.
 
@@ -184,16 +184,16 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string, [object reference](#object-reference), or [LabeledLink](#sec-labeledlink)
+**Content:** string, [object reference](#object-reference), or [LabeledLink](#labeled-link)
 
-**Description:** Policies related to maintenance, update, expected time to live, e.g. FDOF digitalObjectMutability, RDA digitalObjectPolicy, FDOF PersistencyPolicy. If an online resource documents the policies or a URI is used to identify the conditions, recommend using [LabeledLink](#sec-labeledlink), implemented as schema:CreativeWork to provide a label (name) and an identifier (URI or URL).
+**Description:** Policies related to maintenance, update, expected time to live, e.g. FDOF digitalObjectMutability, RDA digitalObjectPolicy, FDOF PersistencyPolicy. If an online resource documents the policies or a URI is used to identify the conditions, recommend using [LabeledLink](#labeled-link), implemented as schema:CreativeWork to provide a label (name) and an identifier (URI or URL).
 
 
 #### keywords
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** Keywords are an array of strings, an array of schema:DefinedTerms, or some combination of these. If you have information about a controlled vocabulary from which keywords come from, use schema:DefinedTerm to descibe that keyword. This allowed variability complicates parsing the metadata record; recommend using DefinedTerm for all keywords if any of them are from a known vocabulary, otherwise an array of strings.
 
@@ -202,7 +202,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** List of [object reference](#object-reference), [Person](#sec-person), or [Organization](#sec-organization)
+**Content:** List of [object reference](#object-reference), [Person](#person), or [Organization](#organization)
 
 **Description:** Author or orginator of intellectual content of dataset. Use the JSON-LD \@list construct to preserve author order. Use contributor with the Role property to specify other roles related to creation or stewardship of the resource.
 
@@ -211,7 +211,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [object reference](#object-reference), [Person](#sec-person), or [Organization](#sec-organization)
+**Content:** [object reference](#object-reference), [Person](#person), or [Organization](#organization)
 
 **Description:** Other parties who played a role in production of dataset
 
@@ -220,7 +220,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional
 
-**Content:** [object reference](#object-reference), [Person](#sec-person), or [Organization](#sec-organization)
+**Content:** [object reference](#object-reference), [Person](#person), or [Organization](#organization)
 
 **Description:** Identify Party who made the dataset publicly available
 
@@ -229,7 +229,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [object reference](#object-reference), [Person](#sec-person), or [Organization](#sec-organization)
+**Content:** [object reference](#object-reference), [Person](#person), or [Organization](#organization)
 
 **Description:** Party who maintains the distribution options for the dataset (i.e. the hosting web server). If there are multiple distributions from different providers, use the provider property on distribution/DataDownload. Contact information for the provider is important if there are malfunctions in the data access workflow.
 
@@ -238,7 +238,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [MonetaryGrant](#sec-monetarygrant)
+**Content:** [MonetaryGrant](#monetarygrant)
 
 **Description:** Acknowledgement for sources of financial or other material resources important for the creation of the described resource. Allows identification of specific funding instruments (grants, contracts, scholarships...) or institutions providing resources.
 
@@ -256,7 +256,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string, [object reference](#object-reference), [LabeledLink](#sec-labeledlink)
+**Content:** string, [object reference](#object-reference), [LabeledLink](#labeled-link)
 
 **Description:** Brief information about sources of data used in aggregate datasets. String bibliographic citations, URIs as object references, or LabeledLink, implemented as schema:CreativeWork, to provide a title, description and URL.
 
@@ -267,7 +267,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** The technique, technology, or methodology used for measurement or determination of the dataset values.
 
@@ -276,9 +276,9 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Required, Repeatable
 
-**Content:** [PropertyValue-(variableMeasured)](#sec-propertyvalue-vm) extended as [CdifInstanceVariable](#sec-cdifinstancevariable)
+**Content:** [PropertyValue-(variableMeasured)](#propertyvalue-variablemeasured) extended as [CdifInstanceVariable](#cdifinstancevariable)
 
-**Description:** At the Data Description level, each variableMeasured item is a CDIF profile of the DDI-CDI InstanceVariable / RepresentedVariable / ConceptualVariable classes. The item is typed as both `schema:PropertyValue` and `cdi:InstanceVariable`, MUST carry `schema:name`, and extends the basic Discovery `variableMeasured` shape with properties describing the variable's data type, role, source, value domain, weighting, and summary statistics. See [PropertyValue-(variableMeasured)](#sec-propertyvalue-vm) for the schema.org base properties and [CdifInstanceVariable](#sec-cdifinstancevariable) for the CDIF extensions.
+**Description:** At the Data Description level, each variableMeasured item is a CDIF profile of the DDI-CDI InstanceVariable / RepresentedVariable / ConceptualVariable classes. The item is typed as both `schema:PropertyValue` and `cdi:InstanceVariable`, MUST carry `schema:name`, and extends the basic Discovery `variableMeasured` shape with properties describing the variable's data type, role, source, value domain, weighting, and summary statistics. See [PropertyValue-(variableMeasured)](#propertyvalue-variablemeasured) for the schema.org base properties and [CdifInstanceVariable](#cdifinstancevariable) for the CDIF extensions.
 
 > **InstanceVariable across CDIF profiles.** The `schema:variableMeasured` item carries a different feature set depending on which CDIF profile a Dataset conforms to:
 >
@@ -295,16 +295,16 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [Place](#sec-place)
+**Content:** [Place](#place)
 
-**Description:** Document spatial extent to which the resource content is relevant. Can be expressed with a simple text place name, a place name from an identified gazeteer (using schema: [DefinedTerm](#sec-definedterm)), a point location, a bounding box (.e.g. for a map extent), a line (e.g. a ship track or foot traverse), or a general geometry. Registered place names from a gazeteer or a simple bounding box are widely recognized and indexed approaches used by spatially aware metadata aggregators.
+**Description:** Document spatial extent to which the resource content is relevant. Can be expressed with a simple text place name, a place name from an identified gazeteer (using schema: [DefinedTerm](#defined-term)), a point location, a bounding box (.e.g. for a map extent), a line (e.g. a ship track or foot traverse), or a general geometry. Registered place names from a gazeteer or a simple bounding box are widely recognized and indexed approaches used by spatially aware metadata aggregators.
 
 
 #### temporalCoverage
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string or [ProperInterval](#sec-properinterval)
+**Content:** string or [ProperInterval](#timeproper-interval)
 
 **Description:** The time interval during which data was collected or observations were made; or a time period that an activity or collection is linked to intellectually or thematically (for example, 1997 to 1998; the 18th century) (see https://documentation.ardc.edu.au/display/DOC/Temporal+coverage). For documentation of Earth Science, Paleobiology or Paleontology datasets, we are interested in the second case\-- the time period that data are linked to thematically. NOTE---the implementation of temporal intervals uses OWL Time, so the context must include \"time\": [http://www.w3.org/2006/time#](http://www.w3.org/2006/time). Simple ISO8601 time intervals can be represented using the description property with a text string value.
 
@@ -313,9 +313,9 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [dqv:QualityMeasurement](#sec-qualitymeasurement)
+**Content:** [dqv:QualityMeasurement](#dqvqualitymeasurement)
 
-**Description:** Quality measurements reported to assess the resource. Reported with a measurement type, specified by name, an [object reference](#object-reference) or as a [DefinedTerm](#sec-definedterm), and the reported result of the quality measure, either as a string or a [DefinedTerm](#sec-definedterm) from a vocabulary.
+**Description:** Quality measurements reported to assess the resource. Reported with a measurement type, specified by name, an [object reference](#object-reference) or as a [DefinedTerm](#defined-term), and the reported result of the quality measure, either as a string or a [DefinedTerm](#defined-term) from a vocabulary.
 
 
 #### Properties added in Data Description Profile
@@ -324,7 +324,7 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [cdif:Key](#sec-cdifkey)
+**Content:** [cdif:Key](#cdifkey)
 
 **Description:** Primary key of the dataset: a `cdif:Key` whose `cdif:isComposedOf` is an ordered list of `cdi:ComponentPosition` wrappers. Each wrapper carries `cdi:indexes` (the `cdi:InstanceVariable` at that position, drawn from `schema:variableMeasured`, inline or `@id`-reference) and `cdi:value` (the integer position in the key, 0- or 1-based). Together the wrappers identify each data instance. Matches the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
 
@@ -333,14 +333,14 @@ This profile applies to description of resources that can be described using the
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [cdi:Statistics](#sec-cdistatistics), [cdi:CategoryStatistics](#sec-cdicategorystatistics), or [cdif:StatisticsCollection](#sec-cdifstatisticscollection); inline or `@id`-reference
+**Content:** [cdi:Statistics](#cdistatistics), [cdi:CategoryStatistics](#cdicategorystatistics), or [cdif:StatisticsCollection](#cdifstatisticscollection); inline or `@id`-reference
 
 **Description:** Summary statistics describing the dataset's values. Each entry is a `cdi:Statistics` bundle (one or more Statistic value objects, optionally weighted by an InstanceVariable, optionally broken down by Category), a `cdi:CategoryStatistics` (per-category statistics), or a `cdif:StatisticsCollection` (groups multiple Statistics nodes and records which InstanceVariables they index). Either inline a node here, or use an `@id`-reference to one declared elsewhere in the document.
 
 
 ## Other Classes used for CDIF Core
 
-### Data Download {#sec-datadownload}
+### Data Download
 
 file-based access to a resource via URL; the DataDownload object provides a link to get the resource content, along with information about the serialization format and conventions used.
 
@@ -402,7 +402,7 @@ file-based access to a resource via URL; the DataDownload object provides a link
 
 **Cardinality:** Optional
 
-**Content:** [spdx:Checksum](#sec-spdxchecksum)
+**Content:** [spdx:Checksum](#spdxchecksum-1)
 
 **Description:** Checksum string that is \'footprint\' of the described file to enable testing for file modification. Algorithm used is specified by spdx:algorithm property.
 
@@ -420,7 +420,7 @@ file-based access to a resource via URL; the DataDownload object provides a link
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [object reference](#object-reference), [Person](#sec-person), or [Organization](#sec-organization)
+**Content:** [object reference](#object-reference), [Person](#person), or [Organization](#organization)
 
 **Description:** The agent responsible for acces to the described resource. Use contact for this agent to report access problems.
 
@@ -437,7 +437,7 @@ file-based access to a resource via URL; the DataDownload object provides a link
 > **Note:** File size is recorded with the Core `schema:contentSize` property (a string, e.g. `'2.5 MB'` or a byte count) on the DataDownload distribution. The earlier `cdi:fileSize` / `cdi:fileSizeUofM` properties have been removed.
 
 
-### Web API {#sec-webapi}
+### Web API
 
 Provides information to request data through a web accessible service endpoint. This implementation uses the schema.org Action to document url or url template and parameters. At this point, schema is set up for one action\-- an HTTP Get that requests data. The url template parameters (in curly brackets \'{}\') specify query parameters to filter the source data, request particular output formats or other options offered by the interface.
 
@@ -445,7 +445,7 @@ Provides information to request data through a web accessible service endpoint. 
 
 **Cardinality:** Required
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** Specify the kind of service. Ideally this should be a resolvable identifier. Currently there is no widely adopted registry for serviceType identifiers. Services might be defined at different levels of granularity, and classifications might focus on function, data formats, thematic content, security, or other aspects of the service definition. For interoperability, there must be an external arrangement between data providers and consumers on the strings that will be used to specify service types.
 
@@ -454,7 +454,7 @@ Provides information to request data through a web accessible service endpoint. 
 
 **Cardinality:** Required, Repeatable
 
-**Content:** string or [LabeledLink](#sec-labeledlink)
+**Content:** string or [LabeledLink](#labeled-link)
 
 **Description:** Description of access privileges required to use the API, e.g. registration, licensing, payments. Note that access constraints applying to all distributions of the resource should be specified in the access constraints for the resource description as a whole.
 
@@ -463,7 +463,7 @@ Provides information to request data through a web accessible service endpoint. 
 
 **Cardinality:** Optional
 
-**Content:** string or [LabeledLink](#sec-labeledlink)
+**Content:** string or [LabeledLink](#labeled-link)
 
 **Description:** A machine-actionable description of a service instance. Examples include OpenAPI documents, OGC Capabilities documents. Software designed to utilise a particular service type will typically include functionality to parse such a description document and engage with the service endpoint. If such a document is available for the service instance providing the resource distribution, it should be included in the distribution metadata.
 
@@ -472,12 +472,12 @@ Provides information to request data through a web accessible service endpoint. 
 
 **Cardinality:** Required, Repeatable
 
-**Content:** [object reference](#object-reference), [Action](#sec-action)
+**Content:** [object reference](#object-reference), [Action](#action)
 
 **Description:** Description of the operations offered by the interface.
 
 
-### Action {#sec-action}
+### Action
 
 #### @type
 
@@ -501,7 +501,7 @@ Provides information to request data through a web accessible service endpoint. 
 
 **Cardinality:** Required
 
-**Content:** [EntryPoint](#sec-entrypoint)
+**Content:** [EntryPoint](#entrypoint)
 
 **Description:** specifies the request target location and request syntax
 
@@ -515,7 +515,7 @@ Provides information to request data through a web accessible service endpoint. 
 **Description:** specifies the serialization scheme (encoding format, information model) for the expected representation of the API response. The result describes the *bytes* the service produces; the WebAPI distribution itself describes the *service*. At the Data Description level, when the result is additionally typed `cdi:PhysicalDataSet`, it may carry the physical-realization properties:
 
 - `cdi:characterSet` — character encoding of the response
-- `cdif:hasPhysicalMapping` — see [CdifPhysicalMapping](#sec-cdifphysicalmapping). The `cdif:formats_InstanceVariable` references inside each mapping point at `@id`s in the parent Dataset's `schema:variableMeasured` (the API response is another physical realization of those same InstanceVariables; do not redeclare the variables on the result).
+- `cdif:hasPhysicalMapping` — see [CdifPhysicalMapping](#cdifphysicalmapping). The `cdif:formats_InstanceVariable` references inside each mapping point at `@id`s in the parent Dataset's `schema:variableMeasured` (the API response is another physical realization of those same InstanceVariables; do not redeclare the variables on the result).
 
 At the Data Structure level, the result also carries `cdi:isStructuredBy` (an inline `cdi:DataStructure` or `@id`-reference to one declared elsewhere). The Data Structure referenced from a WebAPI's `schema:result` MAY differ from the one referenced by sibling DataDownload distributions — e.g., the API may serve a long-format variant of a wide-format file download. `cdi:PhysicalDataSet` typing belongs on the result, NOT on the WebAPI distribution itself.
 
@@ -533,12 +533,12 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [PropertyValueSpecification](#sec-propertyvaluespec)
+**Content:** [PropertyValueSpecification](#propertyvaluespecification)
 
 **Description:** set of explanations of the parameters in the URL template for the target EntryPoint.
 
 
-### Person {#sec-person}
+### Person
 
 Object representing a person.
 
@@ -573,7 +573,7 @@ Object representing a person.
 
 **Cardinality:** Required if no name
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 
 #### description
@@ -598,7 +598,7 @@ Object representing a person.
 
 **Cardinality:** Optional
 
-**Content:** [Organization](#sec-organization)
+**Content:** [Organization](#organization)
 
 **Description:** Organization that the person is associated with.
 
@@ -607,7 +607,7 @@ Object representing a person.
 
 **Cardinality:** Optional
 
-**Content:** [ContactPoint](#sec-contactpoint)
+**Content:** [ContactPoint](#contactpoint-1)
 
 **Description:** email is required property if a contactPoint is included. Schema.org allows telephone and postal contacts as well.
 
@@ -619,7 +619,7 @@ Object representing a person.
 **Content:** string, [object reference](#object-reference)
 
 
-### Organization {#sec-organization}
+### Organization
 
 #### @id
 
@@ -652,14 +652,14 @@ Object representing a person.
 
 **Cardinality:** Required if no name
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 
 #### additionalType
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 
 #### alternateName
@@ -685,7 +685,7 @@ Object representing a person.
 **Content:** string, [object reference](#object-reference)
 
 
-### ContactPoint {#sec-contactpoint}
+### ContactPoint
 
 Information about how to communicate with a person or organization. CDIF only includes e-mail in its schema.
 
@@ -705,7 +705,7 @@ Information about how to communicate with a person or organization. CDIF only in
 **Description:** Property is required if a contactPoint property is included. Use missing@example.org if e-mail address is not available. Recommend using position-based contact point because people move around.
 
 
-### Contributor {#sec-contributor}
+### Contributor
 
 For more granularity on how an agent contributed to a resource, use schema:Role. The schema.org documentation does not state that the Role type is an expected data type for the contributor property, but that is addressed in this blog post (http://blog.schema.org/2014/06/introducing-role.html). see also [ESIPfed Science on Schema.org roles of people note](https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people).
 
@@ -722,7 +722,7 @@ For more granularity on how an agent contributed to a resource, use schema:Role.
 
 **Cardinality:** Required
 
-**Content:** string, [DefinedTerm](#sec-definedterm)
+**Content:** string, [DefinedTerm](#defined-term)
 
 **Description:** term that specifies the relationship between the contributor and the described resource.
 
@@ -731,10 +731,10 @@ For more granularity on how an agent contributed to a resource, use schema:Role.
 
 **Cardinality:** Required
 
-**Content:** [object reference](#object-reference), [Person](#sec-person) or [Organization](#sec-organization)
+**Content:** [object reference](#object-reference), [Person](#person) or [Organization](#organization)
 
 
-### MonetaryGrant {#sec-monetarygrant}
+### MonetaryGrant
 
 #### @type
 
@@ -749,7 +749,7 @@ For more granularity on how an agent contributed to a resource, use schema:Role.
 
 **Cardinality:** Required if no name or funder
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 **Description:** identifier for a particular grant
 
@@ -767,7 +767,7 @@ For more granularity on how an agent contributed to a resource, use schema:Role.
 
 **Cardinality:** Required if no identifier or name
 
-**Content:** [object reference](#object-reference), [Person](#sec-person), or [Organization](#sec-organization)
+**Content:** [object reference](#object-reference), [Person](#person), or [Organization](#organization)
 
 
 #### description
@@ -779,7 +779,7 @@ For more granularity on how an agent contributed to a resource, use schema:Role.
 **Description:** description of the funding or grant
 
 
-### Dataset/dcat:CatalogRecord {#sec-catalogrecord}
+### Dataset/dcat:CatalogRecord
 
 This is the class used to provide information about the metadata record itself.
 
@@ -837,7 +837,7 @@ This is the class used to provide information about the metadata record itself.
 
 **Cardinality:** Optional
 
-**Content:** [Person](#sec-person) or [Organization](#sec-organization)
+**Content:** [Person](#person) or [Organization](#organization)
 
 **Description:** Identification of the agent that maintains the metadata, with contact information. Should include person name and affiliation, or position name and affiliation, or just organization name. e-mail address is preferred contact information.
 
@@ -855,12 +855,12 @@ This is the class used to provide information about the metadata record itself.
 
 **Cardinality:** Optional
 
-**Content:** [DataCatalog](#sec-datacatalog)
+**Content:** [DataCatalog](#datacatalog)
 
 **Description:** identify the source for the origin the metadata record
 
 
-### DataCatalog {#sec-datacatalog}
+### DataCatalog
 
 An accessible collection of data. The data might be metadata (about other resources) or datasets.
 
@@ -902,14 +902,14 @@ An accessible collection of data. The data might be metadata (about other resour
 
 **Cardinality:** Optional
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 **Description:** Identifier for the data catalog.
 
 
 ## Classes added by CDIF Discovery profile
 
-### PropertyValue-(variableMeasured) {#sec-propertyvalue-vm}
+### PropertyValue-(variableMeasured)
 
 #### @type
 
@@ -956,7 +956,7 @@ An accessible collection of data. The data might be metadata (about other resour
 
 **Cardinality:** Optional
 
-**Content:** string, [object reference](#object-reference), or [DefinedTerm](#sec-definedterm)
+**Content:** string, [object reference](#object-reference), or [DefinedTerm](#defined-term)
 
 **Description:** Text description or URI specifying how values for the variable were obtained.
 
@@ -965,7 +965,7 @@ An accessible collection of data. The data might be metadata (about other resour
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string, [object reference](#object-reference), or [DefinedTerm](#sec-definedterm)
+**Content:** string, [object reference](#object-reference), or [DefinedTerm](#defined-term)
 
 **Description:** identifier or name for the property concept
 
@@ -983,7 +983,7 @@ An accessible collection of data. The data might be metadata (about other resour
 
 **Cardinality:** Optional
 
-**Content:** string, [object reference](#object-reference), or [DefinedTerm](#sec-definedterm)
+**Content:** string, [object reference](#object-reference), or [DefinedTerm](#defined-term)
 
 **Description:** URI or code identifying the unit of measure
 
@@ -1010,12 +1010,12 @@ An accessible collection of data. The data might be metadata (about other resour
 
 **Cardinality:** Optional
 
-**Content:** string or [LabeledLink](#sec-labeledlink)
+**Content:** string or [LabeledLink](#labeled-link)
 
 **Description:** references additional information, and label could be used to indicate type of description -- e.g., I-ADOPT, CDIF, etc.
 
 
-### Place {#sec-place}
+### Place
 
 #### @type
 
@@ -1028,7 +1028,7 @@ CHOICE. At least one of the following four is required
 
 **Cardinality:** optional, Repeatable
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** Domain-specific type classifications for this place (e.g. facility type, laboratory classification, feature type)
 
@@ -1037,7 +1037,7 @@ CHOICE. At least one of the following four is required
 
 **Cardinality:** Conditional, Repeatable
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** multiple place names or DefinedTerms that have a place name and URI for the location
 
@@ -1046,14 +1046,14 @@ CHOICE. At least one of the following four is required
 
 **Cardinality:** Conditional
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 
 #### geo
 
 **Cardinality:** Conditional
 
-**Content:** [GeoCoordinates](#sec-geocoordinates) or [GeoShape](#sec-geoshape)
+**Content:** [GeoCoordinates](#geocoordinates) or [GeoShape](#geoshape)
 
 **Description:** Either a bounding box or a point location. Use WGS 84 latitude and longitude coordinates
 
@@ -1062,7 +1062,7 @@ CHOICE. At least one of the following four is required
 
 **Cardinality:** Conditional
 
-**Content:** [sf:SimpleFeature](#sec-sfsimplefeature)
+**Content:** [sf:SimpleFeature](#sfsimplefeature)
 
 **Description:** Optional geographic extent using [wkt geometry](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry), see [Ocean InfoHub](https://book.oceaninfohub.org/thematics/spatial/README.html#simple-geosparql-wkt). Other geometry schemes might be specified in a specific domain profile, e.g. for atmospheric, subsurface data, or local coordinate systems. NOTE that the location specified here should be the same as the schema.org point or contained within the specified bounding box.
 
@@ -1071,12 +1071,12 @@ CHOICE. At least one of the following four is required
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string, [DefinedTerm](#sec-definedterm)
+**Content:** string, [DefinedTerm](#defined-term)
 
-**Description:** multiple place names or [DefinedTerm](#sec-definedterm)s that have a place name and URI for the location
+**Description:** multiple place names or [DefinedTerm](#defined-term)s that have a place name and URI for the location
 
 
-### Defined Term {#sec-definedterm}
+### Defined Term
 
 #### @type
 
@@ -1098,7 +1098,7 @@ CHOICE. At least one of the following four is required
 
 **Cardinality:** Required if no name or termCode
 
-**Content:** string.uri or [PropertyValue-(identifier)](#sec-propertyvalue-id)
+**Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
 
 
 #### termCode
@@ -1121,9 +1121,9 @@ CHOICE. At least one of the following four is required
 
 ## Classes added by CDIF Data Description profile
 
-### CdifInstanceVariable {#sec-cdifinstancevariable}
+### CdifInstanceVariable
 
-A `schema:variableMeasured` item at the Data Description level is a CDIF profile of the DDI-CDI InstanceVariable / RepresentedVariable / ConceptualVariable classes. It composes the basic Discovery `variableMeasured` shape ([PropertyValue-(variableMeasured)](#sec-propertyvalue-vm)) and extends it with properties describing the variable's data type, role, source, value domain, weighting, and summary statistics. The schema.org base properties on PropertyValue (`@id`, `schema:name`, `schema:description`, `schema:alternateName`, `schema:propertyID`, `schema:measurementTechnique`, `schema:unitText`, `schema:unitCode`, `schema:minValue`, `schema:maxValue`, `schema:url`) remain available unchanged; the additions below are CDIF-specific.
+A `schema:variableMeasured` item at the Data Description level is a CDIF profile of the DDI-CDI InstanceVariable / RepresentedVariable / ConceptualVariable classes. It composes the basic Discovery `variableMeasured` shape ([PropertyValue-(variableMeasured)](#propertyvalue-variablemeasured)) and extends it with properties describing the variable's data type, role, source, value domain, weighting, and summary statistics. The schema.org base properties on PropertyValue (`@id`, `schema:name`, `schema:description`, `schema:alternateName`, `schema:propertyID`, `schema:measurementTechnique`, `schema:unitText`, `schema:unitCode`, `schema:minValue`, `schema:maxValue`, `schema:url`) remain available unchanged; the additions below are CDIF-specific.
 
 The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for backward-compatible links; the class is named *CdifInstanceVariable* in the JSON Schema.
 
@@ -1149,7 +1149,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** Identifier or name for the data type concept describing the physical representation of values for this variable.
 
@@ -1167,7 +1167,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional
 
-**Content:** string, [DefinedTerm](#sec-definedterm), or [skos:Concept](#sec-skosconcept)
+**Content:** string, [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
 
 **Description:** Simple text-based unit of measure for the values of this variable. For a controlled-vocabulary unit entry, use `cdi:describedUnitOfMeasure` instead.
 
@@ -1176,7 +1176,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** Essentially the same as `schema:propertyID`. References to concepts that this variable measures or represents. When the dataset's distribution carries `cdi:isStructuredBy` (CDIF Data Structure profile), `cdif:uses` connects the InstanceVariable to a reusable RepresentedVariable concept.
 
@@ -1185,7 +1185,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional
 
-**Content:** [cdif:StatisticsCollection](#sec-cdifstatisticscollection) or [object reference](#object-reference)
+**Content:** [cdif:StatisticsCollection](#cdifstatisticscollection) or [object reference](#object-reference)
 
 **Description:** The StatisticsCollection holding summary / category statistics for this InstanceVariable (InstanceVariable.isDescribedBy). `cdif:` namespaced and target-suffixed because the DDI-CDI `isDescribedBy` association is polymorphic.
 
@@ -1194,7 +1194,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** Immutable characteristic of the variable such as geographic designator, weight, temporal designation, etc. (InstanceVariable.function).
 
@@ -1203,7 +1203,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** The application or technical system context in which the variable has been realized -- typically a statistical processing package or processing environment (InstanceVariable.platformType).
 
@@ -1221,16 +1221,16 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional
 
-**Content:** [xsdDataType](#sec-xsddatatype), [DefinedTerm](#sec-definedterm), or [skos:Concept](#sec-skosconcept)
+**Content:** [xsdDataType](#xsddatatype), [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
 
-**Description:** The data type intended to be used by this variable, independent of its physical representation (RepresentedVariable.hasIntendedDataType). Recommended values are XML Schema datatypes; see [xsdDataType](#sec-xsddatatype).
+**Description:** The data type intended to be used by this variable, independent of its physical representation (RepresentedVariable.hasIntendedDataType). Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype).
 
 
 #### [**cdi:describedUnitOfMeasure**]{.underline}
 
 **Cardinality:** Optional
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** The unit in which the data values are measured, expressed as a controlled-vocabulary entry (RepresentedVariable.describedUnitOfMeasure). For a plain-string unit, use `cdif:simpleUnitOfMeasure` instead.
 
@@ -1239,7 +1239,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [cdif:SentinelValueDomain](#sec-cdifsentinelvaluedomain) inline, or [object reference](#object-reference) (`@id` only)
+**Content:** [cdif:SentinelValueDomain](#cdifsentinelvaluedomain) inline, or [object reference](#object-reference) (`@id` only)
 
 **Description:** Sentinel (missing / not-applicable) value domain(s) for this variable (RepresentedVariable.takesSentinelValuesFrom). The value MUST be a `cdif:SentinelValueDomain` node — referencing a `cdif:SubstantiveValueDomain` here is a schema violation. Added at the Data Description profile level; not present at the Discovery level; disallowed at the Data Structure level (where the property lives on the RepresentedVariable instead).
 
@@ -1248,7 +1248,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 
 **Cardinality:** Optional
 
-**Content:** [cdif:SubstantiveValueDomain](#sec-cdifsubstantivevaluedomain) inline, or [object reference](#object-reference) (`@id` only)
+**Content:** [cdif:SubstantiveValueDomain](#cdifsubstantivevaluedomain) inline, or [object reference](#object-reference) (`@id` only)
 
 **Description:** The substantive value domain for this variable -- the set of valid, meaningful values (RepresentedVariable.takesSubstantiveValuesFrom). The value MUST be a `cdif:SubstantiveValueDomain` node — referencing a `cdif:SentinelValueDomain` here is a schema violation. Added at the Data Description profile level; same profile rules as `cdi:takesSentinelValuesFrom` above.
 
@@ -1262,7 +1262,7 @@ The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for ba
 **Description:** Reference to another InstanceVariable in this dataset that this variable qualifies (provides additional context for; e.g. a measurement-channel attribute qualifying a measure variable).
 
 
-### CdifPhysicalMapping {#sec-cdifphysicalmapping}
+### CdifPhysicalMapping
 
 Defines the physical realization of one field in a tabular or structured dataset distribution — the column index (for tabular), the locator (for structured/hierarchical formats like NetCDF/HDF5), the physical type, format pattern, length, null sequence, defaults, etc., and a `cdif:formats_InstanceVariable` reference linking the column or path back to the `cdi:InstanceVariable` it realises in the parent dataset's `schema:variableMeasured`. Each item in a distribution's `cdif:hasPhysicalMapping` array is one CdifPhysicalMapping node. When a WebAPI distribution's `schema:potentialAction/schema:result` carries `cdif:hasPhysicalMapping`, the same shape applies to the response columns and the same `@id`s are referenced (a WebAPI response is another physical realization of the same conceptual variables; do not redeclare the InstanceVariables themselves on the result).
 
@@ -1374,7 +1374,7 @@ Defines the physical realization of one field in a tabular or structured dataset
 **Description:** Whether a non-null value MUST be present in each row for this field.
 
 
-### cdif:SubstantiveValueDomain {#sec-cdifsubstantivevaluedomain}
+### cdif:SubstantiveValueDomain
 
 The set of valid, meaningful values an InstanceVariable can take — distinct from sentinel (missing/not-applicable) codes, which live on a sibling `cdif:SentinelValueDomain`. Used as the value of `cdi:takesSubstantiveValuesFrom`. A single SubstantiveValueDomain node provides EITHER `cdif:takesValuesFrom` (an enumerated list of allowed values) OR `cdif:recommendedDataType` (one or more XSD data type tokens), or both.
 
@@ -1398,7 +1398,7 @@ The set of valid, meaningful values an InstanceVariable can take — distinct fr
 
 **Cardinality:** Optional
 
-**Content:** [cdif:EnumerationDomain](#sec-cdifenumerationdomain) inline, or [object reference](#object-reference)
+**Content:** [cdif:EnumerationDomain](#cdifenumerationdomain) inline, or [object reference](#object-reference)
 
 **Description:** Enumerated list of allowed substantive values. Use when the value set is a closed vocabulary; combine with `cdif:recommendedDataType` to additionally constrain the data type.
 
@@ -1416,12 +1416,12 @@ The set of valid, meaningful values an InstanceVariable can take — distinct fr
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [xsdDataType](#sec-xsddatatype)
+**Content:** [xsdDataType](#xsddatatype)
 
 **Description:** One or more XSD data type tokens recommended for values from this domain. Required if `cdif:takesValuesFrom` is not provided; the SubstantiveValueDomain node MUST carry at least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType`.
 
 
-### cdif:SentinelValueDomain {#sec-cdifsentinelvaluedomain}
+### cdif:SentinelValueDomain
 
 The set of sentinel (missing / not-applicable / refusal / etc.) codes for an InstanceVariable, distinct from the substantive values the variable takes. Used as the value of `cdi:takesSentinelValuesFrom`. Same shape as `cdif:SubstantiveValueDomain` but typed `cdif:SentinelValueDomain` and intended for the non-substantive value codes (so survey "Don't know" / "Refused" codes, sensor `-9999`-style fill values, etc. are represented separately from valid measurements).
 
@@ -1443,7 +1443,7 @@ The set of sentinel (missing / not-applicable / refusal / etc.) codes for an Ins
 
 **Cardinality:** Optional
 
-**Content:** [cdif:EnumerationDomain](#sec-cdifenumerationdomain) inline, or [object reference](#object-reference)
+**Content:** [cdif:EnumerationDomain](#cdifenumerationdomain) inline, or [object reference](#object-reference)
 
 **Description:** Enumerated list of sentinel codes (e.g., a SKOS concept scheme of missing-value codes).
 
@@ -1459,12 +1459,12 @@ The set of sentinel (missing / not-applicable / refusal / etc.) codes for an Ins
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [xsdDataType](#sec-xsddatatype)
+**Content:** [xsdDataType](#xsddatatype)
 
 **Description:** Same semantics as on `cdif:SubstantiveValueDomain`. At least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType` MUST be present.
 
 
-### cdif:EnumerationDomain {#sec-cdifenumerationdomain}
+### cdif:EnumerationDomain
 
 A codification vocabulary documented as an enumerated value domain — typically a SKOS ConceptScheme listing the allowed values for a `cdif:SubstantiveValueDomain` or `cdif:SentinelValueDomain`. Provides a named extension point so that an EnumerationDomain can either declare an external concept scheme via `cdif:references` or be defined inline.
 
@@ -1486,7 +1486,7 @@ A codification vocabulary documented as an enumerated value domain — typically
 
 **Cardinality:** Optional
 
-**Content:** [Identifier](#sec-propertyvalue-id)
+**Content:** [Identifier](#propertyvalue-identifier)
 
 **Description:** Identifier for this enumerated (categorical) domain.
 
@@ -1506,10 +1506,10 @@ A codification vocabulary documented as an enumerated value domain — typically
 
 **Content:** SKOS ConceptScheme inline, or [object reference](#object-reference)
 
-**Description:** SKOS concept scheme that contains the concepts defining the allowed values of this enumeration domain. Reference an external published vocabulary, or inline one. See [skos:Concept](#sec-skosconcept) for individual concept entries.
+**Description:** SKOS concept scheme that contains the concepts defining the allowed values of this enumeration domain. Reference an external published vocabulary, or inline one. See [skos:Concept](#skosconcept) for individual concept entries.
 
 
-### cdif:Key {#sec-cdifkey}
+### cdif:Key
 
 The CDIF profile of DDI-CDI PrimaryKey: an ordered set of `cdi:InstanceVariable` references that uniquely identify a data instance. Used as the value of [cdif:hasPrimaryKey](#cdifhasprimarykey) on the root Dataset. Each variable's position in the key is recorded with an explicit `cdi:ComponentPosition` wrapper carrying `cdi:indexes` (the variable) and `cdi:value` (the integer position), matching the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
 
@@ -1535,14 +1535,14 @@ The CDIF profile of DDI-CDI PrimaryKey: an ordered set of `cdi:InstanceVariable`
 
 **Cardinality:** Required, Repeatable
 
-**Content:** Array of [cdi:ComponentPosition](#sec-cdicomponentposition) wrappers
+**Content:** Array of [cdi:ComponentPosition](#cdicomponentposition) wrappers
 
 **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (the `cdi:InstanceVariable` at that position -- inline `cdifInstanceVariable` or `@id`-reference) and `cdi:value` (the integer position, 0- or 1-based).
 
 
-### cdi:ComponentPosition {#sec-cdicomponentposition}
+### cdi:ComponentPosition
 
-Indexes a single component within a `cdif:Key` (or other ordered DDI-CDI component structure). Used as the items of `cdif:isComposedOf` on a [cdif:Key](#sec-cdifkey): each wrapper pairs an InstanceVariable with its position number in the key.
+Indexes a single component within a `cdif:Key` (or other ordered DDI-CDI component structure). Used as the items of `cdif:isComposedOf` on a [cdif:Key](#cdifkey): each wrapper pairs an InstanceVariable with its position number in the key.
 
 #### [**@type**]{.underline}
 
@@ -1566,7 +1566,7 @@ Indexes a single component within a `cdif:Key` (or other ordered DDI-CDI compone
 
 **Cardinality:** Required
 
-**Content:** [CdifInstanceVariable](#sec-cdifinstancevariable) or [object reference](#object-reference)
+**Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 
 **Description:** Reference to the `cdi:InstanceVariable` at this position. Either an inline `cdifInstanceVariable` node or an `@id`-reference to one declared elsewhere (typically in `schema:variableMeasured`).
 
@@ -1580,7 +1580,7 @@ Indexes a single component within a `cdif:Key` (or other ordered DDI-CDI compone
 **Description:** Integer position of this component in the key, incrementing from 0 or 1.
 
 
-### cdif:StatisticsCollection {#sec-cdifstatisticscollection}
+### cdif:StatisticsCollection
 
 Groups one or more `cdi:Statistics` nodes. A typical use is a dataset-level collection holding row-count / mean / stddev Statistics for each measured variable. Referenced from a CdifInstanceVariable via `cdif:isDescribedBy_StatisticsCollection`, or from the root Dataset via `cdif:statistics`.
 
@@ -1606,7 +1606,7 @@ Groups one or more `cdi:Statistics` nodes. A typical use is a dataset-level coll
 
 **Cardinality:** Required, Repeatable
 
-**Content:** [cdi:Statistics](#sec-cdistatistics) or [object reference](#object-reference)
+**Content:** [cdi:Statistics](#cdistatistics) or [object reference](#object-reference)
 
 **Description:** Statistics nodes carried by this collection (inline or `@id`-ref). `cdif:` namespaced and target-suffixed because the DDI-CDI `cdi:has` association is polymorphic.
 
@@ -1615,7 +1615,7 @@ Groups one or more `cdi:Statistics` nodes. A typical use is a dataset-level coll
 
 **Cardinality:** Optional
 
-**Content:** [CdifInstanceVariable](#sec-cdifinstancevariable) or [object reference](#object-reference)
+**Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 
 **Description:** The InstanceVariable whose values were used as weights when computing the statistics in this collection.
 
@@ -1624,12 +1624,12 @@ Groups one or more `cdi:Statistics` nodes. A typical use is a dataset-level coll
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [CdifInstanceVariable](#sec-cdifinstancevariable) or [object reference](#object-reference)
+**Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 
 **Description:** CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) the contained Statistics index -- the collection-level coordinate space.
 
 
-### cdi:Statistics {#sec-cdistatistics}
+### cdi:Statistics
 
 A named bundle of one or more Statistic value objects for an instance variable, optionally weighted, optionally broken down by Category.
 
@@ -1664,7 +1664,7 @@ A named bundle of one or more Statistic value objects for an instance variable, 
 
 **Cardinality:** Optional
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** Controlled-vocabulary entry naming the kind of statistic -- e.g. mean, median, count, sum, stdDev.
 
@@ -1673,7 +1673,7 @@ A named bundle of one or more Statistic value objects for an instance variable, 
 
 **Cardinality:** Optional
 
-**Content:** [CdifInstanceVariable](#sec-cdifinstancevariable) or [object reference](#object-reference)
+**Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 
 **Description:** The InstanceVariable whose values were used as weights when computing the Statistic entries.
 
@@ -1682,7 +1682,7 @@ A named bundle of one or more Statistic value objects for an instance variable, 
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [CdifInstanceVariable](#sec-cdifinstancevariable) or [object reference](#object-reference)
+**Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 
 **Description:** CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) this Statistics bundle summarizes -- the per-bundle "what these numbers describe" link.
 
@@ -1691,12 +1691,12 @@ A named bundle of one or more Statistic value objects for an instance variable, 
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** [cdi:CategoryStatistics](#sec-cdicategorystatistics)
+**Content:** [cdi:CategoryStatistics](#cdicategorystatistics)
 
 **Description:** CategoryStatistics entries breaking this Statistics bundle down by Category. `cdif:` namespaced and target-suffixed because the DDI-CDI `cdi:has` association is polymorphic.
 
 
-### cdi:CategoryStatistics {#sec-cdicategorystatistics}
+### cdi:CategoryStatistics
 
 Statistics for a specific Category of an instance variable within a dataset.
 
@@ -1722,7 +1722,7 @@ Statistics for a specific Category of an instance variable within a dataset.
 
 **Cardinality:** Required
 
-**Content:** [skos:Concept](#sec-skosconcept) or [object reference](#object-reference)
+**Content:** [skos:Concept](#skosconcept) or [object reference](#object-reference)
 
 **Description:** The Category this CategoryStatistics is for (inline Category node or an `@id`-reference).
 
@@ -1740,7 +1740,7 @@ Statistics for a specific Category of an instance variable within a dataset.
 
 **Cardinality:** Optional
 
-**Content:** [DefinedTerm](#sec-definedterm), [skos:Concept](#sec-skosconcept), or string
+**Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 
 **Description:** Controlled-vocabulary entry naming the kind of statistic.
 
@@ -1749,12 +1749,12 @@ Statistics for a specific Category of an instance variable within a dataset.
 
 **Cardinality:** Optional
 
-**Content:** [CdifInstanceVariable](#sec-cdifinstancevariable) or [object reference](#object-reference)
+**Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 
 **Description:** The InstanceVariable whose values were used as weights.
 
 
-### skos:Concept {#sec-skosconcept}
+### skos:Concept
 
 A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used throughout the CDIF Data Description profile as the value type for controlled-vocabulary references (data types, units, roles, value domains, etc.). Supports labels (prefLabel, altLabel, hiddenLabel), notations, hierarchical relations (broader/narrower), associative relations (related), cross-scheme mapping properties, scheme membership, and documentary notes.
 
@@ -1780,7 +1780,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 
 **Cardinality:** Required
 
-**Content:** string, [LanguageTaggedValue](#sec-langtagvalue), or array
+**Content:** string, [LanguageTaggedValue](#languagetaggedvalue), or array
 
 **Description:** Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.
 
@@ -1789,7 +1789,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string, [LanguageTaggedValue](#sec-langtagvalue), or array
+**Content:** string, [LanguageTaggedValue](#languagetaggedvalue), or array
 
 **Description:** Alternative lexical labels (acronyms, abbreviations, variants).
 
@@ -1798,7 +1798,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** string, [LanguageTaggedValue](#sec-langtagvalue), or array
+**Content:** string, [LanguageTaggedValue](#languagetaggedvalue), or array
 
 **Description:** Labels accessible to free-text search but not displayed.
 
@@ -1816,7 +1816,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 
 **Cardinality:** Optional
 
-**Content:** string, [LanguageTaggedValue](#sec-langtagvalue), or array
+**Content:** string, [LanguageTaggedValue](#languagetaggedvalue), or array
 
 **Description:** Documentary notes. `skos:definition` is a formal explanation of meaning; `scopeNote` clarifies intended use; `note` is general commentary; `example` illustrates usage. Additional `skos:historyNote`, `skos:changeNote`, and `skos:editorialNote` are also supported with the same content options.
 
@@ -1834,7 +1834,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 
 **Cardinality:** Optional, Repeatable
 
-**Content:** Inline [skos:Concept](#sec-skosconcept) or [object reference](#object-reference)
+**Content:** Inline [skos:Concept](#skosconcept) or [object reference](#object-reference)
 
 **Description:** Hierarchical relations (broader/narrower) and associative relations (related) to other concepts.
 
@@ -1850,7 +1850,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 
 ## Data types used for CDIF Core
 
-### PropertyValue-(identifier) {#sec-propertyvalue-id}
+### PropertyValue-(identifier)
 
 #### @type
 
@@ -1886,7 +1886,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 **Description:** In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK. Get values from https://registry.identifiers.org/registry/ for interoperability
 
 
-### Labeled Link {#sec-labeledlink}
+### Labeled Link
 
 #### @type
 
@@ -1922,7 +1922,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 **Description:** Text description of the linked resource.
 
 
-### spdx:Checksum {#sec-spdxchecksum}
+### spdx:Checksum
 
 #### spdx:algorithm
 
@@ -1942,7 +1942,7 @@ A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used 
 **Description:** the checksum string.
 
 
-### LinkRole {#sec-linkrole}
+### LinkRole
 
 This is the type used for links that have an associated semantic conveyed by the linkRelationship.
 
@@ -1957,7 +1957,7 @@ This is the type used for links that have an associated semantic conveyed by the
 
 **Cardinality:** Required
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** Term that specifies the relationship between the source and target of the link.
 
@@ -1966,12 +1966,12 @@ This is the type used for links that have an associated semantic conveyed by the
 
 **Cardinality:** Required
 
-**Content:** [EntryPoint](#sec-entrypoint)
+**Content:** [EntryPoint](#entrypoint)
 
 **Description:** URL for link target, along with a label and encoding format for the target resource.
 
 
-### EntryPoint {#sec-entrypoint}
+### EntryPoint
 
 Use to document the URL that is the target for invoking an action, or that is the target object of a link relationship.
 
@@ -2011,7 +2011,7 @@ Use to document the URL that is the target for invoking an action, or that is th
 
 ## Data types added by CDIF Discovery profile
 
-### GeoCoordinates {#sec-geocoordinates}
+### GeoCoordinates
 
 A point location specified with latitude and longitude in decimal degrees, using the WGS84 spatial reference system.
 
@@ -2037,7 +2037,7 @@ A point location specified with latitude and longitude in decimal degrees, using
 **Description:** east-longitude coordinate in decimal degrees. Value must be \>= -180 and \<= 180.
 
 
-### GeoShape {#sec-geoshape}
+### GeoShape
 
 CDIF limits schema:GeoShape to a box or line (schema.org includes other options). Point locations are tuples of {latitude east-longitude} (y x). (documentation from [Science on Schema.org](https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#spatial-coverage) see details there)
 
@@ -2066,7 +2066,7 @@ CDIF limits schema:GeoShape to a box or line (schema.org includes other options)
 **Description:** a series of two or more points. Use for extents like a ship track, flight path, or foot traverse.
 
 
-### sf:SimpleFeature {#sec-sfsimplefeature}
+### sf:SimpleFeature
 
 #### @type
 
@@ -2095,7 +2095,7 @@ CDIF limits schema:GeoShape to a box or line (schema.org includes other options)
 **Description:** specify the coordinate reference system for the coordinate numbers in the WKT location description.
 
 
-### time:Proper Interval {#sec-properinterval}
+### time:Proper Interval
 
 Intervals can be bounded by named ordinal eras (e.g. Jurassic, Tang dynasty, Paleolithic) identified by URI, or by numeric bounds that are time coordinates in a specified reference system (implemented by the TimePosition data type). This implementation is a simplified profile based on the [W3C OWL time specification](https://www.w3.org/TR/owl-time/), using the [http://www.w3.org/2006/time#](http://www.w3.org/2006/time) namespace, which is included in the default context for this profile.
 
@@ -2121,7 +2121,7 @@ Choice:
 
 **Cardinality:** Optional
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** identifier for a named time ordinal era that is older bound of time interval, e.g. \'isc:LowerDevonian\'
 
@@ -2130,7 +2130,7 @@ Choice:
 
 **Cardinality:** Optional
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 **Description:** identifier for a named time ordinal era that is younger bound of time interval, e.g. \'isc:LowerDevonian\'
 
@@ -2141,7 +2141,7 @@ OR:
 
 **Cardinality:** Optional
 
-**Content:** [time:TimePosition](#sec-timeposition)
+**Content:** [time:TimePosition](#timetimeposition)
 
 **Description:** Temporal position for the beginning (older bound) of the interval, located by a numeric value in a temporal reference system
 
@@ -2150,12 +2150,12 @@ OR:
 
 **Cardinality:** Optional
 
-**Content:** [time:TimePosition](#sec-timeposition)
+**Content:** [time:TimePosition](#timetimeposition)
 
 **Description:** Temporal position for the end (younger bound) of the interval, located by a numeric value in a temporal reference system
 
 
-### time:TimePosition {#sec-timeposition}
+### time:TimePosition
 
 #### @type
 
@@ -2182,7 +2182,7 @@ OR:
 **Description:** Number that locates a temporal position in the reference frame defined by the hasTRS property.
 
 
-### dqv:QualityMeasurement {#sec-qualitymeasurement}
+### dqv:QualityMeasurement
 
 #### @type
 
@@ -2193,17 +2193,17 @@ OR:
 
 **Cardinality:** Required
 
-**Content:** string, [object reference](#object-reference), or [DefinedTerm](#sec-definedterm)
+**Content:** string, [object reference](#object-reference), or [DefinedTerm](#defined-term)
 
 
 #### dqv:value
 
 **Cardinality:** Required
 
-**Content:** string or [DefinedTerm](#sec-definedterm)
+**Content:** string or [DefinedTerm](#defined-term)
 
 
-### PropertyValueSpecification {#sec-propertyvaluespec}
+### PropertyValueSpecification
 
 Description of the kind of value expected for a parameter value.
 
@@ -2250,7 +2250,7 @@ Description of the kind of value expected for a parameter value.
 
 ## Data types added by CDIF Data Description profile
 
-### LanguageTaggedValue {#sec-langtagvalue}
+### LanguageTaggedValue
 
 An RDF literal value with a language tag, serialized as a JSON-LD value object. Used as the localized form of labels and notes throughout `skos:Concept` and related classes (`skos:prefLabel`, `skos:altLabel`, `skos:definition`, etc.). Either a plain string, a single LanguageTaggedValue, or an array of LanguageTaggedValues may appear wherever a label/note is expected.
 
@@ -2272,13 +2272,13 @@ An RDF literal value with a language tag, serialized as a JSON-LD value object. 
 **Description:** Language tag for the value (e.g. `en`, `fr`, `de`).
 
 
-### xsdDataType {#sec-xsddatatype}
+### xsdDataType
 
-An enumeration of XML Schema datatype identifiers (xsd:* namespaced), used as a string value for [cdi:hasIntendedDataType](#sec-cdifinstancevariable) on an InstanceVariable when the intended data type is a standard XSD primitive. Values:
+An enumeration of XML Schema datatype identifiers (xsd:* namespaced), used as a string value for [cdi:hasIntendedDataType](#cdifinstancevariable) on an InstanceVariable when the intended data type is a standard XSD primitive. Values:
 
 `xsd:anyURI`, `xsd:base64Binary`, `xsd:boolean`, `xsd:byte`, `xsd:date`, `xsd:dateTime`, `xsd:decimal`, `xsd:double`, `xsd:float`, `xsd:gDay`, `xsd:gMonth`, `xsd:gMonthDay`, `xsd:gYear`, `xsd:gYearMonth`, `xsd:hexBinary`, `xsd:int`, `xsd:integer`, `xsd:language`, `xsd:long`, `xsd:Name`, `xsd:NCName`, `xsd:NMTOKEN`, `xsd:negativeInteger`, `xsd:nonNegativeInteger`, `xsd:nonPositiveInteger`, `xsd:normalizedString`, `xsd:positiveInteger`, `xsd:short`, `xsd:string`, `xsd:time`, `xsd:token`, `xsd:unsignedByte`, `xsd:unsignedInt`, `xsd:unsignedLong`, `xsd:unsignedShort`.
 
-For non-XSD intended data types (e.g. domain-specific types defined in a controlled vocabulary), use a [DefinedTerm](#sec-definedterm) or [skos:Concept](#sec-skosconcept) instead.
+For non-XSD intended data types (e.g. domain-specific types defined in a controlled vocabulary), use a [DefinedTerm](#defined-term) or [skos:Concept](#skosconcept) instead.
 
 
 # Namespaces
@@ -2322,7 +2322,7 @@ Is the correct syntax to implemenat an object reference. Throughout this documen
 
 Any property with a 1..\* or 0..\* cardinality has values that are always implemented as arrays. This makes client processing easier because tests for single or array values are not necessary. If a property is 'repeatable', then assume the implementation is an array (JSON list).
 
-## Namespace prefixes and JSON validation. 
+## Namespace prefixes and JSON validation.
 
 Namespace prefixes are explicitly used in the example documents so that the JSON schema can validate instance documents. JSON Schema validates the literal JSON structure \-- property names, nesting, value types. Several features of JSON-LD can cause a semantically correct document to fail JSON Schema checks. The same property can appear as \"schema:name\", \"name\", or \"http://schema.org/name\" depending on the @context. A JSON Schema that checks for \"schema:name\" will reject a document that uses \"name\", even though both mean the same thing. See [Validating CDIF Profile Metadata](https://github.com/Cross-Domain-Interoperability-Framework/validation/blob/main/docs/CDIF-profiles-metadata-validation.md) for a detailed discussion of validation processes for CDIF metadata, and the use of framing to validate JSON-LD instances using different [JSON-LD forms](https://www.w3.org/TR/json-ld11/#forms-of-json-ld) or custom context documents..
 
