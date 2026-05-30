@@ -155,9 +155,7 @@
       ],
       "schema:name": "station_id",
       "schema:description": "Monitoring station identifier; primary key component.",
-      "cdif:physicalDataType": [
-        "string"
-      ],
+      "cdif:physicalDataType": "string",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
       "cdif:role": "UnitIdentifier",
       "cdif:displayLabel": [
@@ -172,9 +170,7 @@
       ],
       "schema:name": "sample_date",
       "schema:description": "Date the water sample was collected; primary key component.",
-      "cdif:physicalDataType": [
-        "date"
-      ],
+      "cdif:physicalDataType": "date",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#date",
       "cdif:role": "Dimension",
       "cdif:displayLabel": [
@@ -193,9 +189,7 @@
       "schema:propertyID": [
         "http://vocab.nerc.ac.uk/collection/P01/current/PHXXZZXX/"
       ],
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": 0.0,
@@ -219,9 +213,7 @@
       "schema:name": "temperature",
       "schema:description": "Sea-water temperature at sample depth.",
       "schema:measurementTechnique": "CTD profiler",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": -2.0,
@@ -247,9 +239,7 @@
       "schema:name": "salinity",
       "schema:description": "Practical salinity (PSU).",
       "schema:measurementTechnique": "CTD profiler",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": 0.0,
@@ -273,9 +263,7 @@
       "schema:name": "dissolved_oxygen",
       "schema:description": "Dissolved oxygen concentration in water.",
       "schema:measurementTechnique": "Optode sensor",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": 0.0,

@@ -74,20 +74,21 @@ cdifd:CDIFActionShape a sh:NodeShape ;
 cdifd:CDIFCatalogRecordShape a sh:NodeShape ;
     sh:message "The target of the metadata record (about)." ;
     sh:nodeKind sh:IRI ;
-    sh:property cdifd:metadataProfileProperty,
+    sh:property cdifd:catalogRecordTypeProperty,
+        cdifd:metadataProfileProperty,
         cdifd:metadataSubjectProperty ;
     sh:target [ a sh:SPARQLTarget ;
             sh:prefixes ( [ sh:namespace "http://schema.org/" ;
                         sh:prefix "schema" ] [ sh:namespace "https://example.org/" ;
                         sh:prefix "ex" ] ) ;
-            sh:select """\r
-            PREFIX schema: <http://schema.org/>\r
-            SELECT ?this\r
-            WHERE {\r
-            ?this a schema:Dataset ;\r
-             schema:about ?parent ;\r
-             schema:additionalType "dcat:CatalogRecord" .\r
-            }\r
+            sh:select """
+            PREFIX schema: <http://schema.org/>
+            SELECT ?this
+            WHERE {
+            ?this a schema:Dataset ;
+             schema:about ?parent ;
+             schema:additionalType "dcat:CatalogRecord" .
+            }
         """ ] .
 
 cdifd:CDIFContactPointShape a sh:NodeShape ;
@@ -124,26 +125,59 @@ cdifd:CDIFDataDownloadShape a sh:NodeShape ;
     sh:targetClass schema:DataDownload .
 
 cdifd:CDIFDatasetMandatoryShape a sh:NodeShape ;
-    sh:property cdifd:dateModifiedProperty,
+    sh:message "A Dataset must have an @id that is a URI (IRI)" ;
+    sh:nodeKind sh:IRI ;
+    sh:property cdifd:accessProperty,
+        cdifd:creatorProperty,
+        cdifd:dateModifiedProperty,
+        cdifd:descriptionProperty,
+        cdifd:keywordsProperty,
         cdifd:nameProperty,
         cdifd:resourceIdentifierProperty,
         cdifd:rightsProperty ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:prefixes ( [ sh:namespace "http://schema.org/" ;
-                        sh:prefix "schema" ] [ sh:namespace "https://example.org/" ;
-                        sh:prefix "ex" ] ) ;
-            sh:select """\r
-       PREFIX schema: <http://schema.org/>\r
-       PREFIX ex: <https://example.org/>\r
-            SELECT ?this\r
-            WHERE {\r
-              ?this a schema:Dataset .\r
-              MINUS {\r
-                ?this schema:about ?x .\r
-                ?this schema:additionalType "dcat:CatalogRecord" .\r
-              }\r
-            }\r
+            sh:select """
+       PREFIX schema: <http://schema.org/>
+       PREFIX ex: <https://example.org/>
+       PREFIX prov: <http://www.w3.org/ns/prov#>
+       PREFIX dcterms: <http://purl.org/dc/terms/>
+            SELECT ?this
+            WHERE {
+              ?this a schema:Dataset .
+              # Exclude catalog-record nodes (they describe a record, not a dataset).
+              MINUS {
+                ?this schema:about ?x .
+                ?this schema:additionalType "dcat:CatalogRecord" .
+              }
+              # Exclude datasets that are only *referenced* as provenance / source /
+              # derived-from / based-on resources rather than the resource being
+              # documented by this record. Such references carry an @id (and maybe a
+              # name/url for readability) but are not held to the full CDIF core
+              # requirements - the documented resource is the SUBJECT of provenance,
+              # never the object, so this never excludes the documented dataset.
+              FILTER NOT EXISTS { ?dpd prov:wasDerivedFrom ?this . }
+              FILTER NOT EXISTS { ?dpu prov:used ?this . }
+              FILTER NOT EXISTS { ?dib schema:isBasedOn ?this . }
+              FILTER NOT EXISTS { ?dsrc dcterms:source ?this . }
+            }
           """ ] .
+
+cdifd:CDIFDiscoveryDataDescriptionConformsToShape a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:hasValue <https://w3id.org/cdif/bbr/metadata/profiles/cdifCompositeProfile/DiscoveryDataDescription> ;
+            sh:message "Metadata record for DiscoveryDataDescription profile should declare conformance to https://w3id.org/cdif/bbr/metadata/profiles/cdifCompositeProfile/DiscoveryDataDescription" ;
+            sh:path dcterms:conformsTo ;
+            sh:severity sh:Warning ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:select """
+            PREFIX schema: <http://schema.org/>
+            SELECT ?this
+            WHERE {
+            ?this a schema:Dataset ;
+             schema:about ?parent ;
+             schema:additionalType "dcat:CatalogRecord" .
+            }
+        """ ] .
 
 cdifd:CDIFIdentifierShape a sh:NodeShape ;
     sh:message "identifier rules. for an identifier, the property ID is expected to specify an identifier scheme.Get values from https://registry.identifiers.org/registry/ for interoperability",
@@ -235,27 +269,27 @@ cdifd:CDIFInstanceVariableShape a sh:NodeShape ;
                         sh:prefix "schema" ] [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
                         sh:prefix "cdi" ] [ sh:namespace "https://example.org/" ;
                         sh:prefix "ex" ] ) ;
-            sh:select """\r
-      PREFIX schema: <http://schema.org/>\r
-      PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>\r
-      SELECT DISTINCT ?this\r
-        WHERE {\r
-          ?this a schema:PropertyValue .\r
-          # Exclude PropertyValue nodes used as identifiers / sameAs / propertyID\r
-          # values - these carry value/url/propertyID, not a measured-variable name.\r
-          FILTER NOT EXISTS { ?ip schema:identifier ?this . }\r
-          FILTER NOT EXISTS { ?ip schema:sameAs ?this . }\r
-          FILTER NOT EXISTS { ?ip schema:propertyID ?this . }\r
-          FILTER (\r
-            # Target if the node is a value of schema:variableMeasured, OR is\r
-            # explicitly typed cdi:InstanceVariable (the DataDescription marker),\r
-            # OR is a top-level standalone PropertyValue with no incoming refs.\r
-            EXISTS { ?s schema:variableMeasured ?this . }\r
-            ||\r
-            EXISTS { ?this a cdi:InstanceVariable . }\r
-            ||\r
-            NOT EXISTS { ?s ?p ?this . }\r
-          )\r
+            sh:select """
+      PREFIX schema: <http://schema.org/>
+      PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+      SELECT DISTINCT ?this
+        WHERE {
+          ?this a schema:PropertyValue .
+          # Exclude PropertyValue nodes used as identifiers / sameAs / propertyID
+          # values - these carry value/url/propertyID, not a measured-variable name.
+          FILTER NOT EXISTS { ?ip schema:identifier ?this . }
+          FILTER NOT EXISTS { ?ip schema:sameAs ?this . }
+          FILTER NOT EXISTS { ?ip schema:propertyID ?this . }
+          FILTER (
+            # Target if the node is a value of schema:variableMeasured, OR is
+            # explicitly typed cdi:InstanceVariable (the DataDescription marker),
+            # OR is a top-level standalone PropertyValue with no incoming refs.
+            EXISTS { ?s schema:variableMeasured ?this . }
+            ||
+            EXISTS { ?this a cdi:InstanceVariable . }
+            ||
+            NOT EXISTS { ?s ?p ?this . }
+          )
         }""" ] .
 
 cdifd:CDIFLabeledLinkShape a sh:NodeShape ;
@@ -413,6 +447,41 @@ cdifd:CDIFxasInstanceVariableShape a sh:NodeShape ;
             sh:severity sh:Warning ] ;
     sh:targetClass cdi:InstanceVariable .
 
+cdifd:QualifiesCoherenceShape a sh:NodeShape ;
+    sh:severity sh:Warning ;
+    sh:sparql [ a sh:SPARQLConstraint ;
+            sh:message "cdi:qualifies @id should reference the @id of another variableMeasured instance variable defined for the same dataset." ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] [ sh:namespace "https://cdif.org/0.1/" ;
+                        sh:prefix "cdif" ] [ sh:namespace "http://schema.org/" ;
+                        sh:prefix "schema" ] ) ;
+            sh:select """
+            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+            PREFIX cdif: <https://cdif.org/0.1/>
+            PREFIX schema: <http://schema.org/>
+            SELECT $this (cdi:qualifies AS ?path) (?target AS ?value)
+            WHERE {
+                $this cdi:qualifies ?target .
+                FILTER NOT EXISTS {
+                    ?dataset schema:variableMeasured ?target .
+                    ?dataset schema:variableMeasured $this .
+                }
+            }""" ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] [ sh:namespace "https://cdif.org/0.1/" ;
+                        sh:prefix "cdif" ] [ sh:namespace "http://schema.org/" ;
+                        sh:prefix "schema" ] ) ;
+            sh:select """
+            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+            PREFIX cdif: <https://cdif.org/0.1/>
+            PREFIX schema: <http://schema.org/>
+            SELECT DISTINCT ?this
+            WHERE {
+                ?this a cdi:InstanceVariable .
+                ?this cdif:role "Attribute" .
+            }""" ] .
+
 cdifd:QualifiesNotAllowedWithoutAttributeShape a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
             sh:message "cdi:qualifies should not be used when cdif:role is absent or not Attribute." ;
@@ -423,18 +492,18 @@ cdifd:QualifiesNotAllowedWithoutAttributeShape a sh:NodeShape ;
                         sh:prefix "cdi" ] [ sh:namespace "https://cdif.org/0.1/" ;
                         sh:prefix "cdif" ] [ sh:namespace "http://schema.org/" ;
                         sh:prefix "schema" ] ) ;
-            sh:select """\r
-            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>\r
-            PREFIX cdif: <https://cdif.org/0.1/>\r
-            PREFIX schema: <http://schema.org/>\r
-            SELECT DISTINCT ?this\r
-            WHERE {\r
-                ?this a cdi:InstanceVariable .\r
-                FILTER (\r
-                    NOT EXISTS { ?this cdif:role ?role . }\r
-                    ||\r
-                    EXISTS { ?this cdif:role ?role . FILTER (?role != "Attribute") }\r
-                )\r
+            sh:select """
+            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+            PREFIX cdif: <https://cdif.org/0.1/>
+            PREFIX schema: <http://schema.org/>
+            SELECT DISTINCT ?this
+            WHERE {
+                ?this a cdi:InstanceVariable .
+                FILTER (
+                    NOT EXISTS { ?this cdif:role ?role . }
+                    ||
+                    EXISTS { ?this cdif:role ?role . FILTER (?role != "Attribute") }
+                )
             }""" ] .
 
 cdifd:QualifiesRequiredForAttributeShape a sh:NodeShape ;
@@ -446,50 +515,20 @@ cdifd:QualifiesRequiredForAttributeShape a sh:NodeShape ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:path cdi:qualifies ;
             sh:severity sh:Violation ] ;
-    sh:sparql [ a sh:SPARQLConstraint ;
-            sh:message "cdi:qualifies @id should reference the @id of another variableMeasured instance variable defined for the same dataset." ;
-            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
-                        sh:prefix "cdi" ] [ sh:namespace "https://cdif.org/0.1/" ;
-                        sh:prefix "cdif" ] [ sh:namespace "http://schema.org/" ;
-                        sh:prefix "schema" ] ) ;
-            sh:select """\r
-            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>\r
-            PREFIX cdif: <https://cdif.org/0.1/>\r
-            PREFIX schema: <http://schema.org/>\r
-            SELECT $this (cdi:qualifies AS ?path) (?target AS ?value)\r
-            WHERE {\r
-                $this cdi:qualifies ?target .\r
-                FILTER NOT EXISTS {\r
-                    ?dataset schema:variableMeasured ?target .\r
-                    ?dataset schema:variableMeasured $this .\r
-                }\r
-            }""" ;
-            sh:severity sh:Warning ] ;
     sh:target [ a sh:SPARQLTarget ;
             sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
                         sh:prefix "cdi" ] [ sh:namespace "https://cdif.org/0.1/" ;
                         sh:prefix "cdif" ] [ sh:namespace "http://schema.org/" ;
                         sh:prefix "schema" ] ) ;
-            sh:select """\r
-            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>\r
-            PREFIX cdif: <https://cdif.org/0.1/>\r
-            PREFIX schema: <http://schema.org/>\r
-            SELECT DISTINCT ?this\r
-            WHERE {\r
-                ?this a cdi:InstanceVariable .\r
-                ?this cdif:role "Attribute" .\r
+            sh:select """
+            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+            PREFIX cdif: <https://cdif.org/0.1/>
+            PREFIX schema: <http://schema.org/>
+            SELECT DISTINCT ?this
+            WHERE {
+                ?this a cdi:InstanceVariable .
+                ?this cdif:role "Attribute" .
             }""" ] .
-
-cdifd:accessProperty a sh:PropertyShape ;
-    sh:message "At least one of schema:url (landing page) or schema:distribution (download/API) must be provided for resource access" ;
-    sh:minCount 1 ;
-    sh:path [ sh:alternativePath ( schema:url schema:distribution ) ] .
-
-cdifd:catalogRecordTypeProperty a sh:PropertyShape ;
-    sh:hasValue "dcat:CatalogRecord" ;
-    sh:message "The CatalogRecord node must have schema:additionalType including dcat:CatalogRecord" ;
-    sh:minCount 1 ;
-    sh:path schema:additionalType .
 
 cdifd:cdifCategoryStatisticShape a sh:NodeShape ;
     sh:property [ sh:message "A cdi:CategoryStatistics must carry a cdi:for reference to the Category it applies to." ;
@@ -567,12 +606,6 @@ cdifd:cdifSubstantiveValueDomainShape a sh:NodeShape ;
     sh:severity sh:Violation ;
     sh:targetClass cdif:SubstantiveValueDomain .
 
-cdifd:creatorProperty a sh:PropertyShape ;
-    sh:message "At least one creator (author/originator) is recommended" ;
-    sh:minCount 1 ;
-    sh:path schema:creator ;
-    sh:severity sh:Warning .
-
 cdifd:dataDescriptionDatasetShape a sh:NodeShape ;
     sh:property [ sh:message "A data-description-level Dataset must carry at least one schema:variableMeasured." ;
             sh:minCount 1 ;
@@ -610,13 +643,6 @@ cdifd:derivedFromProperty a sh:NodeShape ;
                         sh:path schema:url ;
                         sh:pattern "^https?:\\/\\/[^\\s]+$" ] ] ) ;
     sh:targetObjectsOf prov:wasDerivedFrom .
-
-cdifd:descriptionProperty a sh:PropertyShape ;
-    sh:datatype xsd:string ;
-    sh:message "A description of the resource is recommended for discovery" ;
-    sh:minCount 1 ;
-    sh:path schema:description ;
-    sh:severity sh:Warning .
 
 cdifd:fundingShape a sh:NodeShape ;
     sh:message "Funding for creation or maintenance of the resource can be acknowledged using schema:MonetaryGrant with at least one of: a funder, an identifier, a name, or a description." ;
@@ -660,12 +686,6 @@ cdifd:generatedByNode a sh:NodeShape ;
           ?s prov:wasGeneratedBy ?this .\r
         }\r
       }""" ] .
-
-cdifd:keywordsProperty a sh:PropertyShape ;
-    sh:message "Keywords are recommended for discovery" ;
-    sh:minCount 1 ;
-    sh:path schema:keywords ;
-    sh:severity sh:Warning .
 
 cdifd:maintainerOrProviderContactPointShape a sh:NodeShape ;
     sh:property [ sh:message "A maintainer or provider Person should have a contactPoint for users to reach" ;
@@ -881,12 +901,23 @@ cdifd:CDIFDefinedTermShape a sh:NodeShape ;
         }\r
       }""" ] .
 
+cdifd:accessProperty a sh:PropertyShape ;
+    sh:message "At least one of schema:url (landing page) or schema:distribution (download/API) must be provided for resource access" ;
+    sh:minCount 1 ;
+    sh:path [ sh:alternativePath ( schema:url schema:distribution ) ] .
+
 cdifd:affiliationProperty a sh:PropertyShape ;
     sh:message "Optional: an affiliation must have object schema:Organization" ;
     sh:minCount 0 ;
     sh:or ( [ sh:class schema:Organization ] [ sh:nodeKind sh:IRI ] ) ;
     sh:path schema:affiliation ;
     sh:severity sh:Warning .
+
+cdifd:catalogRecordTypeProperty a sh:PropertyShape ;
+    sh:hasValue "dcat:CatalogRecord" ;
+    sh:message "The CatalogRecord node must have schema:additionalType including dcat:CatalogRecord" ;
+    sh:minCount 1 ;
+    sh:path schema:additionalType .
 
 cdifd:contactPointProperty a sh:PropertyShape ;
     sh:message "A Person should have a contactPoint (schema:ContactPoint or mailto: IRI)" ;
@@ -895,12 +926,25 @@ cdifd:contactPointProperty a sh:PropertyShape ;
     sh:path schema:contactPoint ;
     sh:severity sh:Info .
 
+cdifd:creatorProperty a sh:PropertyShape ;
+    sh:message "At least one creator (author/originator) is recommended" ;
+    sh:minCount 1 ;
+    sh:path schema:creator ;
+    sh:severity sh:Warning .
+
 cdifd:dateModifiedProperty a sh:PropertyShape ;
     sh:datatype xsd:string ;
     sh:message "Date of most recent update to resource content is required, using ISO8601 format with at least a year and a month." ;
     sh:minCount 1 ;
     sh:path schema:dateModified ;
     sh:pattern "^[1-2][0-9]{3}-([0][1-9]|[1][0-2])(-([0-2][0-9]|[3][0-1])(T([0-1][0-9]|[2][0-3])(:[0-5][0-9])?(:[0-5][0-9](Z|[+-][0-2][0-9]:[0-5][0-9])?)?)?)?$" .
+
+cdifd:descriptionProperty a sh:PropertyShape ;
+    sh:datatype xsd:string ;
+    sh:message "A description of the resource is recommended for discovery" ;
+    sh:minCount 1 ;
+    sh:path schema:description ;
+    sh:severity sh:Warning .
 
 cdifd:geoCoordinatesNode a sh:NodeShape ;
     sh:message "GeoCoodinates must include latitude between -90 and 90, and longitude between -180 and 180." ;
@@ -930,8 +974,17 @@ cdifd:grantNameProperty a sh:PropertyShape ;
     sh:minLength 3 ;
     sh:path schema:name .
 
+cdifd:keywordsProperty a sh:PropertyShape ;
+    sh:message "Keywords are recommended for discovery" ;
+    sh:minCount 1 ;
+    sh:path schema:keywords ;
+    sh:severity sh:Warning .
+
 cdifd:metadataProfileProperty a sh:PropertyShape ;
-    sh:message "provide identifiers for specifications used in this record to provide guidance for machine agents processing the metadata record" ;
+    sh:hasValue <https://w3id.org/cdif/core/1.0>,
+        <https://w3id.org/cdif/data_description/1.0>,
+        <https://w3id.org/cdif/discovery/1.0> ;
+    sh:message "a CDIF DiscoveryDataDescription metadata record must declare conformance to https://w3id.org/cdif/core/1.0, https://w3id.org/cdif/discovery/1.0 and https://w3id.org/cdif/data_description/1.0" ;
     sh:minCount 1 ;
     sh:nodeKind sh:IRI ;
     sh:path dcterms:conformsTo .
@@ -1016,7 +1069,7 @@ cdifd:termLabelProperty a sh:PropertyShape ;
 
 cdifd:nameProperty a sh:PropertyShape ;
     sh:datatype xsd:string ;
-    sh:message "a name for the person must be provided, and have a length of at least 3 characters." ;
+    sh:message "a name for the dataset must be provided, and have a length of at least 3 characters." ;
     sh:minCount 1 ;
     sh:minLength 3 ;
     sh:path schema:name .

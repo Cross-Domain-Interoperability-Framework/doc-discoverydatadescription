@@ -734,9 +734,7 @@
       "schema:maxValue": 98.0,
       "schema:url": "http://example.com/resource?foo=bar#furlong",
       "cdi:identifier": "ex:KJTFKurNFu",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "cdif:name": [
@@ -794,9 +792,7 @@
       "schema:maxValue": 74.0,
       "schema:url": "http://example.com/resource?foo=bar#stone",
       "cdi:identifier": "ex:OjHgIDO",
-      "cdif:physicalDataType": [
-        "float32"
-      ],
+      "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdif:role": "Dimension",
       "cdif:name": [
@@ -959,7 +955,7 @@
     },
     "dcterms:conformsTo": [
       {
-        "@id": "https://w3id.org/cdif/bbr/metadata/profiles/cdifProfiles/CDIFDataDescription"
+        "@id": "https://w3id.org/cdif/bbr/metadata/profiles/cdifCompositeProfile/DiscoveryDataDescription"
       },
       {
         "@id": "https://w3id.org/cdif/manifest/1.0"

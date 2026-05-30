@@ -596,9 +596,7 @@
         "http://purl.obolibrary.org/obo/NCIT_C25164"
       ],
       "cdif:role": "UnitIdentifier",
-      "cdif:physicalDataType": [
-        "date"
-      ],
+      "cdif:physicalDataType": "date",
       "cdi:hasIntendedDataType": "xsd:date",
       "cdi:function": [
         "temporalDesignation"
@@ -635,9 +633,7 @@
       "schema:minValue": -22.4,
       "schema:maxValue": 31.7,
       "cdif:role": "Measure",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdif:simpleUnitOfMeasure": "degree Celsius",
       "cdi:hasIntendedDataType": "xsd:decimal",
       "cdi:describedUnitOfMeasure": {
@@ -769,9 +765,7 @@
       "schema:minValue": -28.1,
       "schema:maxValue": 24.6,
       "cdif:role": "Measure",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:hasIntendedDataType": "xsd:decimal"
     },
     {
@@ -794,9 +788,7 @@
       "schema:minValue": -15.3,
       "schema:maxValue": 38.9,
       "cdif:role": "Measure",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:hasIntendedDataType": "xsd:decimal"
     },
     {
@@ -811,9 +803,7 @@
         "https://example.org/props/qcFlag"
       ],
       "cdif:role": "Attribute",
-      "cdif:physicalDataType": [
-        "string"
-      ],
+      "cdif:physicalDataType": "string",
       "cdi:hasIntendedDataType": "xsd:string",
       "cdi:qualifies": {
         "@id": "ex:var/dailyMeanTemperature"
@@ -888,6 +878,9 @@
       },
       {
         "@id": "https://w3id.org/cdif/data_description/1.0"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.0"
       }
     ]
   }

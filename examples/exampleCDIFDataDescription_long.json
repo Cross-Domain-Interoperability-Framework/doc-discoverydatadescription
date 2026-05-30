@@ -148,9 +148,7 @@
       ],
       "schema:name": "station_id",
       "schema:description": "Monitoring station identifier; unit of observation.",
-      "cdif:physicalDataType": [
-        "string"
-      ],
+      "cdif:physicalDataType": "string",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
       "cdif:role": "UnitIdentifier",
       "cdif:displayLabel": [
@@ -165,9 +163,7 @@
       ],
       "schema:name": "sample_date",
       "schema:description": "Date the water sample was collected.",
-      "cdif:physicalDataType": [
-        "date"
-      ],
+      "cdif:physicalDataType": "date",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#date",
       "cdif:role": "Dimension",
       "cdif:displayLabel": [
@@ -182,9 +178,7 @@
       ],
       "schema:name": "parameter",
       "schema:description": "Descriptor column. Each value names the measured property whose numeric reading is recorded in the value column. Permitted codes are ph, temperature, salinity, dissolved_oxygen.",
-      "cdif:physicalDataType": [
-        "string"
-      ],
+      "cdif:physicalDataType": "string",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
       "cdif:role": "Descriptor",
       "cdif:displayLabel": [
@@ -199,9 +193,7 @@
       ],
       "schema:name": "value",
       "schema:description": "Reference column. Holds the numeric value of whichever parameter is named in the descriptor column for that row.",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "ReferenceVariable",
       "cdif:displayLabel": [
@@ -216,9 +208,7 @@
       ],
       "schema:name": "unit",
       "schema:description": "Reporting unit symbol for the row's value (e.g., Cel, 1, mg/L).",
-      "cdif:physicalDataType": [
-        "string"
-      ],
+      "cdif:physicalDataType": "string",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#string",
       "cdif:role": "Attribute",
       "cdif:displayLabel": [
@@ -237,9 +227,7 @@
       "schema:name": "ph",
       "schema:description": "pH parameter. Rows whose descriptor column equals 'ph' record values for this variable.",
       "schema:measurementTechnique": "Glass electrode, two-point calibration",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": 0.0,
@@ -263,9 +251,7 @@
       "schema:name": "temperature",
       "schema:description": "Temperature parameter. Rows whose descriptor column equals 'temperature' record values for this variable.",
       "schema:measurementTechnique": "CTD profiler",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": -2.0,
@@ -291,9 +277,7 @@
       "schema:name": "salinity",
       "schema:description": "Practical salinity parameter. Rows whose descriptor column equals 'salinity' record values for this variable.",
       "schema:measurementTechnique": "CTD profiler",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": 0.0,
@@ -317,9 +301,7 @@
       "schema:name": "dissolved_oxygen",
       "schema:description": "Dissolved oxygen parameter. Rows whose descriptor column equals 'dissolved_oxygen' record values for this variable.",
       "schema:measurementTechnique": "Optode sensor",
-      "cdif:physicalDataType": [
-        "float64"
-      ],
+      "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
       "schema:minValue": 0.0,

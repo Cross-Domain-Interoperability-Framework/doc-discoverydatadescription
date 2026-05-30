@@ -133,9 +133,7 @@
       ],
       "schema:name": "time",
       "schema:description": "Mid-month timestamp of the monthly mean field.",
-      "cdif:physicalDataType": [
-        "int32"
-      ],
+      "cdif:physicalDataType": "int32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#date",
       "cdif:role": "Dimension",
       "cdif:displayLabel": [
@@ -158,9 +156,7 @@
       ],
       "schema:name": "depth",
       "schema:description": "Standard ocean depth level below sea surface.",
-      "cdif:physicalDataType": [
-        "float32"
-      ],
+      "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdif:role": "Dimension",
       "schema:minValue": 0.0,
@@ -183,9 +179,7 @@
       ],
       "schema:name": "latitude",
       "schema:description": "Cell-centre latitude (WGS84).",
-      "cdif:physicalDataType": [
-        "float32"
-      ],
+      "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdif:role": "Dimension",
       "schema:minValue": 41.0,
@@ -208,9 +202,7 @@
       ],
       "schema:name": "longitude",
       "schema:description": "Cell-centre longitude (WGS84).",
-      "cdif:physicalDataType": [
-        "float32"
-      ],
+      "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdif:role": "Dimension",
       "schema:minValue": -71.0,
@@ -237,9 +229,7 @@
       "schema:propertyID": [
         "http://vocab.nerc.ac.uk/collection/P01/current/TEMPST01/"
       ],
-      "cdif:physicalDataType": [
-        "float32"
-      ],
+      "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdif:role": "Measure",
       "schema:minValue": -2.0,
