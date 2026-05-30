@@ -121,37 +121,37 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - Statistics for a specific Category of an instance variable within a dataset.
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 - **Description:** Identifier for this CategoryStatistics node.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required -- 'cdi:CategoryStatistics', Repeatable
 - **Content:** string.uri
 - **Description:** MUST include `cdi:CategoryStatistics`.
 
-### [**cdi:for**]{.underline}
+### **cdi:for**
 
 - **Cardinality:** Required
 - **Content:** [skos:Concept](#skosconcept) or [object reference](#object-reference)
 - **Description:** The Category this CategoryStatistics is for (inline Category node or an `@id`-reference).
 
-### [**cdi:statistic**]{.underline}
+### **cdi:statistic**
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of Statistic value objects
 - **Description:** Per-category Statistic value objects.
 
-### [**cdi:typeOfStatistic**]{.underline}
+### **cdi:typeOfStatistic**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Controlled-vocabulary entry naming the kind of statistic.
 
-### [**cdi:hasWeight**]{.underline}
+### **cdi:hasWeight**
 
 - **Cardinality:** Optional
 - **Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
@@ -161,43 +161,43 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - A SKOS Concept in JSON-LD form: a unit of thought within a concept scheme. Used throughout the CDIF Data Description profile as the value type for controlled-vocabulary references (data types, units, roles, value domains, etc.). 
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 - **Description:** URI identifier for this concept.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required -- 'skos:Concept', Repeatable
 - **Content:** string.uri
 - **Description:** MUST include `skos:Concept`.
 
-### [**skos:prefLabel**]{.underline}
+### **skos:prefLabel**
 
 - **Cardinality:** Required
 - **Content:** string, [LanguageTaggedValue](#languagetaggedvalue), or array
 - **Description:** Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.
 
-### [**skos:notation**]{.underline}
+### **skos:notation**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** string
 - **Description:** Classification code for this concept within a scheme.
 
-### [**skos:definition**]{.underline} / [**skos:note**]{.underline}
+### **skos:definition** / **skos:note**
 
 - **Cardinality:** Optional
 - **Content:** string, [LanguageTaggedValue](#languagetaggedvalue), or array
 - **Description:** Documentary notes. `skos:definition` is a formal explanation of meaning; `scopeNote` clarifies intended use; `note` is general commentary; `example` illustrates usage. Additional `skos:historyNote`, `skos:changeNote`, and `skos:editorialNote` are also supported with the same content options.
 
-### [**skos:inScheme**]{.underline} / [**skos:topConceptOf**]{.underline}
+### **skos:inScheme** / **skos:topConceptOf**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [object reference](#object-reference)
 - **Description:** Concept scheme(s) this concept belongs to / is a top concept of.
 
-### [**skos:broader**]{.underline} / [**skos:narrower**]{.underline}
+### **skos:broader** / **skos:narrower**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** Inline [skos:Concept](#skosconcept) or [object reference](#object-reference)
@@ -207,43 +207,43 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 -A  named bundle of one or more Statistic value objects for an instance variable, optionally weighted, optionally broken down by Category.
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 - **Description:** Identifier for this Statistics node.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required -- 'cdi:Statistics', Repeatable
 - **Content:** string.uri
 - **Description:** MUST include `cdi:Statistics`.
 
-### [**cdi:statistic**]{.underline}
+### **cdi:statistic**
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of Statistic value objects
 - **Description:** Ordered list of Statistic value objects carried by this bundle. Order is significant -- consumers MAY rely on array position.
 
-### [**cdi:typeOfStatistic**]{.underline}
+### **cdi:typeOfStatistic**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Controlled-vocabulary entry naming the kind of statistic -- e.g. mean, median, count, sum, stdDev.
 
-### [**cdi:hasWeight**]{.underline}
+### **cdi:hasWeight**
 
 - **Cardinality:** Optional
 - **Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 - **Description:** The InstanceVariable whose values were used as weights when computing the Statistic entries.
 
-### [**cdif:appliesTo**]{.underline}
+### **cdif:appliesTo**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 - **Description:** CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) this Statistics bundle summarizes -- the per-bundle "what these numbers describe" link.
 
-### [**cdif:has_CategoryStatistics**]{.underline}
+### **cdif:has_CategoryStatistics**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [cdi:CategoryStatistics](#cdicategorystatistics)
@@ -253,29 +253,29 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - vocabulary documented as an enumerated value domain — typically a SKOS ConceptScheme listing the allowed values for a `cdif:SubstantiveValueDomain` or `cdif:SentinelValueDomain`. Provides a named extension point so that an EnumerationDomain can either declare an external concept scheme via `cdif:references` or be defined inline.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required
 - **Content:** string.uri array, MUST contain `cdif:EnumerationDomain`
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 
-### [**cdif:identifier**]{.underline}
+### **cdif:identifier**
 
 - **Cardinality:** Optional
 - **Content:** [Identifier](#propertyvalue-identifier)
 - **Description:** Identifier for this enumerated (categorical) domain.
 
-### [**schema:name**]{.underline}
+### **schema:name**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Human-understandable name (linguistic signifier, word, phrase, or mnemonic) for the domain.
 
-### [**cdif:references**]{.underline}
+### **cdif:references**
 
 - **Cardinality:** Optional
 - **Content:** SKOS ConceptScheme inline, or [object reference](#object-reference)
@@ -285,19 +285,19 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - The CDIF profile of DDI-CDI PrimaryKey: an ordered set of `cdi:InstanceVariable` references that uniquely identify a data instance. Used as the value of [cdif:hasPrimaryKey](#cdifhasprimarykey) on the root Dataset. Each variable's position in the key is recorded with an explicit `cdi:ComponentPosition` wrapper carrying `cdi:indexes` (the variable) and `cdi:value` (the integer position), matching the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required -- 'cdif:Key', Repeatable
 - **Content:** string.uri
 - **Description:** MUST include `cdif:Key`.
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 - **Description:** Identifier for this Key node.
 
-### [**cdif:isComposedOf**]{.underline}
+### **cdif:isComposedOf**
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of [cdi:ComponentPosition](#cdicomponentposition) wrappers
@@ -307,28 +307,28 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - The set of sentinel (missing / not-applicable / refusal / etc.) codes for an InstanceVariable, distinct from the substantive values the variable takes. Used as the value of `cdi:takesSentinelValuesFrom`. Same shape as `cdif:SubstantiveValueDomain` but typed `cdif:SentinelValueDomain` and intended for the non-substantive value codes (so survey "Don't know" / "Refused" codes, sensor `-9999`-style fill values, etc. are represented separately from valid measurements).
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required
 - **Content:** string.uri array, MUST contain `cdif:SentinelValueDomain`
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 
-### [**cdif:takesValuesFrom**]{.underline}
+### **cdif:takesValuesFrom**
 
 - **Cardinality:** Optional
 - **Content:** [cdif:EnumerationDomain](#cdifenumerationdomain) inline, or [object reference](#object-reference)
 - **Description:** Enumerated list of sentinel codes (e.g., a SKOS concept scheme of missing-value codes).
 
-### [**cdif:displayLabel**]{.underline}
+### **cdif:displayLabel**
 
 - **Cardinality:** Optional
 - **Content:** string
 
-### [**cdif:recommendedDataType**]{.underline}
+### **cdif:recommendedDataType**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [xsdDataType](#xsddatatype)
@@ -338,31 +338,31 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - Groups one or more `cdi:Statistics` nodes. A typical use is a dataset-level collection holding row-count / mean / stddev Statistics for each measured variable. Referenced from a CdifInstanceVariable via `cdif:isDescribedBy_StatisticsCollection`, or from the root Dataset via `cdif:statistics`.
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 - **Description:** Identifier for this StatisticsCollection node.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required -- 'cdif:StatisticsCollection', Repeatable
 - **Content:** string.uri
 - **Description:** MUST include `cdif:StatisticsCollection`.
 
-### [**cdif:has_Statistics**]{.underline}
+### **cdif:has_Statistics**
 
 - **Cardinality:** Required, Repeatable
 - **Content:** [cdi:Statistics](#cdistatistics) or [object reference](#object-reference)
 - **Description:** Statistics nodes carried by this collection (inline or `@id`-ref). `cdif:` namespaced and target-suffixed because the DDI-CDI `cdi:has` association is polymorphic.
 
-### [**cdi:hasWeight**]{.underline}
+### **cdi:hasWeight**
 
 - **Cardinality:** Optional
 - **Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
 - **Description:** The InstanceVariable whose values were used as weights when computing the statistics in this collection.
 
-### [**cdif:indexedBy**]{.underline}
+### **cdif:indexedBy**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [CdifInstanceVariable](#cdifinstancevariable) or [object reference](#object-reference)
@@ -372,30 +372,30 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - The set of valid, meaningful values an InstanceVariable can take — distinct from sentinel (missing/not-applicable) codes, which live on a sibling `cdif:SentinelValueDomain`. Used as the value of `cdi:takesSubstantiveValuesFrom`. A single SubstantiveValueDomain node provides EITHER `cdif:takesValuesFrom` (an enumerated list of allowed values) OR `cdif:recommendedDataType` (one or more XSD data type tokens), or both.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required
 - **Content:** string.uri array, MUST contain `cdif:SubstantiveValueDomain`
 
-### [**@id**]{.underline}
+### **@id**
 
 - **Cardinality:** Optional
 - **Content:** string.uri
 - **Description:** Identifier for this SubstantiveValueDomain node, used when the same domain is referenced from multiple InstanceVariables.
 
-### [**cdif:takesValuesFrom**]{.underline}
+### **cdif:takesValuesFrom**
 
 - **Cardinality:** Optional
 - **Content:** [cdif:EnumerationDomain](#cdifenumerationdomain) inline, or [object reference](#object-reference)
 - **Description:** Enumerated list of allowed substantive values. Use when the value set is a closed vocabulary; combine with `cdif:recommendedDataType` to additionally constrain the data type.
 
-### [**cdif:displayLabel**]{.underline}
+### **cdif:displayLabel**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Human-readable label for the domain (e.g., shown in UI).
 
-### [**cdif:recommendedDataType**]{.underline}
+### **cdif:recommendedDataType**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [xsdDataType](#xsddatatype)
@@ -407,91 +407,91 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 	The legacy anchor `#sec-cdifvariablemeasured` is retained on this section for backward-compatible links; the class is named *CdifInstanceVariable* in the JSON Schema.
 
-### [**@type**]{.underline}
+### **@type**
 
 - **Cardinality:** Required, Repeatable
 - **Content:** string.uri
 - **Description:** MUST include both `schema:PropertyValue` and `cdi:InstanceVariable`. Additional types may be included.
 
-### [**schema:name**]{.underline}
+### **schema:name**
 
 - **Cardinality:** Required
 - **Content:** string
 - **Description:** String label associated with the variable in the dataset serialization. Inherited from PropertyValue.
 
-### [**cdif:physicalDataType**]{.underline}
+### **cdif:physicalDataType**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Identifier or name for the data type concept describing the physical representation of values for this variable.
 
-### [**cdif:role**]{.underline}
+### **cdif:role**
 
 - **Cardinality:** Optional
 - **Content:** string (controlled-vocabulary entry)
 - **Description:** Specifies the role this variable plays in a data structure. Common values: `UnitIdentifier` (names the unit a row describes), `Measure` (holds observed/derived values), `Attribute` (qualifies an observation), `Dimension` (addresses a position in a multi-dimensional value space).
 
-### [**cdif:simpleUnitOfMeasure**]{.underline}
+### **cdif:simpleUnitOfMeasure**
 
 - **Cardinality:** Optional
 - **Content:** string, [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
 - **Description:** Simple text-based unit of measure for the values of this variable. For a controlled-vocabulary unit entry, use `cdi:describedUnitOfMeasure` instead.
 
-### [**cdif:uses**]{.underline}
+### **cdif:uses**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Essentially the same as `schema:propertyID`. References to concepts that this variable measures or represents. When the dataset's distribution carries `cdi:isStructuredBy` (CDIF Data Structure profile), `cdif:uses` connects the InstanceVariable to a reusable RepresentedVariable concept.
 
-### [**cdif:isDescribedBy_StatisticsCollection**]{.underline}
+### **cdif:isDescribedBy_StatisticsCollection**
 
 - **Cardinality:** Optional
 - **Content:** [cdif:StatisticsCollection](#cdifstatisticscollection) or [object reference](#object-reference)
 - **Description:** The StatisticsCollection holding summary / category statistics for this InstanceVariable (InstanceVariable.isDescribedBy). `cdif:` namespaced and target-suffixed because the DDI-CDI `isDescribedBy` association is polymorphic.
 
-### [**cdi:function**]{.underline}
+### **cdi:function**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Immutable characteristic of the variable such as geographic designator, weight, temporal designation, etc. (InstanceVariable.function).
 
-### [**cdi:platformType**]{.underline}
+### **cdi:platformType**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** The application or technical system context in which the variable has been realized -- typically a statistical processing package or processing environment (InstanceVariable.platformType).
 
-### [**cdi:source**]{.underline}
+### **cdi:source**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference) or string
 - **Description:** Reference capturing provenance information for this InstanceVariable (InstanceVariable.source).
 
-### [**cdi:hasIntendedDataType**]{.underline}
+### **cdi:hasIntendedDataType**
 
 - **Cardinality:** Optional
 - **Content:** [xsdDataType](#xsddatatype), [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
 - **Description:** The data type intended to be used by this variable, independent of its physical representation (RepresentedVariable.hasIntendedDataType). Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype).
 
-### [**cdi:describedUnitOfMeasure**]{.underline}
+### **cdi:describedUnitOfMeasure**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** The unit in which the data values are measured, expressed as a controlled-vocabulary entry (RepresentedVariable.describedUnitOfMeasure). For a plain-string unit, use `cdif:simpleUnitOfMeasure` instead.
 
-### [**cdi:takesSentinelValuesFrom**]{.underline}
+### **cdi:takesSentinelValuesFrom**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [cdif:SentinelValueDomain](#cdifsentinelvaluedomain) inline, or [object reference](#object-reference) (`@id` only)
 - **Description:** Sentinel (missing / not-applicable) value domain(s) for this variable (RepresentedVariable.takesSentinelValuesFrom). The value MUST be a `cdif:SentinelValueDomain` node — referencing a `cdif:SubstantiveValueDomain` here is a schema violation. Added at the Data Description profile level; not present at the Discovery level; disallowed at the Data Structure level (where the property lives on the RepresentedVariable instead).
 
-### [**cdi:takesSubstantiveValuesFrom**]{.underline}
+### **cdi:takesSubstantiveValuesFrom**
 
 - **Cardinality:** Optional
 - **Content:** [cdif:SubstantiveValueDomain](#cdifsubstantivevaluedomain) inline, or [object reference](#object-reference) (`@id` only)
 - **Description:** The substantive value domain for this variable -- the set of valid, meaningful values (RepresentedVariable.takesSubstantiveValuesFrom). The value MUST be a `cdif:SubstantiveValueDomain` node — referencing a `cdif:SentinelValueDomain` here is a schema violation. Added at the Data Description profile level; same profile rules as `cdi:takesSentinelValuesFrom` above.
 
-### [**cdi:qualifies**]{.underline}
+### **cdi:qualifies**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference)
@@ -501,73 +501,73 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - Defines the physical realization of one field in a tabular or structured dataset distribution — the column index (for tabular), the locator (for structured/hierarchical formats like NetCDF/HDF5), the physical type, format pattern, length, null sequence, defaults, etc., and a `cdif:formats_InstanceVariable` reference linking the column or path back to the `cdi:InstanceVariable` it realises in the parent dataset's `schema:variableMeasured`. Each item in a distribution's `cdif:hasPhysicalMapping` array is one CdifPhysicalMapping node. When a WebAPI distribution's `schema:potentialAction/schema:result` carries `cdif:hasPhysicalMapping`, the same shape applies to the response columns and the same `@id`s are referenced (a WebAPI response is another physical realization of the same conceptual variables; do not redeclare the InstanceVariables themselves on the result).
 
-### [**cdif:index**]{.underline}
+### **cdif:index**
 
 - **Cardinality:** Optional (required for tabular text)
 - **Content:** integer (≥ 0)
 - **Description:** Non-negative integer that orders the fields in the data structure (column number, 0-based). Required for `cdi:TabularTextDataSet`; for `cdi:StructuredDataSet` use `cdif:locator` instead.
 
-### [**cdif:locator**]{.underline}
+### **cdif:locator**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Path to the field inside a structured (hierarchical) physical container — for example a NetCDF/HDF5 group path like `/measurements/intensity`, a JSON Pointer, or a Zarr array path. Used in place of `cdif:index` for `cdi:StructuredDataSet` distributions where column-order positioning does not apply.
 
-### [**cdif:format**]{.underline}
+### **cdif:format**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Format pattern for the field — for numbers a token like `decimal`, `scientific`, `integer`; for dates a pattern such as `YYYY/MM` or `YYYY-MM-DDTHH:mm:ssZ`; for booleans the literal token(s) used; etc.
 
-### [**cdif:physicalDataType**]{.underline}
+### **cdif:physicalDataType**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Name of the physical data type for the field as it appears in the file (e.g., `float64`, `int32`, `string`, `dateTime`). Distinct from `cdi:hasIntendedDataType` on the InstanceVariable, which is the conceptual data type.
 
-### [**cdif:formats_InstanceVariable**]{.underline}
+### **cdif:formats_InstanceVariable**
 
 - **Cardinality:** Required (Warning if absent)
 - **Content:** [object reference](#object-reference) (`@id` to a `schema:variableMeasured` item on the parent Dataset)
 - **Description:** Links this column / path back to the `cdi:InstanceVariable` it physically realises. The `@id` MUST match the `@id` of an item in the parent dataset's `schema:variableMeasured`. SHACL warns if missing (the link is what makes the mapping useful).
 
-### [**cdi:length**]{.underline}
+### **cdi:length**
 
 - **Cardinality:** Optional
 - **Content:** integer
 - **Description:** Column width for fixed-width tabular text.
 
-### [**cdi:nullSequence**]{.underline}
+### **cdi:nullSequence**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Literal token that represents a null/missing value for this field (e.g., `NA`, `-9999`, empty string). Becomes the null annotation for the described column.
 
-### [**cdi:defaultValue**]{.underline}
+### **cdi:defaultValue**
 
 - **Cardinality:** Optional
 - **Content:** string
 - **Description:** Default value substituted when the field is empty.
 
-### [**cdi:scale**]{.underline}
+### **cdi:scale**
 
 - **Cardinality:** Optional
 - **Content:** integer
 - **Description:** Scale factor to apply to stored values to recover the conceptual value.
 
-### [**cdi:decimalPositions**]{.underline}
+### **cdi:decimalPositions**
 
 - **Cardinality:** Optional
 - **Content:** integer
 - **Description:** Number of decimal positions (digits after the decimal separator) used to encode the value.
 
-### [**cdi:minimumLength**]{.underline}, [**cdi:maximumLength**]{.underline}
+### **cdi:minimumLength**, **cdi:maximumLength**
 
 - **Cardinality:** Optional
 - **Content:** integer
 - **Description:** Bounds on the textual length of values for this field.
 
-### [**cdi:isRequired**]{.underline}
+### **cdi:isRequired**
 
 - **Cardinality:** Optional, default `false`
 - **Content:** boolean
