@@ -121,6 +121,11 @@ The merge uses **shape-name precedence**: when the same named SHACL shape is def
 - **[metadataBuildingBlocks](https://github.com/Cross-Domain-Interoperability-Framework/metadataBuildingBlocks)** — Building block schemas
 - **[validation](https://github.com/Cross-Domain-Interoperability-Framework/validation)** — Validation tools, DDI converter, DCAT converter, harvester
 
+## Development branch
+
+Active work for the 2026-06 review revision is on the `reviewRevision202606` branch. `main` reflects the prior release state. New changes should target the review branch; it is merged to main on release.
+
+
 ## License
 
 See [LICENSE](LICENSE).
