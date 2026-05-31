@@ -68,9 +68,13 @@ The JSON syntax is defined by the [ECMA JSON specification](https://www.ecma-in
 
 # Model
 
+[↑ Back to TOC](#table-of-contents)
+
 All classes and properties are implemented with schema.org types and attributes unless there is a prefix indicating use of elements from other vocabularies. See the context section for prefixes used and their mapping to URIs.
 
 ## Action
+
+[↑ Back to TOC](#table-of-contents)
 
 ### @type
 
@@ -115,9 +119,13 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## Base Class DataSet
 
+[↑ Back to TOC](#table-of-contents)
+
 - This profile applies to description of resources that can be described using the properties defined in the [CDIF discovery information model](https://cross-domain-interoperability-framework.github.io/cdifbook/metadata/contentmodel.html#basic-discovery-metadata-content-model) . For implementation using the schema.org vocabulary, these are typed as schema:Dataset.
 
 ## cdi:CategoryStatistics
+
+[↑ Back to TOC](#table-of-contents)
 
 - Statistics for a specific Category of an instance variable within a dataset.
 
@@ -205,6 +213,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## cdi:Statistics
 
+[↑ Back to TOC](#table-of-contents)
+
 -A  named bundle of one or more Statistic value objects for an instance variable, optionally weighted, optionally broken down by Category.
 
 ### **@id**
@@ -251,6 +261,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## cdif:EnumerationDomain
 
+[↑ Back to TOC](#table-of-contents)
+
 - vocabulary documented as an enumerated value domain — typically a SKOS ConceptScheme listing the allowed values for a `cdif:SubstantiveValueDomain` or `cdif:SentinelValueDomain`. Provides a named extension point so that an EnumerationDomain can either declare an external concept scheme via `cdif:references` or be defined inline.
 
 ### **@type**
@@ -283,6 +295,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## cdif:Key
 
+[↑ Back to TOC](#table-of-contents)
+
 - The CDIF profile of DDI-CDI PrimaryKey: an ordered set of `cdi:InstanceVariable` references that uniquely identify a data instance. Used as the value of [cdif:hasPrimaryKey](#cdifhasprimarykey) on the root Dataset. Each variable's position in the key is recorded with an explicit `cdi:ComponentPosition` wrapper carrying `cdi:indexes` (the variable) and `cdi:value` (the integer position), matching the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
 
 ### **@type**
@@ -304,6 +318,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (the `cdi:InstanceVariable` at that position -- inline `cdifInstanceVariable` or `@id`-reference) and `cdi:value` (the integer position, 0- or 1-based).
 
 ## cdif:SentinelValueDomain
+
+[↑ Back to TOC](#table-of-contents)
 
 - The set of sentinel (missing / not-applicable / refusal / etc.) codes for an InstanceVariable, distinct from the substantive values the variable takes. Used as the value of `cdi:takesSentinelValuesFrom`. Same shape as `cdif:SubstantiveValueDomain` but typed `cdif:SentinelValueDomain` and intended for the non-substantive value codes (so survey "Don't know" / "Refused" codes, sensor `-9999`-style fill values, etc. are represented separately from valid measurements).
 
@@ -335,6 +351,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Description:** Same semantics as on `cdif:SubstantiveValueDomain`. At least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType` MUST be present.
 
 ## cdif:StatisticsCollection
+
+[↑ Back to TOC](#table-of-contents)
 
 - Groups one or more `cdi:Statistics` nodes. A typical use is a dataset-level collection holding row-count / mean / stddev Statistics for each measured variable. Referenced from a CdifInstanceVariable via `cdif:isDescribedBy_StatisticsCollection`, or from the root Dataset via `cdif:statistics`.
 
@@ -370,6 +388,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## cdif:SubstantiveValueDomain
 
+[↑ Back to TOC](#table-of-contents)
+
 - The set of valid, meaningful values an InstanceVariable can take — distinct from sentinel (missing/not-applicable) codes, which live on a sibling `cdif:SentinelValueDomain`. Used as the value of `cdi:takesSubstantiveValuesFrom`. A single SubstantiveValueDomain node provides EITHER `cdif:takesValuesFrom` (an enumerated list of allowed values) OR `cdif:recommendedDataType` (one or more XSD data type tokens), or both.
 
 ### **@type**
@@ -402,6 +422,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Description:** One or more XSD data type tokens recommended for values from this domain. Required if `cdif:takesValuesFrom` is not provided; the SubstantiveValueDomain node MUST carry at least one of `cdif:takesValuesFrom` or `cdif:recommendedDataType`.
 
 ## CdifInstanceVariable
+
+[↑ Back to TOC](#table-of-contents)
 
 - A `schema:variableMeasured` item at the Data Description level is a CDIF profile of the DDI-CDI InstanceVariable / RepresentedVariable / ConceptualVariable classes. It composes the basic Discovery `variableMeasured` shape ([PropertyValue-(variableMeasured)](#propertyvalue-variablemeasured)) and extends it with properties describing the variable's data type, role, source, value domain, weighting, and summary statistics. The schema.org base properties on PropertyValue (`@id`, `schema:name`, `schema:description`, `schema:alternateName`, `schema:propertyID`, `schema:measurementTechnique`, `schema:unitText`, `schema:unitCode`, `schema:minValue`, `schema:maxValue`, `schema:url`) remain available unchanged; the additions below are CDIF-specific.
 
@@ -499,6 +521,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## CdifPhysicalMapping
 
+[↑ Back to TOC](#table-of-contents)
+
 - Defines the physical realization of one field in a tabular or structured dataset distribution — the column index (for tabular), the locator (for structured/hierarchical formats like NetCDF/HDF5), the physical type, format pattern, length, null sequence, defaults, etc., and a `cdif:formats_InstanceVariable` reference linking the column or path back to the `cdi:InstanceVariable` it realises in the parent dataset's `schema:variableMeasured`. Each item in a distribution's `cdif:hasPhysicalMapping` array is one CdifPhysicalMapping node. When a WebAPI distribution's `schema:potentialAction/schema:result` carries `cdif:hasPhysicalMapping`, the same shape applies to the response columns and the same `@id`s are referenced (a WebAPI response is another physical realization of the same conceptual variables; do not redeclare the InstanceVariables themselves on the result).
 
 ### **cdif:index**
@@ -575,9 +599,15 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## Classes added by CDIF Data Description profile
 
+[↑ Back to TOC](#table-of-contents)
+
 ## Classes added by CDIF Discovery profile
 
+[↑ Back to TOC](#table-of-contents)
+
 ## ContactPoint
+
+[↑ Back to TOC](#table-of-contents)
 
 - Information about how to communicate with a person or organization. CDIF only includes e-mail in its schema.
 
@@ -593,6 +623,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Description:** Property is required if a contactPoint property is included. Use missing@example.org if e-mail address is not available. Recommend using position-based contact point because people move around.
 
 ## Contributor
+
+[↑ Back to TOC](#table-of-contents)
 
 - For more granularity on how an agent contributed to a resource, use schema:Role. The schema.org documentation does not state that the Role type is an expected data type for the contributor property, but that is addressed in this blog post (http://blog.schema.org/2014/06/introducing-role.html). see also [ESIPfed Science on Schema.org roles of people note](https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#roles-of-people).
 
@@ -614,6 +646,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** [object reference](#object-reference), [Person](#person) or [Organization](#organization)
 
 ## Data Download
+
+[↑ Back to TOC](#table-of-contents)
 
 - file-based access to a resource via URL; the DataDownload object provides a link to get the resource content, along with information about the serialization format and conventions used.
 
@@ -681,6 +715,8 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 ## Data types added by CDIF Data Description profile
 
+[↑ Back to TOC](#table-of-contents)
+
 ### xsdDataType
 
 - An enumeration of XML Schema datatype identifiers (xsd:* namespaced), used as a string value for [cdi:hasIntendedDataType](#cdifinstancevariable) on an InstanceVariable when the intended data type is a standard XSD primitive. Values:
@@ -691,9 +727,15 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 
 ## Data types added by CDIF Discovery profile
 
+[↑ Back to TOC](#table-of-contents)
+
 ## Data types used for CDIF Core
 
+[↑ Back to TOC](#table-of-contents)
+
 ## DataCatalog
+
+[↑ Back to TOC](#table-of-contents)
 
 - An accessible collection of data. The data might be metadata (about other resources) or datasets.
 
@@ -727,6 +769,8 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 - **Description:** Identifier for the data catalog.
 
 ## Dataset/dcat:CatalogRecord
+
+[↑ Back to TOC](#table-of-contents)
 
 - This is the class used to provide information about the metadata record itself.
 
@@ -784,6 +828,8 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 
 ## Defined Term
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @type
 
 - **Cardinality:** Required -- \'DefinedTerm\', Repeatable
@@ -814,6 +860,8 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 
 ## dqv:QualityMeasurement
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @type
 
 - **Cardinality:** Required -- \'dqv:QualityMeasurement\', repeatable
@@ -829,6 +877,8 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 - **Content:** string or [DefinedTerm](#defined-term)
 
 ## EntryPoint
+
+[↑ Back to TOC](#table-of-contents)
 
 - Use to document the URL that is the target for invoking an action, or that is the target object of a link relationship.
 
@@ -857,6 +907,8 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 
 ## GeoCoordinates
 
+[↑ Back to TOC](#table-of-contents)
+
 - A point location specified with latitude and longitude in decimal degrees, using the WGS84 spatial reference system.
 
 ### @type
@@ -876,6 +928,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 - **Description:** east-longitude coordinate in decimal degrees. Value must be \>= -180 and \<= 180
 
 ## GeoShape
+
+[↑ Back to TOC](#table-of-contents)
 
 - CDIF limits schema:GeoShape to a box or line (schema.org includes other options). Point locations are tuples of {latitude east-longitude} (y x). (documentation from [Science on Schema.org](https://github.com/ESIPFed/science-on-schema.org/blob/develop/guides/Dataset.md#spatial-coverage) see details there)
 
@@ -897,6 +951,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 - **Description:** a series of two or more points. Use for extents like a ship track, flight path, or foot traverse.
 
 ## Labeled Link
+
+[↑ Back to TOC](#table-of-contents)
 
 ### @type
 
@@ -923,6 +979,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 ## LinkRole
 
+[↑ Back to TOC](#table-of-contents)
+
 - This is the type used for links that have an associated semantic conveyed by the linkRelationship.
 
 ### @type
@@ -943,6 +1001,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 - **Description:** URL for link target, along with a label and encoding format for the target resource.
 
 ## MonetaryGrant
+
+[↑ Back to TOC](#table-of-contents)
 
 ### @type
 
@@ -975,6 +1035,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 - **Description:** description of the funding or grant
 
 ## Optional properties from CDIF Core
+
+[↑ Back to TOC](#table-of-contents)
 
 ### description
 
@@ -1074,6 +1136,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 ## Organization
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @id
 
 - **Cardinality:** Optional
@@ -1120,7 +1184,11 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 ## Other Classes used for CDIF Core
 
+[↑ Back to TOC](#table-of-contents)
+
 ## Person
+
+[↑ Back to TOC](#table-of-contents)
 
 - Object representing a person.
 
@@ -1178,6 +1246,8 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 ## Place
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @type
 
 - **Cardinality:** Required -- \"Place\", Repeatable
@@ -1221,6 +1291,8 @@ CHOICE. At least one of the following four is required
 
 ## Properties added in Data Description Profile
 
+[↑ Back to TOC](#table-of-contents)
+
 ### cdif:hasPrimaryKey
 
 - **Cardinality:** Optional, Repeatable
@@ -1234,6 +1306,8 @@ CHOICE. At least one of the following four is required
 - **Description:** Summary statistics describing the dataset's values. Each entry is a `cdi:Statistics` bundle (one or more Statistic value objects, optionally weighted by an InstanceVariable, optionally broken down by Category), a `cdi:CategoryStatistics` (per-category statistics), or a `cdif:StatisticsCollection` (groups multiple Statistics nodes and records which InstanceVariables they index). Either inline a node here, or use an `@id`-reference to one declared elsewhere in the document.
 
 ## Properties added in Discovery Profile
+
+[↑ Back to TOC](#table-of-contents)
 
 ### measurementTechnique
 
@@ -1277,6 +1351,8 @@ CHOICE. At least one of the following four is required
 
 ## PropertyValue-(identifier)
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @type
 
 - **Cardinality:** Required -- \'PropertyValue\', Repeatable
@@ -1301,6 +1377,8 @@ CHOICE. At least one of the following four is required
 - **Description:** In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK. Get values from https://registry.identifiers.org/registry/ for interoperability
 
 ## PropertyValue-(variableMeasured)
+
+[↑ Back to TOC](#table-of-contents)
 
 ### @type
 
@@ -1374,6 +1452,8 @@ CHOICE. At least one of the following four is required
 
 ## PropertyValueSpecification
 
+[↑ Back to TOC](#table-of-contents)
+
 - Description of the kind of value expected for a parameter value.
 
 ### @type
@@ -1405,6 +1485,8 @@ CHOICE. At least one of the following four is required
 - **Description:** regular expression to validate values for template parameters.
 
 ## Required Properties from cdif Core profile
+
+[↑ Back to TOC](#table-of-contents)
 
 ### @id
 
@@ -1472,6 +1554,8 @@ CHOICE. At least one of the following four is required
 
 ## sf:SimpleFeature
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @type
 
 - **Cardinality:** Required
@@ -1492,6 +1576,8 @@ CHOICE. At least one of the following four is required
 
 ## spdx:Checksum
 
+[↑ Back to TOC](#table-of-contents)
+
 ### spdx:algorithm
 
 - **Cardinality:** Required
@@ -1505,6 +1591,8 @@ CHOICE. At least one of the following four is required
 - **Description:** the checksum string.
 
 ## time:Proper Interval
+
+[↑ Back to TOC](#table-of-contents)
 
 - Intervals can be bounded by named ordinal eras (e.g. Jurassic, Tang dynasty, Paleolithic) identified by URI, or by numeric bounds that are time coordinates in a specified reference system (implemented by the TimePosition data type). This implementation is a simplified profile based on the [W3C OWL time specification](https://www.w3.org/TR/owl-time/), using the [http://www.w3.org/2006/time#](http://www.w3.org/2006/time) namespace, which is included in the default context for this profile.
 
@@ -1549,6 +1637,8 @@ OR:
 
 ## time:TimePosition
 
+[↑ Back to TOC](#table-of-contents)
+
 ### @type
 
 - **Cardinality:** Required -- \'time:TimePosition\', repeatable
@@ -1567,6 +1657,8 @@ OR:
 - **Description:** Number that locates a temporal position in the reference frame defined by the hasTRS property.
 
 ## Web API
+
+[↑ Back to TOC](#table-of-contents)
 
 - Provides information to request data through a web accessible service endpoint. This implementation uses the schema.org Action to document url or url template and parameters. At this point, schema is set up for one action\-- an HTTP Get that requests data. The url template parameters (in curly brackets \'{}\') specify query parameters to filter the source data, request particular output formats or other options offered by the interface.
 
@@ -1596,6 +1688,8 @@ OR:
 
 # Namespaces
 
+[↑ Back to TOC](#table-of-contents)
+
 - Namespace prefixes use in CDIF Discovery schema.org JSON-LD objects are specified by this JSON-LD context, which must be declared in every instance document. Note that the correct namespace URI for schema.org is '**http'**, not '**https'**. The [**https**://schema.org/](https://schema.org/) uri identifies the schema.org context document, not the namespace. This example context includes all the namespaces used in any cdif profile:
 
 \"@context\": {\
@@ -1615,11 +1709,17 @@ OR:
 
 # Notes on schema.org implementation
 
+[↑ Back to TOC](#table-of-contents)
+
 ## JSON-LD \@type
+
+[↑ Back to TOC](#table-of-contents)
 
 JSON-LD every graph node has a \@type property that specifies the rdf:type for the node. This type has implications for the properties expected to be found in the content of the node, and should convey the intention of the kind of thing the node is intended to represent. In the CDIF JSON-LD implementation, most of the \@types are taken from the schema.org vocabulary, but there are a few exceptions for content items that do not map to the schema.org vocabulary. The \@type is always serialized as an array \[JSON list\] to allow for extensions that add additional typing.
 
 ## Object reference
+
+[↑ Back to TOC](#table-of-contents)
 
 Linked data is implemented in rdf using URIs to reference objects that might be located in other parts of a graph, or remotely and accessed online. In the JSON-LD implementation, simply using a URI string as the value of a property does not create such a link---the value is simply a string, not the object reference by the URI. An \"object ref\" is always a string containing the id of the referenced object. Thus
 
@@ -1633,13 +1733,19 @@ Is the correct syntax to implemenat an object reference. Throughout this documen
 
 ## Repeating values
 
+[↑ Back to TOC](#table-of-contents)
+
 Any property with a 1..\* or 0..\* cardinality has values that are always implemented as arrays. This makes client processing easier because tests for single or array values are not necessary. If a property is 'repeatable', then assume the implementation is an array (JSON list).
 
 ## Namespace prefixes and JSON validation.
 
+[↑ Back to TOC](#table-of-contents)
+
 Namespace prefixes are explicitly used in the example documents so that the JSON schema can validate instance documents. JSON Schema validates the literal JSON structure \-- property names, nesting, value types. Several features of JSON-LD can cause a semantically correct document to fail JSON Schema checks. The same property can appear as \"schema:name\", \"name\", or \"http://schema.org/name\" depending on the @context. A JSON Schema that checks for \"schema:name\" will reject a document that uses \"name\", even though both mean the same thing. See [Validating CDIF Profile Metadata](https://github.com/Cross-Domain-Interoperability-Framework/validation/blob/main/docs/CDIF-profiles-metadata-validation.md) for a detailed discussion of validation processes for CDIF metadata, and the use of framing to validate JSON-LD instances using different [JSON-LD forms](https://www.w3.org/TR/json-ld11/#forms-of-json-ld) or custom context documents..
 
 ## Use of dcat:CatalogRecord
+
+[↑ Back to TOC](#table-of-contents)
 
 In a harvesting/federated catalog system some metadata about the metadata is useful to keep track of where metadata came from, what format/profile it uses (harvesters need this to process), and update dates. Unambiguous expression of this information requires making statements about a metadata record distinct from the thing in the world that the metadata describes. In an RDF framework, this requires a distinct identifier for the metadata record object that will serve as the subject for these triples.
 
@@ -1684,6 +1790,8 @@ Example instance with dcat catalog record content (mapped to schema.org properti
 ```
 
 ## Polymorphism of PropertyValue
+
+[↑ Back to TOC](#table-of-contents)
 
 The schema.org PropertyValue type is used in several different contexts in the implementation of CDIF metadata. This is a result of how the expected values for some important properties are defined in schema.org. In the Discovery profile, PropertyValue is an allowed value type for variableMeasured and for identifier. In some more advanced profiles, PropertyValue is also an allowed value for additionalProperty.
 
