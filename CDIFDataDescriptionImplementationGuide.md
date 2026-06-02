@@ -800,7 +800,7 @@ For non-XSD intended data types (e.g. domain-specific types defined in a control
 
 - **Cardinality:** Required, Repeatable
 - **Content:** object reference
-- **Description:** Identifiers for conformance classes/profiles that the metadata record follows. For CDIF data description must include \"https://w3id.org/cdif/discovery/1.0\", \"https://w3id.org/cdif/core/1.0\", and \"https://w3id.org/cdif/data_description/1.0\" because conforms to all three profiles.
+- **Description:** Identifiers for conformance classes/profiles that the metadata record follows. For CDIF data description must include \"https://w3id.org/cdif/discovery/1.1\", \"https://w3id.org/cdif/core/1.1\", and \"https://w3id.org/cdif/data_description/1.1\" because conforms to all three profiles.
 
 ### description
 
@@ -1781,9 +1781,9 @@ Example instance with dcat catalog record content (mapped to schema.org properti
     "about": {"@id": "ex:URIforNode1"},
     "description": "metadata about documentation for ex:URIforDescribedResource",
     "dcterms:conformsTo": [
-      {"@id": "https://w3id.org/cdif/core/1.0"},
-      {"@id": "https://w3id.org/cdif/discovery/1.0"},
-      {"@id": "https://w3id.org/cdif/data_description/1.0"}
+      {"@id": "https://w3id.org/cdif/core/1.1"},
+      {"@id": "https://w3id.org/cdif/discovery/1.1"},
+      {"@id": "https://w3id.org/cdif/data_description/1.1"}
     ]
   }
 }

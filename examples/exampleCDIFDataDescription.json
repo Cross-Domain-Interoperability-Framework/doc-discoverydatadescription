@@ -958,16 +958,16 @@
         "@id": "https://w3id.org/cdif/bbr/metadata/profiles/cdifCompositeProfile/DiscoveryDataDescription"
       },
       {
-        "@id": "https://w3id.org/cdif/manifest/1.0"
+        "@id": "https://w3id.org/cdif/manifest/1.1"
       },
       {
-        "@id": "https://w3id.org/cdif/core/1.0"
+        "@id": "https://w3id.org/cdif/core/1.1"
       },
       {
-        "@id": "https://w3id.org/cdif/discovery/1.0"
+        "@id": "https://w3id.org/cdif/discovery/1.1"
       },
       {
-        "@id": "https://w3id.org/cdif/data_description/1.0"
+        "@id": "https://w3id.org/cdif/data_description/1.1"
       }
     ],
     "schema:maintainer": {

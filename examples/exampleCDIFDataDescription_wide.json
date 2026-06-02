@@ -331,13 +331,13 @@
     "schema:sdDatePublished": "2025-10-20",
     "dcterms:conformsTo": [
       {
-        "@id": "https://w3id.org/cdif/core/1.0"
+        "@id": "https://w3id.org/cdif/core/1.1"
       },
       {
-        "@id": "https://w3id.org/cdif/discovery/1.0"
+        "@id": "https://w3id.org/cdif/discovery/1.1"
       },
       {
-        "@id": "https://w3id.org/cdif/data_description/1.0"
+        "@id": "https://w3id.org/cdif/data_description/1.1"
       }
     ]
   }

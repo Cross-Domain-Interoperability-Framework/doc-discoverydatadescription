@@ -81,15 +81,76 @@ cdifd:CDIFCatalogRecordShape a sh:NodeShape ;
             sh:prefixes ( [ sh:namespace "http://schema.org/" ;
                         sh:prefix "schema" ] [ sh:namespace "https://example.org/" ;
                         sh:prefix "ex" ] ) ;
-            sh:select """
-            PREFIX schema: <http://schema.org/>
-            SELECT ?this
-            WHERE {
-            ?this a schema:Dataset ;
-             schema:about ?parent ;
-             schema:additionalType "dcat:CatalogRecord" .
-            }
+            sh:select """\r
+            PREFIX schema: <http://schema.org/>\r
+            SELECT ?this\r
+            WHERE {\r
+            ?this a schema:Dataset ;\r
+             schema:about ?parent ;\r
+             schema:additionalType "dcat:CatalogRecord" .\r
+            }\r
         """ ] .
+
+cdifd:CDIFCodelistConceptShape a sh:NodeShape ;
+    sh:message "A CDIF codelist concept must have a resolvable IRI as @id." ;
+    sh:nodeKind sh:IRI ;
+    sh:property [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:message "skos:notation is required on every concept." ;
+            sh:minCount 1 ;
+            sh:path skos:notation ],
+        [ a sh:PropertyShape ;
+            sh:class skos:ConceptScheme ;
+            sh:maxCount 1 ;
+            sh:message "Every concept must declare skos:inScheme referencing its ConceptScheme." ;
+            sh:minCount 1 ;
+            sh:path skos:inScheme ],
+        [ a sh:PropertyShape ;
+            sh:message "skos:prefLabel is required on every concept." ;
+            sh:minCount 1 ;
+            sh:path skos:prefLabel ] ;
+    sh:targetClass skos:Concept .
+
+cdifd:CDIFCodelistConformsToShape a sh:NodeShape ;
+    sh:property [ a sh:PropertyShape ;
+            sh:hasValue <https://w3id.org/cdif/codelist/1.1> ;
+            sh:message "A subjectOf catalog record on a CDIF codelist must include dcterms:conformsTo <https://w3id.org/cdif/codelist/1.1>." ;
+            sh:minCount 1 ;
+            sh:path dcterms:conformsTo ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes cdifd: ;
+            sh:select """\r
+                PREFIX schema: <http://schema.org/>\r
+                SELECT ?this WHERE {\r
+                    ?dataset schema:subjectOf ?this .\r
+                }\r
+            """ ] .
+
+cdifd:CDIFCodelistShape a sh:NodeShape ;
+    sh:message "A CDIF codelist must have a resolvable IRI as @id.",
+        "Either schema:license or schema:conditionsOfAccess must be provided." ;
+    sh:nodeKind sh:IRI ;
+    sh:or ( [ a sh:PropertyShape ;
+                sh:minCount 1 ;
+                sh:path schema:license ] [ a sh:PropertyShape ;
+                sh:minCount 1 ;
+                sh:path schema:conditionsOfAccess ] ) ;
+    sh:property [ a sh:PropertyShape ;
+            sh:message "schema:identifier is required on a CDIF codelist (string or PropertyValue)." ;
+            sh:minCount 1 ;
+            sh:path schema:identifier ],
+        [ a sh:PropertyShape ;
+            sh:datatype xsd:string ;
+            sh:maxCount 1 ;
+            sh:message "schema:dateModified is required (ISO 8601 date string)." ;
+            sh:minCount 1 ;
+            sh:path schema:dateModified ],
+        [ a sh:PropertyShape ;
+            sh:class skos:Concept ;
+            sh:message "A codelist must declare at least one skos:hasTopConcept." ;
+            sh:minCount 1 ;
+            sh:path skos:hasTopConcept ] ;
+    sh:targetClass skos:ConceptScheme .
 
 cdifd:CDIFContactPointShape a sh:NodeShape ;
     sh:property [ sh:datatype xsd:string ;
@@ -102,18 +163,18 @@ cdifd:CDIFContactPointShape a sh:NodeShape ;
 
 cdifd:CDIFDataDescriptionConformsToShape a sh:NodeShape ;
     sh:property [ a sh:PropertyShape ;
-            sh:hasValue <https://w3id.org/cdif/data_description/1.0> ;
-            sh:message "Metadata record must declare conformance to the CDIF data description profile (https://w3id.org/cdif/data_description/1.0)" ;
+            sh:hasValue <https://w3id.org/cdif/data_description/1.1> ;
+            sh:message "Metadata record must declare conformance to the CDIF data description profile (https://w3id.org/cdif/data_description/1.1)" ;
             sh:path dcterms:conformsTo ] ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:select """
-            PREFIX schema: <http://schema.org/>
-            SELECT ?this
-            WHERE {
-            ?this a schema:Dataset ;
-             schema:about ?parent ;
-             schema:additionalType "dcat:CatalogRecord" .
-            }
+            sh:select """\r
+            PREFIX schema: <http://schema.org/>\r
+            SELECT ?this\r
+            WHERE {\r
+            ?this a schema:Dataset ;\r
+             schema:about ?parent ;\r
+             schema:additionalType "dcat:CatalogRecord" .\r
+            }\r
         """ ] .
 
 cdifd:CDIFDataDownloadShape a sh:NodeShape ;
@@ -136,30 +197,30 @@ cdifd:CDIFDatasetMandatoryShape a sh:NodeShape ;
         cdifd:resourceIdentifierProperty,
         cdifd:rightsProperty ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:select """
-       PREFIX schema: <http://schema.org/>
-       PREFIX ex: <https://example.org/>
-       PREFIX prov: <http://www.w3.org/ns/prov#>
-       PREFIX dcterms: <http://purl.org/dc/terms/>
-            SELECT ?this
-            WHERE {
-              ?this a schema:Dataset .
-              # Exclude catalog-record nodes (they describe a record, not a dataset).
-              MINUS {
-                ?this schema:about ?x .
-                ?this schema:additionalType "dcat:CatalogRecord" .
-              }
-              # Exclude datasets that are only *referenced* as provenance / source /
-              # derived-from / based-on resources rather than the resource being
-              # documented by this record. Such references carry an @id (and maybe a
-              # name/url for readability) but are not held to the full CDIF core
-              # requirements - the documented resource is the SUBJECT of provenance,
-              # never the object, so this never excludes the documented dataset.
-              FILTER NOT EXISTS { ?dpd prov:wasDerivedFrom ?this . }
-              FILTER NOT EXISTS { ?dpu prov:used ?this . }
-              FILTER NOT EXISTS { ?dib schema:isBasedOn ?this . }
-              FILTER NOT EXISTS { ?dsrc dcterms:source ?this . }
-            }
+            sh:select """\r
+       PREFIX schema: <http://schema.org/>\r
+       PREFIX ex: <https://example.org/>\r
+       PREFIX prov: <http://www.w3.org/ns/prov#>\r
+       PREFIX dcterms: <http://purl.org/dc/terms/>\r
+            SELECT ?this\r
+            WHERE {\r
+              ?this a schema:Dataset .\r
+              # Exclude catalog-record nodes (they describe a record, not a dataset).\r
+              MINUS {\r
+                ?this schema:about ?x .\r
+                ?this schema:additionalType "dcat:CatalogRecord" .\r
+              }\r
+              # Exclude datasets that are only *referenced* as provenance / source /\r
+              # derived-from / based-on resources rather than the resource being\r
+              # documented by this record. Such references carry an @id (and maybe a\r
+              # name/url for readability) but are not held to the full CDIF core\r
+              # requirements - the documented resource is the SUBJECT of provenance,\r
+              # never the object, so this never excludes the documented dataset.\r
+              FILTER NOT EXISTS { ?dpd prov:wasDerivedFrom ?this . }\r
+              FILTER NOT EXISTS { ?dpu prov:used ?this . }\r
+              FILTER NOT EXISTS { ?dib schema:isBasedOn ?this . }\r
+              FILTER NOT EXISTS { ?dsrc dcterms:source ?this . }\r
+            }\r
           """ ] .
 
 cdifd:CDIFDiscoveryDataDescriptionConformsToShape a sh:NodeShape ;
@@ -169,14 +230,14 @@ cdifd:CDIFDiscoveryDataDescriptionConformsToShape a sh:NodeShape ;
             sh:path dcterms:conformsTo ;
             sh:severity sh:Warning ] ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:select """
-            PREFIX schema: <http://schema.org/>
-            SELECT ?this
-            WHERE {
-            ?this a schema:Dataset ;
-             schema:about ?parent ;
-             schema:additionalType "dcat:CatalogRecord" .
-            }
+            sh:select """\r
+            PREFIX schema: <http://schema.org/>\r
+            SELECT ?this\r
+            WHERE {\r
+            ?this a schema:Dataset ;\r
+             schema:about ?parent ;\r
+             schema:additionalType "dcat:CatalogRecord" .\r
+            }\r
         """ ] .
 
 cdifd:CDIFIdentifierShape a sh:NodeShape ;
@@ -612,16 +673,16 @@ cdifd:dataDescriptionDatasetShape a sh:NodeShape ;
             sh:path schema:variableMeasured ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
-            sh:select """
-	       PREFIX schema: <http://schema.org/>
-	            SELECT ?this
-	            WHERE {
-	              ?this a schema:Dataset .
-	              MINUS {
-	                ?this schema:about ?x .
-	                ?this schema:additionalType "dcat:CatalogRecord" .
-	              }
-	            }
+            sh:select """\r
+	       PREFIX schema: <http://schema.org/>\r
+	            SELECT ?this\r
+	            WHERE {\r
+	              ?this a schema:Dataset .\r
+	              MINUS {\r
+	                ?this schema:about ?x .\r
+	                ?this schema:additionalType "dcat:CatalogRecord" .\r
+	              }\r
+	            }\r
 	          """ ] .
 
 cdifd:dataDescriptionVariableShape a sh:NodeShape ;
@@ -981,10 +1042,10 @@ cdifd:keywordsProperty a sh:PropertyShape ;
     sh:severity sh:Warning .
 
 cdifd:metadataProfileProperty a sh:PropertyShape ;
-    sh:hasValue <https://w3id.org/cdif/core/1.0>,
-        <https://w3id.org/cdif/data_description/1.0>,
-        <https://w3id.org/cdif/discovery/1.0> ;
-    sh:message "a CDIF DiscoveryDataDescription metadata record must declare conformance to https://w3id.org/cdif/core/1.0, https://w3id.org/cdif/discovery/1.0 and https://w3id.org/cdif/data_description/1.0" ;
+    sh:hasValue <https://w3id.org/cdif/core/1.1>,
+        <https://w3id.org/cdif/data_description/1.1>,
+        <https://w3id.org/cdif/discovery/1.1> ;
+    sh:message "a CDIF DiscoveryDataDescription metadata record must declare conformance to https://w3id.org/cdif/core/1.1, https://w3id.org/cdif/discovery/1.1 and https://w3id.org/cdif/data_description/1.1" ;
     sh:minCount 1 ;
     sh:nodeKind sh:IRI ;
     sh:path dcterms:conformsTo .
