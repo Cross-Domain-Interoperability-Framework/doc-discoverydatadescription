@@ -8,7 +8,7 @@
     "csvw": "http://www.w3.org/ns/csvw#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "ex": "https://example.org/",
-    "cdif": "https://cdif.org/0.1/"
+    "cdif": "https://w3id.org/cdif/"
   },
   "@id": "ex:gom-water-quality-wide-2025",
   "@type": [
