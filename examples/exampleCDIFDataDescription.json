@@ -955,12 +955,6 @@
     },
     "dcterms:conformsTo": [
       {
-        "@id": "https://w3id.org/cdif/bbr/metadata/profiles/cdifCompositeProfile/DiscoveryDataDescription"
-      },
-      {
-        "@id": "https://w3id.org/cdif/manifest/1.1"
-      },
-      {
         "@id": "https://w3id.org/cdif/core/1.1"
       },
       {
