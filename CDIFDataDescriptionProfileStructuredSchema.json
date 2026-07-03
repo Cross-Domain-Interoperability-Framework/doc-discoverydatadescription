@@ -3044,7 +3044,7 @@
     },
     "cdif:statistics": {
       "type": "array",
-      "description": "Summary statistics describing the dataset's values. Each entry is a cdi:Statistics bundle (one or more Statistic value objects, optionally weighted by an InstanceVariable, optionally broken down by Category) or a cdi:StatisticsCollection (groups multiple Statistics nodes and records which InstanceVariables they index). Inline node or @id-reference to one declared elsewhere in the document. cdif: namespaced — DDI-CDI has no `statistics` association from a dataset; this is a CDIF attachment property.",
+      "description": "**Dataset-scope** summary statistics — statistics that describe the dataset as a whole rather than any single variable (e.g. row count, dataset-wide totals, table-level checksums). Each entry is a cdi:Statistics bundle (one or more Statistic value objects) or a cdi:StatisticsCollection; inline or @id-reference to one declared elsewhere. cdif: namespaced — DDI-CDI has no `statistics` association from a dataset; this is a CDIF attachment property reserved for genuinely dataset-scope aggregates.\nPer-variable statistics MUST NOT appear here — they belong under `schema:variableMeasured[i].cdif:isDescribedBy_StatisticsCollection`, which is the direct JSON mapping of the DDI-CDI `InstanceVariable → isDescribedBy → StatisticsCollection` association. As a consequence, entries under `cdif:statistics` MUST NOT carry `cdif:appliesTo` (Statistics) or `cdif:indexedBy` (StatisticsCollection); those properties are the marker of a per-variable stat and require the variable-anchored path.",
       "items": {
         "anyOf": [
           {
@@ -3976,7 +3976,7 @@
           "description": "Reference capturing provenance information for this InstanceVariable (InstanceVariable.source)."
         },
         "cdif:isDescribedBy_StatisticsCollection": {
-          "description": "The StatisticsCollection holding summary / category statistics for this InstanceVariable (InstanceVariable.isDescribedBy). cdif: namespaced and target-suffixed because the DDI-CDI isDescribedBy association is polymorphic.",
+          "description": "The StatisticsCollection holding summary / category statistics for this InstanceVariable (direct JSON mapping of the DDI-CDI `InstanceVariable.isDescribedBy → StatisticsCollection` association). cdif: namespaced and target-suffixed because the DDI-CDI isDescribedBy association is polymorphic. This is the canonical CDIF path for **per-variable** statistics; dataset-scope aggregates (row count etc.) go under `Dataset.cdif:statistics` instead.",
           "anyOf": [
             {
               "$ref": "#/$defs/StatisticsCollection"
@@ -4188,7 +4188,7 @@
         },
         "cdif:indexedBy": {
           "type": "array",
-          "description": "CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) the contained Statistics index — the collection-level coordinate space.",
+          "description": "CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) the contained Statistics index — the collection-level coordinate space. Marks the collection as per-variable-scoped: a StatisticsCollection carrying `cdif:indexedBy` MUST be attached via `schema:variableMeasured[i].cdif:isDescribedBy_StatisticsCollection` on one of the indexed variables, NOT at Dataset level via `cdif:statistics` (which is reserved for genuinely dataset-scope aggregates like row count).",
           "items": {
             "anyOf": [
               {
@@ -4300,7 +4300,7 @@
         },
         "cdif:appliesTo": {
           "type": "array",
-          "description": "CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) this Statistics bundle summarizes — the per-bundle \"what these numbers describe\" link. When a Statistics node sits inside a StatisticsCollection that indexes more than one variable, cdif:appliesTo disambiguates which variable each bundle describes.",
+          "description": "CDIF addition (not in canonical DDI-CDI): the InstanceVariable(s) this Statistics bundle summarizes — the per-bundle \"what these numbers describe\" link. Used **only** when this Statistics bundle sits inside a StatisticsCollection that indexes more than one variable, to disambiguate which variable each bundle describes. It MUST NOT appear on a Statistics bundle attached at Dataset level via `cdif:statistics`; per-variable stats belong under `schema:variableMeasured[i].cdif:isDescribedBy_StatisticsCollection` (the direct JSON mapping of the DDI-CDI `InstanceVariable.isDescribedBy` association).",
           "items": {
             "anyOf": [
               {

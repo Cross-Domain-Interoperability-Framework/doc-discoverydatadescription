@@ -472,7 +472,7 @@
   },
   "cdif:statistics": [
     {
-      "@id": "ex:stats/tavg-summary",
+      "@id": "ex:stats/dataset-rowcount",
       "@type": [
         "cdi:Statistics"
       ],
@@ -480,101 +480,16 @@
         "@type": [
           "schema:DefinedTerm"
         ],
-        "schema:name": "Count",
+        "schema:name": "Row count",
         "schema:termCode": "count",
         "schema:inDefinedTermSet": "https://ddialliance.org/vocab/statistic-types"
       },
-      "cdi:hasWeight": {
-        "@id": "ex:var/dailyMeanTemperature"
-      },
-      "cdif:appliesTo": [
-        {
-          "@id": "ex:var/dailyMeanTemperature"
-        }
-      ],
       "cdi:statistic": [
         {
           "cdi:computationBase": "Total",
           "cdi:content": 366,
           "cdi:isWeighted": false,
           "cdi:typeOfNumericValue": "decimal"
-        }
-      ],
-      "cdif:has_CategoryStatistics": [
-        {
-          "@id": "ex:catstat/tavg-byMonth-jan",
-          "@type": [
-            "cdi:CategoryStatistics"
-          ],
-          "cdi:for": {
-            "@type": [
-              "cdi:Category"
-            ],
-            "cdif:name": "January",
-            "cdif:definition": "Observations in calendar month January.",
-            "cdif:displayLabel": "Jan",
-            "cdif:descriptiveText": "Month 01 of the observation year."
-          },
-          "cdi:typeOfStatistic": {
-            "@type": [
-              "schema:DefinedTerm"
-            ],
-            "schema:name": "Mean",
-            "schema:termCode": "mean"
-          },
-          "cdi:hasWeight": {
-            "@id": "ex:var/dailyMeanTemperature"
-          },
-          "cdi:statistic": [
-            {
-              "cdi:computationBase": "ValidOnly",
-              "cdi:content": -3.2,
-              "cdi:isWeighted": false,
-              "cdi:typeOfNumericValue": "decimal"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "@id": "ex:statcoll/tavg",
-      "@type": [
-        "cdif:StatisticsCollection"
-      ],
-      "cdi:hasWeight": {
-        "@id": "ex:var/dailyMeanTemperature"
-      },
-      "cdif:indexedBy": [
-        {
-          "@id": "ex:var/dailyMeanTemperature"
-        }
-      ],
-      "cdif:has_Statistics": [
-        {
-          "@id": "ex:stats/tavg-meanstddev",
-          "@type": [
-            "cdi:Statistics"
-          ],
-          "cdi:typeOfStatistic": {
-            "@type": [
-              "schema:DefinedTerm"
-            ],
-            "schema:name": "Standard deviation",
-            "schema:termCode": "stdDev"
-          },
-          "cdif:appliesTo": [
-            {
-              "@id": "ex:var/dailyMeanTemperature"
-            }
-          ],
-          "cdi:statistic": [
-            {
-              "cdi:computationBase": "ValidOnly",
-              "cdi:content": 9.84,
-              "cdi:isWeighted": false,
-              "cdi:typeOfNumericValue": "decimal"
-            }
-          ]
         }
       ]
     }
@@ -657,7 +572,90 @@
         }
       ],
       "cdif:isDescribedBy_StatisticsCollection": {
-        "@id": "ex:statcoll/tavg"
+        "@id": "ex:statcoll/tavg",
+        "@type": [
+          "cdif:StatisticsCollection"
+        ],
+        "cdi:hasWeight": {
+          "@id": "ex:var/dailyMeanTemperature"
+        },
+        "cdif:has_Statistics": [
+          {
+            "@id": "ex:stats/tavg-count",
+            "@type": [
+              "cdi:Statistics"
+            ],
+            "cdi:typeOfStatistic": {
+              "@type": [
+                "schema:DefinedTerm"
+              ],
+              "schema:name": "Valid observations",
+              "schema:termCode": "count",
+              "schema:inDefinedTermSet": "https://ddialliance.org/vocab/statistic-types"
+            },
+            "cdi:statistic": [
+              {
+                "cdi:computationBase": "ValidOnly",
+                "cdi:content": 366,
+                "cdi:isWeighted": false,
+                "cdi:typeOfNumericValue": "decimal"
+              }
+            ],
+            "cdif:has_CategoryStatistics": [
+              {
+                "@id": "ex:catstat/tavg-byMonth-jan",
+                "@type": [
+                  "cdi:CategoryStatistics"
+                ],
+                "cdi:for": {
+                  "@type": [
+                    "cdi:Category"
+                  ],
+                  "cdif:name": "January",
+                  "cdif:definition": "Observations in calendar month January.",
+                  "cdif:displayLabel": "Jan",
+                  "cdif:descriptiveText": "Month 01 of the observation year."
+                },
+                "cdi:typeOfStatistic": {
+                  "@type": [
+                    "schema:DefinedTerm"
+                  ],
+                  "schema:name": "Mean",
+                  "schema:termCode": "mean"
+                },
+                "cdi:statistic": [
+                  {
+                    "cdi:computationBase": "ValidOnly",
+                    "cdi:content": -3.2,
+                    "cdi:isWeighted": false,
+                    "cdi:typeOfNumericValue": "decimal"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "@id": "ex:stats/tavg-meanstddev",
+            "@type": [
+              "cdi:Statistics"
+            ],
+            "cdi:typeOfStatistic": {
+              "@type": [
+                "schema:DefinedTerm"
+              ],
+              "schema:name": "Standard deviation",
+              "schema:termCode": "stdDev"
+            },
+            "cdi:statistic": [
+              {
+                "cdi:computationBase": "ValidOnly",
+                "cdi:content": 9.84,
+                "cdi:isWeighted": false,
+                "cdi:typeOfNumericValue": "decimal"
+              }
+            ]
+          }
+        ]
       },
       "cdi:takesSubstantiveValuesFrom": {
         "@id": "ex:vd/temperature-substantive",

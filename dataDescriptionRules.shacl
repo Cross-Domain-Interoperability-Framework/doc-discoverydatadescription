@@ -697,6 +697,24 @@ cdifd:dataDescriptionVariableShape a sh:NodeShape ;
             sh:severity sh:Warning ] ;
     sh:targetClass cdi:InstanceVariable .
 
+cdifd:datasetScopeStatisticsShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 0 ;
+            sh:message "Statistics attached at Dataset level via cdif:statistics are reserved for dataset-scope aggregates and MUST NOT carry cdif:appliesTo. Per-variable statistics belong under variableMeasured[i].cdif:isDescribedBy_StatisticsCollection." ;
+            sh:path <https://w3id.org/cdif/appliesTo> ;
+            sh:severity sh:Violation ],
+        [ sh:maxCount 0 ;
+            sh:message "StatisticsCollection attached at Dataset level via cdif:statistics is reserved for dataset-scope aggregates and MUST NOT carry cdif:indexedBy. Per-variable StatisticsCollections belong under variableMeasured[i].cdif:isDescribedBy_StatisticsCollection." ;
+            sh:path <https://w3id.org/cdif/indexedBy> ;
+            sh:severity sh:Violation ] ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:select """
+            PREFIX cdif: <https://w3id.org/cdif/>
+            SELECT ?this
+            WHERE {
+              ?dataset cdif:statistics ?this .
+            }
+        """ ] .
+
 cdifd:derivedFromProperty a sh:NodeShape ;
     sh:filterShape [ sh:nodeKind sh:BlankNode ] ;
     sh:message "PROV:derivedFrom must have a string value, a CreativeWork citing a source or an @id reference to a source." ;
