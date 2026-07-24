@@ -20,7 +20,9 @@
     "@type": [
       "schema:PropertyValue"
     ],
-    "schema:propertyID": "https://doi.org",
+    "schema:propertyID": {
+      "@id": "https://doi.org"
+    },
     "schema:value": "10.5281/zenodo.5151515",
     "schema:url": "https://doi.org/10.5281/zenodo.5151515"
   },
@@ -187,7 +189,9 @@
       "schema:description": "pH of the water sample (unitless).",
       "schema:measurementTechnique": "Glass electrode, two-point calibration",
       "schema:propertyID": [
-        "http://vocab.nerc.ac.uk/collection/P01/current/PHXXZZXX/"
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P01/current/PHXXZZXX/"
+        }
       ],
       "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
@@ -323,7 +327,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "schema:about": {
       "@id": "ex:gom-water-quality-wide-2025"

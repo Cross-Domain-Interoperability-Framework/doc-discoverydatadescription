@@ -28,7 +28,9 @@
     "@type": [
       "schema:PropertyValue"
     ],
-    "schema:propertyID": "https://doi.org",
+    "schema:propertyID": {
+      "@id": "https://doi.org"
+    },
     "schema:value": "10.1234/airtemp-flg-2024",
     "schema:url": "https://doi.org/10.1234/airtemp-flg-2024"
   },
@@ -37,7 +39,9 @@
       "@type": [
         "schema:PropertyValue"
       ],
-      "schema:propertyID": "urn:noaa-ghcnd:station-id",
+      "schema:propertyID": {
+        "@id": "urn:noaa-ghcnd:station-id"
+      },
       "schema:value": "USW00003103",
       "schema:url": "https://www.ncei.noaa.gov/access/services/data/v1?stations=USW00003103"
     }
@@ -64,7 +68,9 @@
         "@type": [
           "schema:PropertyValue"
         ],
-        "schema:propertyID": "https://vocab.nerc.ac.uk/collection/P02/current/",
+        "schema:propertyID": {
+          "@id": "https://vocab.nerc.ac.uk/collection/P02/current/"
+        },
         "schema:value": "AirTemp",
         "schema:url": "https://vocab.nerc.ac.uk/collection/P02/current/CTMP/"
       },
@@ -80,7 +86,9 @@
         "@type": [
           "schema:PropertyValue"
         ],
-        "schema:propertyID": "https://vocab.nerc.ac.uk/collection/L05/current/",
+        "schema:propertyID": {
+          "@id": "https://vocab.nerc.ac.uk/collection/L05/current/"
+        },
         "schema:value": "CLIMOBS",
         "schema:url": "https://vocab.nerc.ac.uk/collection/L05/current/CLIMOBS/"
       },
@@ -128,7 +136,9 @@
           "@type": [
             "schema:PropertyValue"
           ],
-          "schema:propertyID": "https://orcid.org",
+          "schema:propertyID": {
+            "@id": "https://orcid.org"
+          },
           "schema:value": "0000-0002-7933-2154",
           "schema:url": "https://orcid.org/0000-0002-7933-2154"
         },
@@ -164,7 +174,9 @@
           "@type": [
             "schema:PropertyValue"
           ],
-          "schema:propertyID": "https://orcid.org",
+          "schema:propertyID": {
+            "@id": "https://orcid.org"
+          },
           "schema:value": "0000-0001-8898-3457",
           "schema:url": "https://orcid.org/0000-0001-8898-3457"
         }
@@ -181,7 +193,9 @@
       "@type": [
         "schema:PropertyValue"
       ],
-      "schema:propertyID": "https://ror.org",
+      "schema:propertyID": {
+        "@id": "https://ror.org"
+      },
       "schema:value": "0171mag52",
       "schema:url": "https://ror.org/0171mag52"
     }
@@ -197,7 +211,9 @@
         "@type": [
           "schema:PropertyValue"
         ],
-        "schema:propertyID": "https://ror.org",
+        "schema:propertyID": {
+          "@id": "https://ror.org"
+        },
         "schema:value": "0171mag52",
         "schema:url": "https://ror.org/0171mag52"
       }
@@ -213,7 +229,9 @@
         "@type": [
           "schema:PropertyValue"
         ],
-        "schema:propertyID": "https://www.nsf.gov/awardsearch",
+        "schema:propertyID": {
+          "@id": "https://www.nsf.gov/awardsearch"
+        },
         "schema:value": "EAR-1234567",
         "schema:url": "https://www.nsf.gov/awardsearch/showAward?AWD_ID=1234567"
       },
@@ -228,7 +246,9 @@
           "@type": [
             "schema:PropertyValue"
           ],
-          "schema:propertyID": "https://ror.org",
+          "schema:propertyID": {
+            "@id": "https://ror.org"
+          },
           "schema:value": "021nxhr62",
           "schema:url": "https://ror.org/021nxhr62"
         }
@@ -246,7 +266,9 @@
         "@type": [
           "schema:PropertyValue"
         ],
-        "schema:propertyID": "https://www.wikidata.org/wiki/",
+        "schema:propertyID": {
+          "@id": "https://www.wikidata.org/wiki/"
+        },
         "schema:value": "RTD",
         "schema:url": "https://www.wikidata.org/wiki/Q1377889"
       },
@@ -508,7 +530,9 @@
         "observation_date"
       ],
       "schema:propertyID": [
-        "http://purl.obolibrary.org/obo/NCIT_C25164"
+        {
+          "@id": "http://purl.obolibrary.org/obo/NCIT_C25164"
+        }
       ],
       "cdif:role": "UnitIdentifier",
       "cdif:physicalDataType": "date",
@@ -540,7 +564,9 @@
         "tavg"
       ],
       "schema:propertyID": [
-        "https://qudt.org/vocab/quantitykind/Temperature"
+        {
+          "@id": "https://qudt.org/vocab/quantitykind/Temperature"
+        }
       ],
       "schema:measurementTechnique": "Aggregation of QC'd hourly RTD observations to a daily mean.",
       "schema:unitText": "degC",
@@ -677,7 +703,9 @@
             "@type": [
               "schema:PropertyValue"
             ],
-            "schema:propertyID": "https://example.org/vacd",
+            "schema:propertyID": {
+              "@id": "https://example.org/vacd"
+            },
             "schema:value": "temperature-degC",
             "schema:url": "https://example.org/vacd/temperature-degC"
           },
@@ -724,7 +752,9 @@
               "@type": [
                 "schema:PropertyValue"
               ],
-              "schema:propertyID": "https://example.org/codelists",
+              "schema:propertyID": {
+                "@id": "https://example.org/codelists"
+              },
               "schema:value": "missingCodes",
               "schema:url": "https://example.org/codelists/missingCodes"
             },
@@ -756,7 +786,9 @@
         "tmin"
       ],
       "schema:propertyID": [
-        "https://qudt.org/vocab/quantitykind/Temperature"
+        {
+          "@id": "https://qudt.org/vocab/quantitykind/Temperature"
+        }
       ],
       "schema:unitText": "degC",
       "schema:unitCode": "CEL",
@@ -779,7 +811,9 @@
         "tmax"
       ],
       "schema:propertyID": [
-        "https://qudt.org/vocab/quantitykind/Temperature"
+        {
+          "@id": "https://qudt.org/vocab/quantitykind/Temperature"
+        }
       ],
       "schema:unitText": "degC",
       "schema:unitCode": "CEL",
@@ -798,7 +832,9 @@
       "schema:name": "qc_flag",
       "schema:description": "Quality-control flag qualifying the daily mean temperature value.",
       "schema:propertyID": [
-        "https://example.org/props/qcFlag"
+        {
+          "@id": "https://example.org/props/qcFlag"
+        }
       ],
       "cdif:role": "Attribute",
       "cdif:physicalDataType": "string",
@@ -827,7 +863,9 @@
             "@type": [
               "schema:PropertyValue"
             ],
-            "schema:propertyID": "https://example.org/codelists",
+            "schema:propertyID": {
+              "@id": "https://example.org/codelists"
+            },
             "schema:value": "qcFlags",
             "schema:url": "https://example.org/codelists/qcFlags"
           },
@@ -844,7 +882,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "schema:name": "Catalog record for airtemp-flg-2024",
     "schema:dateModified": "2025-01-15",
@@ -863,7 +903,9 @@
             "@type": [
               "schema:PropertyValue"
             ],
-            "schema:propertyID": "https://orcid.org",
+            "schema:propertyID": {
+              "@id": "https://orcid.org"
+            },
             "schema:value": "0000-0002-7933-2154",
             "schema:url": "https://orcid.org/0000-0002-7933-2154"
           }

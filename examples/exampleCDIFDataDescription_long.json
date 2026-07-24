@@ -20,7 +20,9 @@
     "@type": [
       "schema:PropertyValue"
     ],
-    "schema:propertyID": "https://doi.org",
+    "schema:propertyID": {
+      "@id": "https://doi.org"
+    },
     "schema:value": "10.5281/zenodo.5151516",
     "schema:url": "https://doi.org/10.5281/zenodo.5151516"
   },
@@ -347,7 +349,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "schema:about": {
       "@id": "ex:gom-water-quality-long-2025"

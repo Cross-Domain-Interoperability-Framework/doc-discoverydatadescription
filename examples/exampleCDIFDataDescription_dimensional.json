@@ -19,7 +19,9 @@
     "@type": [
       "schema:PropertyValue"
     ],
-    "schema:propertyID": "https://doi.org",
+    "schema:propertyID": {
+      "@id": "https://doi.org"
+    },
     "schema:value": "10.5281/zenodo.4242424",
     "schema:url": "https://doi.org/10.5281/zenodo.4242424"
   },
@@ -227,7 +229,9 @@
       "schema:description": "Monthly mean in-situ sea-water temperature for the cell.",
       "schema:measurementTechnique": "Optimal interpolation of CTD and ARGO float observations",
       "schema:propertyID": [
-        "http://vocab.nerc.ac.uk/collection/P01/current/TEMPST01/"
+        {
+          "@id": "http://vocab.nerc.ac.uk/collection/P01/current/TEMPST01/"
+        }
       ],
       "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
@@ -275,7 +279,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "schema:about": {
       "@id": "ex:gom-temp-cube-2025"

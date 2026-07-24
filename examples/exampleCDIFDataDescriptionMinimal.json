@@ -28,7 +28,9 @@
       ],
       "schema:name": "snow_depth",
       "schema:propertyID": [
-        "https://qudt.org/vocab/quantitykind/Depth"
+        {
+          "@id": "https://qudt.org/vocab/quantitykind/Depth"
+        }
       ],
       "schema:unitText": "cm"
     }
@@ -39,7 +41,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "schema:about": {
       "@id": "ex:dataset/snowDepth-2024"

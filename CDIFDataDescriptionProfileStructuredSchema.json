@@ -1259,6 +1259,9 @@
       "items": {
         "title": "very simple links or names of software or instruments used to generate a resource.",
         "type": "object",
+        "required": [
+          "@type"
+        ],
         "properties": {
           "@type": {
             "type": "array",
@@ -1272,6 +1275,7 @@
           },
           "prov:used": {
             "type": "array",
+            "description": "Entities the activity used. Per PROV-O each value denotes a prov:Entity. An item may be (1) a string URI or free-text reference, (2) an {@id} reference, or (3) an inline entity object. Inline entities SHOULD carry an @type that includes prov:Entity plus a schema.org type for the kind of thing used, e.g. [\"prov:Entity\",\"schema:Thing\"] (instrument), [\"prov:Entity\",\"schema:CreativeWork\"] (method/protocol), or [\"prov:Entity\",\"schema:SoftwareApplication\"] (software).",
             "items": {
               "anyOf": [
                 {
@@ -1285,6 +1289,25 @@
                       "description": "a resolvable reference to a representation of the software or instrument used"
                     }
                   }
+                },
+                {
+                  "type": "object",
+                  "description": "an inline prov:Entity used by the activity (see prov:used description)",
+                  "properties": {
+                    "@type": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1,
+                      "contains": {
+                        "const": "prov:Entity"
+                      }
+                    }
+                  },
+                  "required": [
+                    "@type"
+                  ]
                 }
               ]
             }
@@ -1334,10 +1357,33 @@
           "type": "array",
           "description": "additional type assertions for the catalog record node. dcat:CatalogRecord is required.",
           "items": {
-            "type": "string"
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "object",
+                "required": [
+                  "@id"
+                ],
+                "properties": {
+                  "@id": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
           },
           "contains": {
-            "const": "dcat:CatalogRecord"
+            "type": "object",
+            "required": [
+              "@id"
+            ],
+            "properties": {
+              "@id": {
+                "const": "dcat:CatalogRecord"
+              }
+            }
           },
           "minItems": 1
         },
@@ -1613,7 +1659,22 @@
                                                       }
                                                     },
                                                     "schema:propertyID": {
-                                                      "type": "string"
+                                                      "anyOf": [
+                                                        {
+                                                          "type": "string"
+                                                        },
+                                                        {
+                                                          "type": "object",
+                                                          "required": [
+                                                            "@id"
+                                                          ],
+                                                          "properties": {
+                                                            "@id": {
+                                                              "type": "string"
+                                                            }
+                                                          }
+                                                        }
+                                                      ]
                                                     },
                                                     "schema:value": {
                                                       "type": "string"
@@ -1662,7 +1723,7 @@
                                               }
                                             },
                                             "skos:prefLabel": {
-                                              "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+                                              "description": "Preferred lexical label for the concept scheme. Required. A single\nstring, a single language-tagged value, or an array of language-tagged\nvalues.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Multilinguality.** For codelists intended for multilingual use,\nsupply an array of language-tagged values — one per supported locale.\nWhen a bare string is supplied (no `@language` tag), consumers treat\nit as untagged and MAY infer the language from the enclosing document's\n`@context` or from `schema:inLanguage` on the codelist itself.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept scheme has exactly one preferred label per\nlanguage.\n",
                                               "type": "string"
                                             },
                                             "skos:definition": {
@@ -1698,10 +1759,33 @@
                                                 "schema:additionalType": {
                                                   "type": "array",
                                                   "items": {
-                                                    "type": "string"
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "@id"
+                                                        ],
+                                                        "properties": {
+                                                          "@id": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
                                                   },
                                                   "contains": {
-                                                    "const": "dcat:CatalogRecord"
+                                                    "type": "object",
+                                                    "required": [
+                                                      "@id"
+                                                    ],
+                                                    "properties": {
+                                                      "@id": {
+                                                        "const": "dcat:CatalogRecord"
+                                                      }
+                                                    }
                                                   },
                                                   "minItems": 1
                                                 },
@@ -2074,7 +2158,22 @@
                                                     }
                                                   },
                                                   "schema:propertyID": {
-                                                    "type": "string"
+                                                    "anyOf": [
+                                                      {
+                                                        "type": "string"
+                                                      },
+                                                      {
+                                                        "type": "object",
+                                                        "required": [
+                                                          "@id"
+                                                        ],
+                                                        "properties": {
+                                                          "@id": {
+                                                            "type": "string"
+                                                          }
+                                                        }
+                                                      }
+                                                    ]
                                                   },
                                                   "schema:value": {
                                                     "type": "string"
@@ -2123,7 +2222,7 @@
                                             }
                                           },
                                           "skos:prefLabel": {
-                                            "description": "Preferred lexical label for the concept scheme. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+                                            "description": "Preferred lexical label for the concept scheme. Required. A single\nstring, a single language-tagged value, or an array of language-tagged\nvalues.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Multilinguality.** For codelists intended for multilingual use,\nsupply an array of language-tagged values — one per supported locale.\nWhen a bare string is supplied (no `@language` tag), consumers treat\nit as untagged and MAY infer the language from the enclosing document's\n`@context` or from `schema:inLanguage` on the codelist itself.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept scheme has exactly one preferred label per\nlanguage.\n",
                                             "type": "string"
                                           },
                                           "skos:definition": {
@@ -2159,10 +2258,33 @@
                                               "schema:additionalType": {
                                                 "type": "array",
                                                 "items": {
-                                                  "type": "string"
+                                                  "anyOf": [
+                                                    {
+                                                      "type": "string"
+                                                    },
+                                                    {
+                                                      "type": "object",
+                                                      "required": [
+                                                        "@id"
+                                                      ],
+                                                      "properties": {
+                                                        "@id": {
+                                                          "type": "string"
+                                                        }
+                                                      }
+                                                    }
+                                                  ]
                                                 },
                                                 "contains": {
-                                                  "const": "dcat:CatalogRecord"
+                                                  "type": "object",
+                                                  "required": [
+                                                    "@id"
+                                                  ],
+                                                  "properties": {
+                                                    "@id": {
+                                                      "const": "dcat:CatalogRecord"
+                                                    }
+                                                  }
                                                 },
                                                 "minItems": 1
                                               },
@@ -3198,8 +3320,23 @@
           "minItems": 1
         },
         "schema:propertyID": {
-          "type": "string",
-          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability"
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "required": [
+                "@id"
+              ],
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              }
+            }
+          ],
+          "description": "In this context for the schema:PropertyValue, this field is an identifier for the identifier schema, e.g. DOI, ARK.  Get values from https://registry.identifiers.org/registry/ for interoperability. URI-shape values MUST be serialized as JSON-LD IRI references ({\"@id\":\"...\"}) so they participate in RDF entailment; free-label strings remain valid as strings."
         },
         "schema:value": {
           "type": "string",
@@ -3358,6 +3495,7 @@
             }
           },
           "required": [
+            "@type",
             "schema:email"
           ]
         },
@@ -4768,7 +4906,7 @@
           }
         },
         "skos:prefLabel": {
-          "description": "Preferred lexical label for this concept. A single string, a single language-tagged value, or an array of language-tagged values. Each language should appear at most once.",
+          "description": "Preferred lexical label for this concept. A single string,\na single language-tagged value, or an array of language-tagged values.\nEach language should appear at most once.\n\n**Uniqueness rule.** Each language should appear at most once in the\nset of prefLabel values. Two prefLabel values with duplicate `@language`\ntags are non-conformant. Consumers may reject or arbitrarily pick one.\n\n**Relationship to skos:altLabel.** Alternate labels (acronyms,\nspelling variants, obsolete names) go on `skos:altLabel`, NOT on\n`prefLabel`. A concept has exactly one preferred label per language.\n",
           "type": "string"
         },
         "skos:notation": {
