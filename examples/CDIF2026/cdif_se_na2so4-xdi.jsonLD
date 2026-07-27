@@ -1,0 +1,664 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
+    "dqv": "http://www.w3.org/ns/dqv#",
+    "geosparql": "http://www.opengis.net/ont/geosparql#",
+    "spdx": "http://spdx.org/rdf/terms#",
+    "time": "http://www.w3.org/2006/time#",
+    "sf": "http://www.opengis.net/ont/sf#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://cdif.org/0.1/",
+    "csvw": "http://www.w3.org/ns/csvw#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "ada": "https://ada.astromat.org/metadata/",
+    "xas": "https://ada.astromat.org/metadata/xas/",
+    "nxs": "https://manual.nexusformat.org/classes/"
+  },
+  "@id": "http://cdi4exas.org/485749",
+  "@type": [
+    "schema:Dataset",
+    "schema:Product"
+  ],
+  "schema:contributor": [
+    {
+      "@id": "_:b1",
+      "@type": [
+        "schema:Role"
+      ],
+      "schema:contributor": {
+        "@id": "http://example.org/base/#aps",
+        "@type": [
+          "schema:Organization"
+        ],
+        "schema:name": "APS"
+      },
+      "schema:roleName": "Facility"
+    }
+  ],
+  "schema:dateModified": "2026-01-29",
+  "schema:description": "comment from xdi file: room temperature; measured at beamline 13-BM-D.  need a better description of what's in this datasset-- maybe the DCAT metadata has what we need?",
+  "schema:distribution": [
+    {
+      "@id": "_:b2",
+      "@type": [
+        "schema:DataDownload",
+        "cdi:TabularTextDataSet"
+      ],
+      "cdi:allowsDuplicates": false,
+      "cdi:arrayBase": 1,
+      "cdi:hasPhysicalMapping": [
+        {
+          "@id": "_:b3",
+          "@type": [
+            "cdi:TextMapping"
+          ],
+          "cdi:formats_InstanceVariable": {
+            "@id": "http://cdi4exas.org/monochromatorEnergyVariable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "cdi:displayLabel": "monochromator energy",
+            "cdi:identifier": "should be URI from nexusFormat organization",
+            "cdi:name": "energy",
+            "cdi:physicalDataType": [
+              "https://www.w3.org/TR/xmlschema-2/#decimal"
+            ],
+            "cdi:role": "cdi:DimensionComponent",
+            "cdi:simpleUnitOfMeasure": "eV",
+            "cdi:uses": [
+              "xas:Monochromator_Energy"
+            ],
+            "schema:description": "The energy selected by the X-ray monochromator and delivered to the sample during an absorption scan.",
+            "schema:name": "energy",
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/Monochromator_Energy",
+                "@type": [
+                  "skos:Concept"
+                ],
+                "skos:definition": "photon energy selected by the X-ray monochromator and delivered to the sample during an absorption scan; the incident X-ray photon energy impinging on the sample at any given point in the scan. This is the independent variable in an XAS scan.(ChatGPT)",
+                "skos:inScheme": [
+                  {
+                    "@id": "http://example.org/base/#xasDict",
+                    "@type": [
+                      "skos:ConceptScheme"
+                    ],
+                    "dcterms:description": "A SKOS vocabulary of X-ray Absorption Spectroscopy metadata.",
+                    "dcterms:title": "X-Ray Absorption Spectroscopy Dictionary"
+                  }
+                ],
+                "skos:prefLabel": "Monochromator Energy"
+              }
+            ],
+            "schema:unitText": "eV",
+            "scheme:alternateName": "Monochromator energy"
+          },
+          "cdi:index": 1,
+          "cdi:length": 12
+        },
+        {
+          "@id": "_:b4",
+          "@type": [
+            "cdi:TextMapping"
+          ],
+          "cdi:formats_InstanceVariable": {
+            "@id": "http://cdi4exas.org/incidentIntensityVariable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "cdi:displayLabel": "monitor intensity",
+            "cdi:identifier": "should be URI from nexusFormat organization",
+            "cdi:name": "i0",
+            "cdi:physicalDataType": [
+              "https://www.w3.org/TR/xmlschema-2/#decimal"
+            ],
+            "cdi:role": "cdi:MeasureComponent",
+            "cdi:uses": [
+              "xas:Incident_Intensity"
+            ],
+            "schema:alternateName": [
+              "Monitor intensity"
+            ],
+            "schema:description": "The measured X-ray intensity before it interacts with the sample. ",
+            "schema:measurementTechnique": {
+              "@id": "http://cdi4exas.org/Detector10cmN2",
+              "@type": [
+                "schema:Thing"
+              ],
+              "schema:additionalProperty": [
+                {
+                  "@id": "_:b25",
+                  "@type": [
+                    "schema:PropertyValue"
+                  ],
+                  "schema:alternateName": "detector mode",
+                  "schema:name": "flux measurement method",
+                  "schema:propertyID": [
+                    {
+                      "@id": "http://cdi4exas.org/flux_measure_method"
+                    }
+                  ],
+                  "schema:value": "10cm  N2"
+                }
+              ],
+              "schema:additionalType": [
+                "xas:Detector"
+              ]
+            },
+            "schema:name": "i0     ",
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/Incident_Intensity",
+                "@type": [
+                  "skos:Concept"
+                ],
+                "skos:definition": "The measured X-ray energy hitting the sample at each monochromator energy setting. Measured by an ionization chamber (gas-filled detector) or photodiode placed before the sample. (ChatGPT)",
+                "skos:inScheme": [
+                  {
+                    "@id": "http://example.org/base/#xasDict",
+                    "@type": [
+                      "skos:ConceptScheme"
+                    ],
+                    "dcterms:description": "A SKOS vocabulary of X-ray Absorption Spectroscopy metadata.",
+                    "dcterms:title": "X-Ray Absorption Spectroscopy Dictionary"
+                  }
+                ],
+                "skos:prefLabel": "Incident X-Ray intensity"
+              }
+            ],
+            "schema:unitText": "counts"
+          },
+          "cdi:index": 3,
+          "cdi:length": 13
+        },
+        {
+          "@id": "_:b5",
+          "@type": [
+            "cdi:TextMapping"
+          ],
+          "cdi:formats_InstanceVariable": {
+            "@id": "http://cdi4exas.org/transmittedIntensityVariable",
+            "@type": [
+              "cdi:InstanceVariable",
+              "schema:PropertyValue"
+            ],
+            "cdi:displayLabel": "transmission intensity",
+            "cdi:identifier": "should be URI from nexusFormat organization",
+            "cdi:name": "itrans",
+            "cdi:physicalDataType": [
+              "https://www.w3.org/TR/xmlschema-2/#decimal"
+            ],
+            "cdi:role": "cdi:MeasureComponent",
+            "cdi:uses": [
+              "xas:Transmitted_Intensity"
+            ],
+            "schema:alternateName": [
+              "transmission intensity"
+            ],
+            "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
+            "schema:measurementTechnique": {
+              "@id": "http://cdi4exas.org/Detector10cmN2",
+              "@type": [
+                "schema:Thing"
+              ],
+              "schema:additionalProperty": [
+                {
+                  "@id": "_:b25",
+                  "@type": [
+                    "schema:PropertyValue"
+                  ],
+                  "schema:alternateName": "detector mode",
+                  "schema:name": "flux measurement method",
+                  "schema:propertyID": [
+                    {
+                      "@id": "http://cdi4exas.org/flux_measure_method"
+                    }
+                  ],
+                  "schema:value": "10cm  N2"
+                }
+              ],
+              "schema:additionalType": [
+                "xas:Detector"
+              ]
+            },
+            "schema:name": "itrans",
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/Transmitted_Intensity",
+                "@type": [
+                  "skos:Concept"
+                ],
+                "skos:altLabel": [
+                  "itrans"
+                ],
+                "skos:definition": "The measured X-ray energy transmitted through a sample (ChatGPT)",
+                "skos:inScheme": [
+                  {
+                    "@id": "http://example.org/base/#xasDict",
+                    "@type": [
+                      "skos:ConceptScheme"
+                    ],
+                    "dcterms:description": "A SKOS vocabulary of X-ray Absorption Spectroscopy metadata.",
+                    "dcterms:title": "X-Ray Absorption Spectroscopy Dictionary"
+                  }
+                ],
+                "skos:prefLabel": "Transmitted X-Ray intensity"
+              }
+            ],
+            "schema:unitText": "counts"
+          },
+          "cdi:index": 2,
+          "cdi:length": 12
+        }
+      ],
+      "cdi:isDelimited": false,
+      "cdi:isFixedWidth": true,
+      "cdi:recordCount": 469,
+      "dcterms:conformsTo": [
+        {
+          "@id": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/spec.md"
+        }
+      ],
+      "schema:contentSize": "30 kb",
+      "schema:contentUrl": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
+      "schema:description": "Distribution = PhysicalDataSet text file conformant with XDI specification",
+      "schema:encodingFormat": [
+        "text/plain"
+      ],
+      "csvw:commentPrefix": "#",
+      "csvw:header": true,
+      "csvw:headerRowCount": 27,
+      "csvw:skipInitialSpace": true
+    }
+  ],
+  "schema:identifier": "http://doi.org/210707/35uhnh4",
+  "schema:keywords": [
+    {
+      "@id": "_:b6",
+      "@type": [
+        "schema:DefinedTerm"
+      ],
+      "schema:inDefinedTermSet": "https://github.com/XraySpectroscopy/XAS-Data-Interchange/blob/master/specification/dictionary.md",
+      "schema:name": "K-edge",
+      "schema:termCode": "K"
+    },
+    {
+      "@id": "_:b7",
+      "@type": [
+        "schema:DefinedTerm"
+      ],
+      "schema:identifier": "http://sweetontology.net/matrElement/Selenium",
+      "schema:inDefinedTermSet": "http://sweetontology.net/matrElement",
+      "schema:name": "Selenium",
+      "schema:termCode": "Se"
+    }
+  ],
+  "schema:license": [
+    "https://creativecommons.org/publicdomain/zero/1.0/"
+  ],
+  "schema:measurementTechnique": [
+    {
+      "@id": "_:b8",
+      "@type": [
+        "schema:DefinedTerm"
+      ],
+      "schema:identifier": "http://purl.org/pan-science/PaNET/PaNET01196",
+      "schema:inDefinedTermSet": "http://purl.org/pan-science/PaNET/PaNET.owl",
+      "schema:name": "X-Ray Absorption Spectroscopy",
+      "schema:termCode": "XAS"
+    }
+  ],
+  "schema:name": "X-ray absorption spectra for K edge, selenium in sodium selenate",
+  "schema:subjectOf": {
+    "@id": "http://cdi4exas.org/ja51-pz63",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.1"
+      }
+    ],
+    "schema:about": {
+      "@id": "http://cdi4exas.org/485749"
+    },
+    "schema:creator": {
+      "@id": "https://ada.org/person/3479",
+      "@type": [
+        "schema:Person"
+      ],
+      "schema:email": "smrTucson@email.org",
+      "schema:identifier": "https://orcid.org/0000-0002-7933-2154",
+      "schema:name": "Richard, Stephen M."
+    },
+    "schema:dateModified": "2025-08-26",
+    "schema:description": "metadata about documentation for se_na2so4",
+    "schema:additionalType": [
+      {
+        "@id": "dcat:CatalogRecord"
+      }
+    ]
+  },
+  "schema:url": "https://github.com/XraySpectroscopy/XASDataLibrary/blob/master/data/Se/Se_Na2SeO4_rt_01.xdi",
+  "schema:variableMeasured": [
+    {
+      "@id": "http://cdi4exas.org/monochromatorEnergyVariable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "cdi:displayLabel": "monochromator energy",
+      "cdi:identifier": "should be URI from nexusFormat organization",
+      "cdi:name": "energy",
+      "cdi:physicalDataType": [
+        "https://www.w3.org/TR/xmlschema-2/#decimal"
+      ],
+      "cdi:role": "cdi:DimensionComponent",
+      "cdi:simpleUnitOfMeasure": "eV",
+      "cdi:uses": [
+        "xas:Monochromator_Energy"
+      ],
+      "schema:description": "The energy selected by the X-ray monochromator and delivered to the sample during an absorption scan.",
+      "schema:name": "energy",
+      "schema:propertyID": [
+        {
+          "@id": "http://cdi4exas.org/Monochromator_Energy",
+          "@type": [
+            "skos:Concept"
+          ],
+          "skos:definition": "photon energy selected by the X-ray monochromator and delivered to the sample during an absorption scan; the incident X-ray photon energy impinging on the sample at any given point in the scan. This is the independent variable in an XAS scan.(ChatGPT)",
+          "skos:inScheme": [
+            {
+              "@id": "http://example.org/base/#xasDict",
+              "@type": [
+                "skos:ConceptScheme"
+              ],
+              "dcterms:description": "A SKOS vocabulary of X-ray Absorption Spectroscopy metadata.",
+              "dcterms:title": "X-Ray Absorption Spectroscopy Dictionary"
+            }
+          ],
+          "skos:prefLabel": "Monochromator Energy"
+        }
+      ],
+      "schema:unitText": "eV",
+      "scheme:alternateName": "Monochromator energy"
+    },
+    {
+      "@id": "http://cdi4exas.org/incidentIntensityVariable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "cdi:displayLabel": "monitor intensity",
+      "cdi:identifier": "should be URI from nexusFormat organization",
+      "cdi:name": "i0",
+      "cdi:physicalDataType": [
+        "https://www.w3.org/TR/xmlschema-2/#decimal"
+      ],
+      "cdi:role": "cdi:MeasureComponent",
+      "cdi:uses": [
+        "xas:Incident_Intensity"
+      ],
+      "schema:alternateName": [
+        "Monitor intensity"
+      ],
+      "schema:description": "The measured X-ray intensity before it interacts with the sample. ",
+      "schema:measurementTechnique": {
+        "@id": "http://cdi4exas.org/Detector10cmN2",
+        "@type": [
+          "schema:Thing"
+        ],
+        "schema:additionalProperty": [
+          {
+            "@id": "_:b25",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:alternateName": "detector mode",
+            "schema:name": "flux measurement method",
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/flux_measure_method"
+              }
+            ],
+            "schema:value": "10cm  N2"
+          }
+        ],
+        "schema:additionalType": [
+          "xas:Detector"
+        ]
+      },
+      "schema:name": "i0     ",
+      "schema:propertyID": [
+        {
+          "@id": "http://cdi4exas.org/Incident_Intensity",
+          "@type": [
+            "skos:Concept"
+          ],
+          "skos:definition": "The measured X-ray energy hitting the sample at each monochromator energy setting. Measured by an ionization chamber (gas-filled detector) or photodiode placed before the sample. (ChatGPT)",
+          "skos:inScheme": [
+            {
+              "@id": "http://example.org/base/#xasDict",
+              "@type": [
+                "skos:ConceptScheme"
+              ],
+              "dcterms:description": "A SKOS vocabulary of X-ray Absorption Spectroscopy metadata.",
+              "dcterms:title": "X-Ray Absorption Spectroscopy Dictionary"
+            }
+          ],
+          "skos:prefLabel": "Incident X-Ray intensity"
+        }
+      ],
+      "schema:unitText": "counts"
+    },
+    {
+      "@id": "http://cdi4exas.org/transmittedIntensityVariable",
+      "@type": [
+        "cdi:InstanceVariable",
+        "schema:PropertyValue"
+      ],
+      "cdi:displayLabel": "transmission intensity",
+      "cdi:identifier": "should be URI from nexusFormat organization",
+      "cdi:name": "itrans",
+      "cdi:physicalDataType": [
+        "https://www.w3.org/TR/xmlschema-2/#decimal"
+      ],
+      "cdi:role": "cdi:MeasureComponent",
+      "cdi:uses": [
+        "xas:Transmitted_Intensity"
+      ],
+      "schema:alternateName": [
+        "transmission intensity"
+      ],
+      "schema:description": "missing, definition of what this variable is about (maybe even an iAdopt description",
+      "schema:measurementTechnique": {
+        "@id": "http://cdi4exas.org/Detector10cmN2",
+        "@type": [
+          "schema:Thing"
+        ],
+        "schema:additionalProperty": [
+          {
+            "@id": "_:b25",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:alternateName": "detector mode",
+            "schema:name": "flux measurement method",
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/flux_measure_method"
+              }
+            ],
+            "schema:value": "10cm  N2"
+          }
+        ],
+        "schema:additionalType": [
+          "xas:Detector"
+        ]
+      },
+      "schema:name": "itrans",
+      "schema:propertyID": [
+        {
+          "@id": "http://cdi4exas.org/Transmitted_Intensity",
+          "@type": [
+            "skos:Concept"
+          ],
+          "skos:altLabel": [
+            "itrans"
+          ],
+          "skos:definition": "The measured X-ray energy transmitted through a sample (ChatGPT)",
+          "skos:inScheme": [
+            {
+              "@id": "http://example.org/base/#xasDict",
+              "@type": [
+                "skos:ConceptScheme"
+              ],
+              "dcterms:description": "A SKOS vocabulary of X-ray Absorption Spectroscopy metadata.",
+              "dcterms:title": "X-Ray Absorption Spectroscopy Dictionary"
+            }
+          ],
+          "skos:prefLabel": "Transmitted X-Ray intensity"
+        }
+      ],
+      "schema:unitText": "counts"
+    }
+  ],
+  "prov:wasGeneratedBy": [
+    {
+      "@id": "_:b9",
+      "@type": [
+        "prov:Activity",
+        "http://cdi4exas.org/Analysis_Event"
+      ],
+      "schema:additionalProperty": [
+        {
+          "@id": "_:b10",
+          "@type": [
+            "schema:PropertyValue"
+          ],
+          "schema:description": "extrinsic properties of measurement environment--temperature, pressure, e-field, mag-field.  have to check magnetic_moment, electrochemical_potential",
+          "schema:propertyID": [
+            {
+              "@id": "http://cdi4exas.org/pressure"
+            }
+          ],
+          "schema:unitText": "KPa",
+          "schema:value": 3567
+        },
+        {
+          "@id": "_:b11",
+          "@type": [
+            "schema:PropertyValue"
+          ],
+          "schema:propertyID": [
+            {
+              "@id": "http://cdi4exas.org/edge_energy"
+            }
+          ],
+          "schema:unitText": "eV",
+          "schema:value": "12658.0"
+        }
+      ],
+      "schema:identifier": "20241111_DSC_NU_OREX-803224-0_1",
+      "schema:location": {
+        "@id": "_:b12",
+        "@type": [
+          "schema:Place",
+          "http://cdi4exas.org/Facility"
+        ],
+        "schema:additionalProperty": [
+          {
+            "@id": "_:b13",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/facility_energy"
+              }
+            ],
+            "schema:unitText": "GeV",
+            "schema:value": "7.00"
+          },
+          {
+            "@id": "_:b14",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/xray_source_type"
+              }
+            ],
+            "schema:value": "APS bending magnet"
+          }
+        ],
+        "schema:identifier": "https://ror.org/aps",
+        "schema:name": "APS"
+      },
+      "schema:mainEntity": {
+        "@id": "_:b15",
+        "@type": [
+          "schema:Thing"
+        ],
+        "schema:additionalProperty": [
+          {
+            "@id": "_:b16",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/porosity"
+              }
+            ],
+            "schema:unitText": "percent",
+            "schema:value": 27
+          },
+          {
+            "@id": "_:b17",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/chemical_composition"
+              }
+            ],
+            "schema:value": "Na2SeO4"
+          },
+          {
+            "@id": "_:b18",
+            "@type": [
+              "schema:PropertyValue"
+            ],
+            "schema:propertyID": [
+              {
+                "@id": "http://cdi4exas.org/sample_preparation"
+              }
+            ],
+            "schema:value": "powder on tape, 6 layers"
+          }
+        ],
+        "schema:additionalType": [
+          "MaterialSample",
+          "https://w3id.org/isample/vocabulary/materialsampleobjecttype/materialsample"
+        ],
+        "schema:description": "physical properties of sample: ph, eh, volume, porosity, density, concentration, resistivity, viscosity, crystal structure, opacity from xdi list...",
+        "schema:name": "Na2SeO4"
+      },
+      "schema:startDate": "2008-04-10T21:58:50"
+    }
+  ]
+}
