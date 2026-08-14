@@ -58,8 +58,7 @@
   },
   "prov:wasDerivedFrom": [
     {
-      "@id": "ex:gom-water-quality-wide-2025",
-      "schema:name": "Wide-form release of the same observations"
+      "@id": "ex:gom-water-quality-wide-2025"
     }
   ],
   "schema:distribution": [
