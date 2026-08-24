@@ -292,10 +292,22 @@
     "@id": "ex:gom-water-quality-wide-2025/pk",
     "cdif:isComposedOf": [
       {
-        "@id": "ex:var-station"
+        "@type": [
+          "cdi:ComponentPosition"
+        ],
+        "cdi:indexes": {
+          "@id": "ex:var-station"
+        },
+        "cdi:value": 1
       },
       {
-        "@id": "ex:var-sample-date"
+        "@type": [
+          "cdi:ComponentPosition"
+        ],
+        "cdi:indexes": {
+          "@id": "ex:var-sample-date"
+        },
+        "cdi:value": 2
       }
     ]
   },

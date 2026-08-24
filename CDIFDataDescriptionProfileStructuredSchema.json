@@ -2715,6 +2715,19 @@
                 },
                 {
                   "$ref": "#/$defs/DefinedTerm"
+                },
+                {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "@id"
+                  ],
+                  "properties": {
+                    "@id": {
+                      "type": "string",
+                      "description": "reference to a term defined elsewhere"
+                    }
+                  }
                 }
               ]
             }
@@ -3151,10 +3164,13 @@
             ]
           },
           "dqv:value": {
-            "description": "the reported result of the quality measure, either as a string or a defined term from a vocabulary",
+            "description": "the reported result of the quality measure, as a string, a number, or a defined term from a vocabulary",
             "anyOf": [
               {
                 "type": "string"
+              },
+              {
+                "type": "number"
               },
               {
                 "$ref": "#/$defs/DefinedTerm"
@@ -3411,8 +3427,24 @@
           ]
         },
         "schema:inDefinedTermSet": {
-          "type": "string",
-          "description": "Name for the controlled vocabulary responsible for this keyword."
+          "description": "The controlled vocabulary responsible for this keyword, as EITHER a plain URI string identifying the vocabulary, OR an object reference ({\"@id\": \"<uri>\"}) to a vocabulary defined elsewhere in the document. Both forms are already in use across CDIF profiles and downstream ADA building blocks; permitting only the string form made the object form - the natural JSON-LD spelling of a reference - invalid, while this class's own union-type policy above explicitly anticipates both.",
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object",
+              "required": [
+                "@id"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "@id": {
+                  "type": "string"
+                }
+              }
+            }
+          ]
         },
         "schema:termCode": {
           "type": "string",
@@ -3799,12 +3831,20 @@
       "type": "object",
       "properties": {
         "@type": {
+          "description": "Must include schema:PropertyValue - a measured VALUE - or schema:PropertyValueSpecification - a SPECIFICATION of one, stating the permitted range, default or unit rather than an observed result. Protocol and method descriptions declare the latter, and pinning the array to PropertyValue alone left them no valid spelling. Additional type URIs may be included.",
           "type": "array",
           "items": {
             "type": "string"
           },
           "contains": {
-            "const": "schema:PropertyValue"
+            "anyOf": [
+              {
+                "const": "schema:PropertyValue"
+              },
+              {
+                "const": "schema:PropertyValueSpecification"
+              }
+            ]
           },
           "minItems": 1
         },
@@ -3996,7 +4036,22 @@
           "items": {
             "$ref": "#/$defs/cdifConceptOrTermOrString"
           },
-          "description": "Essentially the same as schema:propertyID. References to concepts that this variable measures or represents. When the dataset's distribution carries cdi:isStructuredBy (CDIF Data Structure profile), cdif:uses references the RepresentedVariable that supplies the represented-variable-level properties below, which are then NOT duplicated on the InstanceVariable."
+          "description": "Essentially the same as schema:propertyID. References to the concept(s) that this variable measures or represents. Concepts only -- to point at the RepresentedVariable that supplies the represented-variable-level properties, use cdif:isDefinedBy_RepresentedVariable. Splitting the two targets follows the CDIF convention of disambiguating the polymorphic DDI-CDI role names by target, so each JSON key has a single value type; it also keeps cdif:uses type-compatible with canonical cdi:uses on InstanceVariable, which is valued by a Concept."
+        },
+        "cdif:isDefinedBy_RepresentedVariable": {
+          "title": "Object Reference",
+          "description": "The RepresentedVariable this InstanceVariable instantiates. A reference only (@id, nothing else): the point of the link is that the represented-variable-level properties are defined once on the RepresentedVariable and NOT duplicated here, so an inline copy would defeat it. Same property name as on cdifDataStructureComponent, which carries the equivalent link within a data structure; that one also accepts an inline RepresentedVariable because a structure may define one that exists nowhere else.",
+          "type": "object",
+          "properties": {
+            "@id": {
+              "type": "string",
+              "description": "resolvable @id of the referenced node"
+            }
+          },
+          "required": [
+            "@id"
+          ],
+          "additionalProperties": false
         },
         "cdi:function": {
           "type": "array",

@@ -631,7 +631,9 @@
                   "@type": [
                     "cdi:Category"
                   ],
-                  "cdif:name": "January",
+                  "cdif:name": [
+                    "January"
+                  ],
                   "cdif:definition": "Observations in calendar month January.",
                   "cdif:displayLabel": "Jan",
                   "cdif:descriptiveText": "Month 01 of the observation year."
