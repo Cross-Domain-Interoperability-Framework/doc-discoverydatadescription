@@ -494,6 +494,49 @@ cdifd:CDIFxasInstanceVariableShape a sh:NodeShape ;
             sh:severity sh:Warning ] ;
     sh:targetClass cdi:InstanceVariable .
 
+cdifd:InstanceVariableRepresentedVariableExclusivityShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 0 ;
+            sh:message "cdi:takesSubstantiveValuesFrom is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must be declared on the RepresentedVariable, not duplicated on the InstanceVariable." ;
+            sh:path cdi:takesSubstantiveValuesFrom ],
+        [ sh:maxCount 0 ;
+            sh:message "cdi:takesSentinelValuesFrom is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must be declared on the RepresentedVariable, not duplicated on the InstanceVariable." ;
+            sh:path cdi:takesSentinelValuesFrom ],
+        [ sh:maxCount 0 ;
+            sh:message "cdi:hasIntendedDataType is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path cdi:hasIntendedDataType ],
+        [ sh:maxCount 0 ;
+            sh:message "cdi:describedUnitOfMeasure is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path cdi:describedUnitOfMeasure ],
+        [ sh:maxCount 0 ;
+            sh:message "cdi:unitOfMeasureKind is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path cdi:unitOfMeasureKind ],
+        [ sh:maxCount 0 ;
+            sh:message "cdi:measures is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path cdi:measures ],
+        [ sh:maxCount 0 ;
+            sh:message "cdi:externalDefinition is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path cdi:externalDefinition ],
+        [ sh:maxCount 0 ;
+            sh:message "cdif:uses_Concept is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/uses_Concept> ],
+        [ sh:maxCount 0 ;
+            sh:message "cdif:definition is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/definition> ] ;
+    sh:severity sh:Violation ;
+    sh:target [ a sh:SPARQLTarget ;
+            sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
+                        sh:prefix "cdi" ] [ sh:namespace "https://w3id.org/cdif/" ;
+                        sh:prefix "cdif" ] ) ;
+            sh:select """
+            PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
+            PREFIX cdif: <https://w3id.org/cdif/>
+            SELECT DISTINCT ?this
+            WHERE {
+                ?this a cdi:InstanceVariable .
+                ?this cdif:isDefinedBy_RepresentedVariable ?rv .
+                FILTER ( isIRI(?rv) || isBlank(?rv) )
+            }""" ] .
+
 cdifd:QualifiesCoherenceShape a sh:NodeShape ;
     sh:severity sh:Warning ;
     sh:sparql [ a sh:SPARQLConstraint ;
@@ -1099,8 +1142,8 @@ cdifd:resourceIdentifierProperty a sh:PropertyShape ;
                                     sh:path schema:url ] ] [ sh:property [ sh:datatype xsd:string ;
                                     sh:message "The identifer string; include applicable prefix (e.g. doi:, ark:, http:, isbn:)" ;
                                     sh:path schema:value ] ] ) ;
-                sh:property [ sh:datatype xsd:string ;
-                        sh:message "If specifying an identifier via the PropertyValue, the scheme (authority, domain) within which the identifier is assigned and unique must be identifed, either by name or preferably using a URI. See https://registry.identifiers.org/registry" ;
+                sh:property [ sh:message "If specifying an identifier via the PropertyValue, the scheme (authority, domain) within which the identifier is assigned and unique must be identifed, either by name or preferably using a URI. See https://registry.identifiers.org/registry" ;
+                        sh:or ( [ sh:datatype xsd:string ] [ sh:nodeKind sh:IRI ] ) ;
                         sh:path schema:propertyID ;
                         sh:severity sh:Warning ] ] ) ;
     sh:path schema:identifier .

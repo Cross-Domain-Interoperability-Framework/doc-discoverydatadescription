@@ -1498,51 +1498,7 @@
               }
             ]
           },
-          "minItems": 1,
-          "allOf": [
-            {
-              "contains": {
-                "type": "object",
-                "required": [
-                  "@id"
-                ],
-                "additionalProperties": false,
-                "properties": {
-                  "@id": {
-                    "const": "https://w3id.org/cdif/core/1.1"
-                  }
-                }
-              }
-            },
-            {
-              "contains": {
-                "type": "object",
-                "required": [
-                  "@id"
-                ],
-                "additionalProperties": false,
-                "properties": {
-                  "@id": {
-                    "const": "https://w3id.org/cdif/discovery/1.1"
-                  }
-                }
-              }
-            },
-            {
-              "contains": {
-                "type": "object",
-                "required": [
-                  "@id"
-                ],
-                "additionalProperties": false,
-                "properties": {
-                  "@id": {
-                    "const": "https://w3id.org/cdif/data_description/1.1"
-                  }
-                }
-              }
-            }
-          ]
+          "minItems": 1
         },
         "schema:maintainer": {
           "description": "Identification of the agent that maintains the metadata, with contact information. Should include person name and affiliation, or position name and affiliation, or just organization name. e-mail address is preferred contact information.",
@@ -3362,6 +3318,47 @@
       "required": [
         "schema:variableMeasured"
       ]
+    },
+    {
+      "if": {
+        "required": [
+          "schema:variableMeasured"
+        ],
+        "properties": {
+          "schema:variableMeasured": {
+            "type": "array",
+            "minItems": 1
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "schema:subjectOf"
+        ],
+        "properties": {
+          "schema:subjectOf": {
+            "required": [
+              "dcterms:conformsTo"
+            ],
+            "properties": {
+              "dcterms:conformsTo": {
+                "contains": {
+                  "type": "object",
+                  "required": [
+                    "@id"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "@id": {
+                      "const": "https://w3id.org/cdif/data_description/1.1"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   ],
   "$defs": {
@@ -4150,6 +4147,27 @@
         },
         {
           "$ref": "#/$defs/VariableMeasured"
+        },
+        {
+          "if": {
+            "required": [
+              "cdif:isDefinedBy_RepresentedVariable"
+            ]
+          },
+          "then": {
+            "properties": {
+              "cdi:takesSubstantiveValuesFrom": false,
+              "cdi:takesSentinelValuesFrom": false,
+              "cdi:hasIntendedDataType": false,
+              "cdi:describedUnitOfMeasure": false,
+              "cdi:unitOfMeasureKind": false,
+              "cdi:measures": false,
+              "cdi:externalDefinition": false,
+              "cdif:uses_Concept": false,
+              "cdif:definition": false
+            },
+            "description": "When cdif:isDefinedBy_RepresentedVariable is present, the represented-variable-level properties live on that RepresentedVariable and may not be declared inline on the InstanceVariable."
+          }
         }
       ]
     },

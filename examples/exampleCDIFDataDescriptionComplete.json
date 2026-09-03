@@ -594,7 +594,7 @@
       "cdif:isDescribedBy_StatisticsCollection": {
         "@id": "ex:statcoll/tavg",
         "@type": [
-          "cdif:StatisticsCollection"
+          "cdi:StatisticsCollection"
         ],
         "cdi:hasWeight": {
           "@id": "ex:var/dailyMeanTemperature"
@@ -635,7 +635,9 @@
                     "January"
                   ],
                   "cdif:definition": "Observations in calendar month January.",
-                  "cdif:displayLabel": "Jan",
+                  "cdif:displayLabel": [
+                    "Jan"
+                  ],
                   "cdif:descriptiveText": "Month 01 of the observation year."
                 },
                 "cdi:typeOfStatistic": {
@@ -705,21 +707,8 @@
             "schema:value": "temperature-degC",
             "schema:url": "https://example.org/vacd/temperature-degC"
           },
-          "cdi:formatPattern": {
-            "@id": "ex:pattern/decimal1",
-            "@type": [
-              "skos:Concept"
-            ],
-            "skos:prefLabel": "#,##0.0",
-            "skos:notation": "#,##0.0"
-          },
-          "cdi:logicalExpression": {
-            "@id": "ex:expr/temp-range",
-            "@type": [
-              "skos:Concept"
-            ],
-            "skos:prefLabel": "all reals x such that -90 <= x <= 60"
-          },
+          "cdi:formatPattern": "#,##0.0",
+          "cdi:logicalExpression": "all reals x such that -90 <= x <= 60",
           "cdi:regularExpression": "^-?\\d{1,2}(\\.\\d)?$",
           "cdi:minimumValueInclusive": "-90.0",
           "cdi:minimumValueExclusive": "-273.15",
