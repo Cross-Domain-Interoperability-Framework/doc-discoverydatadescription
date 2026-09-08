@@ -672,6 +672,29 @@ cdifd:cdifKeyShape a sh:NodeShape ;
             sh:severity sh:Violation ] ;
     sh:targetClass <https://w3id.org/cdif/Key> .
 
+cdifd:cdifRepresentedVariable_ConceptSystemShape a sh:NodeShape ;
+    sh:property [ sh:message "A cdi:ConceptSystem may carry cdif:has_Concept members (the concepts it structures)." ;
+            sh:path <https://w3id.org/cdif/has_Concept> ;
+            sh:severity sh:Info ] ;
+    sh:targetClass cdi:ConceptSystem .
+
+cdifd:cdifRepresentedVariable_RepresentedVariableShape a sh:NodeShape ;
+    sh:property [ sh:message "A cdi:RepresentedVariable should carry at least one cdif:name (ObjectName)." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/name> ;
+            sh:severity sh:Warning ],
+        [ sh:message "cdif:isDefinedBy_Concept may link the RepresentedVariable to the SKOS concept(s) it represents." ;
+            sh:path <https://w3id.org/cdif/isDefinedBy_Concept> ;
+            sh:severity sh:Info ] ;
+    sh:targetClass cdi:RepresentedVariable .
+
+cdifd:cdifRepresentedVariable_UnitTypeShape a sh:NodeShape ;
+    sh:property [ sh:message "A cdi:UnitType should carry at least one cdif:name (ObjectName)." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/name> ;
+            sh:severity sh:Warning ] ;
+    sh:targetClass cdi:UnitType .
+
 cdifd:cdifSentinelValueDomainShape a sh:NodeShape ;
     sh:message "A cdif:SentinelValueDomain must carry at least one of cdif:takesValuesFrom or cdif:recommendedDataType" ;
     sh:or ( [ sh:minCount 1 ;
