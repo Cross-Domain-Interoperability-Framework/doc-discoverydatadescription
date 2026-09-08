@@ -1822,7 +1822,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "@id": "https://doi.org/10.7910/DVN/CEVZPL#metadata",
     "schema:name": "Metadata record for: Replication Data for: Long-term monitoring reveals an avian species credit in secondary forest patches of Costa Rica",

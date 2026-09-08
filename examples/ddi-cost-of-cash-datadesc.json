@@ -1685,7 +1685,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "@id": "https://doi.org/10.7910/DVN/CAKWNE#metadata",
     "schema:name": "Metadata record for: Replication Data for \"Cost of Cash: Evidence from Cashiers\"",

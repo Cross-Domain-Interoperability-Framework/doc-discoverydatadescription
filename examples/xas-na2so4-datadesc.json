@@ -224,7 +224,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "@id": "xas:485749#metadata",
     "schema:name": "Metadata record for: X-ray absorption spectra for K edge, selenium in sodium selenate",

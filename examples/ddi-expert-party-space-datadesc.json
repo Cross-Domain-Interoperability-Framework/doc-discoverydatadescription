@@ -1445,7 +1445,9 @@
       "schema:Dataset"
     ],
     "schema:additionalType": [
-      "dcat:CatalogRecord"
+      {
+        "@id": "dcat:CatalogRecord"
+      }
     ],
     "@id": "https://doi.org/10.7910/DVN/EZNWPA#metadata",
     "schema:name": "Metadata record for: Replication data for: Expert Interpretations of Party Space and Party Locations in 42 Societies",
