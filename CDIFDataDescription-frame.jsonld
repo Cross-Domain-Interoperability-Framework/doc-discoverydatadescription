@@ -243,11 +243,7 @@
 
     "cdif:hasPrimaryKey": {
         "@embed": "@always",
-        "cdif:isComposedOf": {
-            "@embed": "@always",
-            "cdi:indexes": {"@embed": "@always"},
-            "cdi:value": {}
-        }
+        "cdi:has_DataStructureComponent": {"@embed": "@always"}
     },
 
     "cdif:statistics": {
