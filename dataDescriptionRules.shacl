@@ -697,7 +697,7 @@ cdifd:cdifEnumerationDomainShape a sh:NodeShape ;
     sh:targetClass <https://w3id.org/cdif/EnumerationDomain> .
 
 cdifd:cdifKeyShape a sh:NodeShape ;
-    sh:property [ sh:message "A cdif:Key must have at least one cdif:isComposedOf entry (a cdi:InstanceVariable inline or @id-reference)." ;
+    sh:property [ sh:message "A cdif:Key must have at least one cdif:isComposedOf entry (an @id-reference to a cdi:InstanceVariable)." ;
             sh:minCount 1 ;
             sh:path <https://w3id.org/cdif/isComposedOf> ;
             sh:severity sh:Violation ] ;
