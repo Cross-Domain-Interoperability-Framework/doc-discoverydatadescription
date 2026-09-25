@@ -315,7 +315,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of [cdi:ComponentPosition](#cdicomponentposition) wrappers
-- **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (the `cdi:InstanceVariable` at that position -- inline `cdifInstanceVariable` or `@id`-reference) and `cdi:value` (the integer position, 0- or 1-based).
+- **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (an `@id`-reference to the `cdi:InstanceVariable` at that position -- an inline variable definition is **not** permitted) and `cdi:value` (the 1-based integer position, default `1`).
 
 ## cdif:SentinelValueDomain
 
@@ -1297,7 +1297,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [cdif:Key](#cdifkey)
-- **Description:** Primary key of the dataset: a `cdif:Key` whose `cdif:isComposedOf` is an ordered list of `cdi:ComponentPosition` wrappers. Each wrapper carries `cdi:indexes` (the `cdi:InstanceVariable` at that position, drawn from `schema:variableMeasured`, inline or `@id`-reference) and `cdi:value` (the integer position in the key, 0- or 1-based). Together the wrappers identify each data instance. Matches the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
+- **Description:** Primary key of the dataset: a `cdif:Key` whose `cdif:isComposedOf` is an ordered list of `cdi:ComponentPosition` wrappers. Each wrapper carries `cdi:indexes` (an `@id`-reference to the `cdi:InstanceVariable` at that position, drawn from `schema:variableMeasured`) and `cdi:value` (the 1-based integer position in the key, default `1`). Together the wrappers identify each data instance. Matches the canonical DDI-CDI PrimaryKey structure defined in `ddi-cdif-data-structure`.
 
 ### cdif:statistics
 
