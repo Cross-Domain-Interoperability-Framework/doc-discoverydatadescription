@@ -678,6 +678,21 @@ cdifd:cdifCategoryStatisticShape a sh:NodeShape ;
             sh:severity sh:Violation ] ;
     sh:targetClass cdi:CategoryStatistics .
 
+cdifd:cdifDescriptorValueDomainShape a sh:NodeShape ;
+    sh:property [ sh:message "A cdi:DescriptorValueDomain must carry at least one cdif:takesValuesFrom entry." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/takesValuesFrom> ;
+            sh:severity sh:Violation ] ;
+    sh:targetClass cdi:DescriptorValueDomain .
+
+cdifd:cdifDescriptorVariableShape a sh:NodeShape ;
+    sh:property [ sh:maxCount 1 ;
+            sh:message "A cdi:DescriptorVariable must reference exactly one cdi:DescriptorValueDomain via cdif:hasValuesFrom." ;
+            sh:minCount 1 ;
+            sh:path <https://w3id.org/cdif/hasValuesFrom> ;
+            sh:severity sh:Violation ] ;
+    sh:targetClass cdi:DescriptorVariable .
+
 cdifd:cdifEnumerationDomainShape a sh:NodeShape ;
     sh:property [ sh:datatype xsd:string ;
             sh:message "A cdif:EnumerationDomain should carry a schema:name (human-readable label)" ;
