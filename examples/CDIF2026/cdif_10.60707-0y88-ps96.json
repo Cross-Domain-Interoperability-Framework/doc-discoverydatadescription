@@ -28,67 +28,46 @@
   "schema:creator": {
     "@list": [
       {
-        "@id": "https://ada.org/person/5489",
+        "@id": "https://orcid.org/0000-0001-6435-2177",
         "@type": [
           "schema:Person"
         ],
-        "schema:email": [
-          "shollenberger@llnl.gov",
-          "brennecka2@llnl.gov",
-          "render1@llnl.gov"
-        ],
-        "schema:identifier": [
-          "https://orcid.org/0000-0001-6435-2177",
-          "https://orcid.org/0000-0002-0852-5595",
-          "https://orcid.org/0000-0002-6534-9129"
-        ],
-        "schema:name": [
-          "Shollenberger, Quinn",
-          "Brennecka, Greg",
-          "Render, Jan"
-        ]
+        "schema:identifier": "https://orcid.org/0000-0001-6435-2177",
+        "schema:name": "Shollenberger, Quinn",
+        "schema:contactPoint": {
+          "@type": [
+            "schema:ContactPoint"
+          ],
+          "schema:email": "shollenberger@llnl.gov"
+        }
       },
       {
-        "@id": "https://ada.org/person/5489",
+        "@id": "https://orcid.org/0000-0002-0852-5595",
         "@type": [
           "schema:Person"
         ],
-        "schema:email": [
-          "shollenberger@llnl.gov",
-          "brennecka2@llnl.gov",
-          "render1@llnl.gov"
-        ],
-        "schema:identifier": [
-          "https://orcid.org/0000-0001-6435-2177",
-          "https://orcid.org/0000-0002-0852-5595",
-          "https://orcid.org/0000-0002-6534-9129"
-        ],
-        "schema:name": [
-          "Shollenberger, Quinn",
-          "Brennecka, Greg",
-          "Render, Jan"
-        ]
+        "schema:identifier": "https://orcid.org/0000-0002-0852-5595",
+        "schema:name": "Brennecka, Greg",
+        "schema:contactPoint": {
+          "@type": [
+            "schema:ContactPoint"
+          ],
+          "schema:email": "brennecka2@llnl.gov"
+        }
       },
       {
-        "@id": "https://ada.org/person/5489",
+        "@id": "https://orcid.org/0000-0002-6534-9129",
         "@type": [
           "schema:Person"
         ],
-        "schema:email": [
-          "shollenberger@llnl.gov",
-          "brennecka2@llnl.gov",
-          "render1@llnl.gov"
-        ],
-        "schema:identifier": [
-          "https://orcid.org/0000-0001-6435-2177",
-          "https://orcid.org/0000-0002-0852-5595",
-          "https://orcid.org/0000-0002-6534-9129"
-        ],
-        "schema:name": [
-          "Shollenberger, Quinn",
-          "Brennecka, Greg",
-          "Render, Jan"
-        ]
+        "schema:identifier": "https://orcid.org/0000-0002-6534-9129",
+        "schema:name": "Render, Jan",
+        "schema:contactPoint": {
+          "@type": [
+            "schema:ContactPoint"
+          ],
+          "schema:email": "render1@llnl.gov"
+        }
       }
     ]
   },
