@@ -1160,6 +1160,7 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 - **Cardinality:** Required if no name
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
+- **Description:** identifier for organization
 
 ### additionalType
 
@@ -1181,6 +1182,7 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** string, [object reference](#object-reference)
+- **Description:** other identifiers for the organization
 
 ## Other Classes used for CDIF Core
 
@@ -1214,6 +1216,7 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 - **Cardinality:** Required if no name
 - **Content:** string.uri or [PropertyValue-(identifier)](#propertyvalue-identifier)
+- **Description:** identifier for person, recommend ORCID
 
 ### description
 
@@ -1243,6 +1246,7 @@ Required --  [\'GeoCoordinates'\] (string:uri)
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** string, [object reference](#object-reference)
+- **Description:** other identifiers for the person
 
 ## Place
 
