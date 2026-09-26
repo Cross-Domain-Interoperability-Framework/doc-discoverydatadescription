@@ -151,7 +151,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of Statistic value objects
-- **Description:** Per-category Statistic value objects.
+- **Description:** The value of the identified type of statistic. May be repeated to provide unweighted or weighted values and different computation bases.
 
 ### **cdi:typeOfStatistic**
 
@@ -233,7 +233,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of Statistic value objects
-- **Description:** Ordered list of Statistic value objects carried by this bundle. Order is significant -- consumers MAY rely on array position.
+- **Description:** The value of the identified type of statistic. May be repeated to provide unweighted or weighted values and different computation bases.
 
 ### **cdi:typeOfStatistic**
 
@@ -315,7 +315,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Required, Repeatable
 - **Content:** Array of [cdi:ComponentPosition](#cdicomponentposition) wrappers
-- **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds `cdi:indexes` (an `@id`-reference to the `cdi:InstanceVariable` at that position -- an inline variable definition is **not** permitted) and `cdi:value` (the 1-based integer position, default `1`).
+- **Description:** Ordered list of `cdi:ComponentPosition` wrappers, one per key component. Each wrapper holds a `cdi:value` (the 1-based integer position, default `1`) for its position, and `cdi:indexes` (an `@id`-reference to the variable used at that position in the key -- an inline variable definition is **not** permitted)
 
 ## cdif:SentinelValueDomain
 
@@ -343,7 +343,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional
 - **Content:** string
-- **Description:** a label to identifier the value domain in user interfaces
+- **Description:** A human-readable display label for the object for use in user interfaces.
 
 ### **cdif:recommendedDataType**
 
@@ -414,7 +414,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional
 - **Content:** string
-- **Description:** Human-readable label for the domain (e.g., shown in UI).
+- **Description:** A human-readable display label for the object for use in user interfaces.
 
 ### **cdif:recommendedDataType**
 
@@ -494,31 +494,31 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 
 - **Cardinality:** Optional
 - **Content:** [xsdDataType](#xsddatatype), [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
-- **Description:** The data type intended to be used by this variable, independent of its physical representation (RepresentedVariable.hasIntendedDataType). Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype).
+- **Description:** The physical datatype intended to be used for values of this variable. Supports the optional use of an external controlled vocabulary.Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype)
 
 ### **cdi:describedUnitOfMeasure**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
-- **Description:** The unit in which the data values are measured, expressed as a controlled-vocabulary entry (RepresentedVariable.describedUnitOfMeasure). For a plain-string unit, use `cdif:simpleUnitOfMeasure` instead.
+- **Description:** The unit in which the data values are measured (kg, pound, euro), expressed as a value from a controlled system of entries (i.e., QDT). Supports the provision of an identifier for the entry in the authoritative source (a URI, etc.), and the specific vocabulary.
 
 ### **cdi:takesSentinelValuesFrom**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [cdif:SentinelValueDomain](#cdifsentinelvaluedomain) inline, or [object reference](#object-reference) (`@id` only)
-- **Description:** Sentinel (missing / not-applicable) value domain(s) for this variable (RepresentedVariable.takesSentinelValuesFrom). The value MUST be a `cdif:SentinelValueDomain` node — referencing a `cdif:SubstantiveValueDomain` here is a schema violation. Added at the Data Description profile level; not present at the Discovery level; disallowed at the Data Structure level (where the property lives on the RepresentedVariable instead).
+- **Description:** Sentinel (missing / not-applicable) value domain(s) for this variable. Added at the Data Description profile level; not present at the Discovery level; disallowed at the Data Structure level where the property lives on the RepresentedVariable.
 
 ### **cdi:takesSubstantiveValuesFrom**
 
 - **Cardinality:** Optional
 - **Content:** [cdif:SubstantiveValueDomain](#cdifsubstantivevaluedomain) inline, or [object reference](#object-reference) (`@id` only)
-- **Description:** The substantive value domain for this variable -- the set of valid, meaningful values (RepresentedVariable.takesSubstantiveValuesFrom). The value MUST be a `cdif:SubstantiveValueDomain` node — referencing a `cdif:SentinelValueDomain` here is a schema violation. Added at the Data Description profile level; same profile rules as `cdi:takesSentinelValuesFrom` above.
+- **Description:** Specifies the set of substantive values for this variable - the set of valid, meaningful values
 
 ### **cdi:qualifies**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference)
-- **Description:** Reference to another InstanceVariable in this dataset that this variable qualifies (provides additional context for; e.g. a measurement-channel attribute qualifying a measure variable).
+- **Description:** Reference to another variable in this dataset that this variable qualifies (provides additional context for; e.g. a measurement-channel attribute qualifying a measure variable).
 
 ## CdifPhysicalMapping
 
