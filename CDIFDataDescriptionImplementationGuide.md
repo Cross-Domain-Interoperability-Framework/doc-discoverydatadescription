@@ -1349,7 +1349,7 @@ CHOICE. At least one of the following four is required
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [Place](#place)
-- **Description:** Document spatial extent to which the resource content is relevant. Can be expressed with a simple text place name, a place name from an identified gazeteer (using schema: [DefinedTerm](#defined-term)), a point location, a bounding box (.e.g. for a map extent), a line (e.g. a ship track or foot traverse), or a general geometry. Registered place names from a gazeteer or a simple bounding box are widely recognized and indexed approaches used by spatially aware metadata aggregators.
+- **Description:** specifies the spatial extent to which the resource content is relevant. Can be expressed with a simple text place name, a place name from an identified gazetteer (using schema: [DefinedTerm](#defined-term)), a point location, a bounding box (.e.g. for a map extent), a line (e.g. a ship track or foot traverse), or a general geometry. Registered place names from a gazetteer or a simple bounding box are widely recognized and indexed approaches used by spatially aware metadata aggregators.
 
 ### temporalCoverage
 
