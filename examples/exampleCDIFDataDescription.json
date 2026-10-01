@@ -755,7 +755,7 @@
       "schema:minValue": 67.0,
       "schema:maxValue": 98.0,
       "schema:url": "http://example.com/resource?foo=bar#furlong",
-      "cdi:identifier": "ex:KJTFKurNFu",
+      "cdif:identifier": "ex:KJTFKurNFu",
       "cdif:physicalDataType": "float64",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#decimal",
       "cdif:role": "Measure",
@@ -765,7 +765,7 @@
       "cdif:displayLabel": [
         "Sea Water Temperature"
       ],
-      "cdi:describedUnitOfMeasure": {
+      "cdif:describedUnitOfMeasure": {
         "@type": [
           "schema:DefinedTerm"
         ],
@@ -819,7 +819,7 @@
       "schema:minValue": 36.0,
       "schema:maxValue": 74.0,
       "schema:url": "http://example.com/resource?foo=bar#stone",
-      "cdi:identifier": "ex:OjHgIDO",
+      "cdif:identifier": "ex:OjHgIDO",
       "cdif:physicalDataType": "float32",
       "cdi:intendedDataType": "https://www.w3.org/TR/xmlschema-2/#float",
       "cdif:role": "Dimension",
@@ -830,7 +830,7 @@
         "Measurement Depth"
       ],
       "cdi:simpleUnitOfMeasure": "m",
-      "cdi:qualifies": {
+      "cdif:qualifies": {
         "@id": "ex:KJTFKurNFu"
       }
     }

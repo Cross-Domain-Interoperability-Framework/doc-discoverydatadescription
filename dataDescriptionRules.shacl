@@ -398,24 +398,13 @@ cdifd:CDIFPersonShape a sh:NodeShape ;
     sh:targetClass schema:Person .
 
 cdifd:CDIFRelationShape a sh:NodeShape ;
-    sh:message "A relation link must carry a resolvable schema:url. dcterms:relation (URI of the related resource) and dcat:hadRole (SKOS-typed role) are recommended when the relation distinguishes the related resource from its presentation URL or carries an explicit role." ;
+    sh:message "On a dcat:Relationship, dcterms:relation names the related resource and dcat:hadRole (a skos:Concept) classifies the relation. A Relationship that also declares schema:CreativeWork is a labeled link as well, and CDIFLabeledLinkShape requires its schema:url." ;
     sh:property [ a sh:PropertyShape ;
-            sh:datatype xsd:string ;
-            sh:message "A relation link must have at least one schema:url that resolves over http(s)." ;
-            sh:minCount 1 ;
-            sh:path schema:url ;
-            sh:pattern "^https?://[^\\s]+$" ],
-        [ a sh:PropertyShape ;
-            sh:class skos:Concept ;
-            sh:message "If dcat:hadRole is provided, its value must be a skos:Concept classifying the role of the related resource." ;
-            sh:path dcat:hadRole ;
-            sh:severity sh:Warning ],
-        [ a sh:PropertyShape ;
-            sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:message "If dcterms:relation is provided, it must be a syntactically valid URI." ;
+            sh:message "dcterms:relation must be an @id reference to the related resource (recommended) or a URI-shaped string. DCMI recommends the URI form and permits the string form." ;
+            sh:or ( [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ;
+                        sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$" ] ) ;
             sh:path dcterms:relation ;
-            sh:pattern "^[a-zA-Z][a-zA-Z0-9+.-]*:[^\\s]*$" ;
             sh:severity sh:Warning ],
         [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
@@ -424,7 +413,12 @@ cdifd:CDIFRelationShape a sh:NodeShape ;
         [ a sh:PropertyShape ;
             sh:datatype xsd:string ;
             sh:maxCount 1 ;
-            sh:path schema:description ] ;
+            sh:path schema:description ],
+        [ a sh:PropertyShape ;
+            sh:message "dcat:hadRole should classify the role of the related resource: a dcat:Role (DCAT's declared range), or a skos:Concept, schema:DefinedTerm, @id reference or string." ;
+            sh:or ( [ sh:class dcat:Role ] [ sh:class skos:Concept ] [ sh:class schema:DefinedTerm ] [ sh:nodeKind sh:IRI ] [ sh:datatype xsd:string ] ) ;
+            sh:path dcat:hadRole ;
+            sh:severity sh:Warning ] ;
     sh:targetClass dcat:Relationship .
 
 cdifd:CDIFRoleShape a sh:NodeShape ;
@@ -549,14 +543,14 @@ cdifd:InstanceVariableRepresentedVariableExclusivityShape a sh:NodeShape ;
             sh:message "cdi:takesSentinelValuesFrom is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must be declared on the RepresentedVariable, not duplicated on the InstanceVariable." ;
             sh:path cdi:takesSentinelValuesFrom ],
         [ sh:maxCount 0 ;
-            sh:message "cdi:hasIntendedDataType is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
-            sh:path cdi:hasIntendedDataType ],
+            sh:message "cdif:hasIntendedDataType is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/hasIntendedDataType> ],
         [ sh:maxCount 0 ;
-            sh:message "cdi:describedUnitOfMeasure is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
-            sh:path cdi:describedUnitOfMeasure ],
+            sh:message "cdif:describedUnitOfMeasure is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/describedUnitOfMeasure> ],
         [ sh:maxCount 0 ;
-            sh:message "cdi:unitOfMeasureKind is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
-            sh:path cdi:unitOfMeasureKind ],
+            sh:message "cdif:unitOfMeasureKind is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
+            sh:path <https://w3id.org/cdif/unitOfMeasureKind> ],
         [ sh:maxCount 0 ;
             sh:message "cdi:measures is a RepresentedVariable property; when cdif:isDefinedBy_RepresentedVariable is set it must not be duplicated on the InstanceVariable." ;
             sh:path cdi:measures ],
@@ -587,7 +581,7 @@ cdifd:InstanceVariableRepresentedVariableExclusivityShape a sh:NodeShape ;
 cdifd:QualifiesCoherenceShape a sh:NodeShape ;
     sh:severity sh:Warning ;
     sh:sparql [ a sh:SPARQLConstraint ;
-            sh:message "cdi:qualifies @id should reference the @id of another variableMeasured instance variable defined for the same dataset." ;
+            sh:message "cdif:qualifies @id should reference the @id of another variableMeasured instance variable defined for the same dataset." ;
             sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
                         sh:prefix "cdi" ] [ sh:namespace "https://w3id.org/cdif/" ;
                         sh:prefix "cdif" ] [ sh:namespace "http://schema.org/" ;
@@ -596,9 +590,9 @@ cdifd:QualifiesCoherenceShape a sh:NodeShape ;
             PREFIX cdi: <http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/>
             PREFIX cdif: <https://w3id.org/cdif/>
             PREFIX schema: <http://schema.org/>
-            SELECT $this (cdi:qualifies AS ?path) (?target AS ?value)
+            SELECT $this (cdif:qualifies AS ?path) (?target AS ?value)
             WHERE {
-                $this cdi:qualifies ?target .
+                $this cdif:qualifies ?target .
                 FILTER NOT EXISTS {
                     ?dataset schema:variableMeasured ?target .
                     ?dataset schema:variableMeasured $this .
@@ -621,8 +615,8 @@ cdifd:QualifiesCoherenceShape a sh:NodeShape ;
 
 cdifd:QualifiesNotAllowedWithoutAttributeShape a sh:NodeShape ;
     sh:property [ sh:maxCount 0 ;
-            sh:message "cdi:qualifies should not be used when cdif:role is absent or not Attribute." ;
-            sh:path cdi:qualifies ;
+            sh:message "cdif:qualifies should not be used when cdif:role is absent or not Attribute." ;
+            sh:path <https://w3id.org/cdif/qualifies> ;
             sh:severity sh:Warning ] ;
     sh:target [ a sh:SPARQLTarget ;
             sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;
@@ -644,13 +638,13 @@ cdifd:QualifiesNotAllowedWithoutAttributeShape a sh:NodeShape ;
             }""" ] .
 
 cdifd:QualifiesRequiredForAttributeShape a sh:NodeShape ;
-    sh:property [ sh:message "cdi:qualifies is required when cdif:role is Attribute." ;
+    sh:property [ sh:message "cdif:qualifies is required when cdif:role is Attribute." ;
             sh:minCount 1 ;
-            sh:path cdi:qualifies ;
+            sh:path <https://w3id.org/cdif/qualifies> ;
             sh:severity sh:Violation ],
-        [ sh:message "cdi:qualifies must be an object with an @id referencing another instance variable defined for this dataset." ;
+        [ sh:message "cdif:qualifies must be an object with an @id referencing another instance variable defined for this dataset." ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:path cdi:qualifies ;
+            sh:path <https://w3id.org/cdif/qualifies> ;
             sh:severity sh:Violation ] ;
     sh:target [ a sh:SPARQLTarget ;
             sh:prefixes ( [ sh:namespace "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/" ;

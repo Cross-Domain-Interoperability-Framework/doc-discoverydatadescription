@@ -142,7 +142,7 @@
         "Time"
       ],
       "cdif:simpleUnitOfMeasure": "d",
-      "cdi:describedUnitOfMeasure": {
+      "cdif:describedUnitOfMeasure": {
         "@type": [
           "schema:DefinedTerm"
         ],
@@ -241,7 +241,7 @@
       "cdif:displayLabel": [
         "Sea-water temperature"
       ],
-      "cdi:describedUnitOfMeasure": {
+      "cdif:describedUnitOfMeasure": {
         "@type": [
           "schema:DefinedTerm"
         ],

@@ -227,6 +227,13 @@
                       "type": "string"
                     }
                   },
+                  "schema:additionalType": {
+                    "type": "array",
+                    "description": "Domain-specific type classification for this distribution: what KIND of thing the file is, beyond its MIME type. schema:encodingFormat says how to parse the bytes; this says what they are. A plain string is accepted, but a schema:DefinedTerm carrying schema:inDefinedTermSet is preferred where the value comes from a controlled vocabulary, so the vocabulary travels with the data rather than being asserted only in a profile.",
+                    "items": {
+                      "$ref": "#/$defs/cdifConceptOrTermOrString"
+                    }
+                  },
                   "schema:contentSize": {
                     "type": "string",
                     "description": "File size of this distribution, e.g. '2.5 MB' or a byte count. Per schema.org/contentSize."
@@ -253,7 +260,9 @@
                       }
                     },
                     "required": [
-                      "@type"
+                      "@type",
+                      "spdx:algorithm",
+                      "spdx:checksumValue"
                     ]
                   },
                   "dcterms:conformsTo": {
@@ -1016,7 +1025,8 @@
           },
           "schema:linkRelationship": {
             "$ref": "#/$defs/cdifConceptOrTermOrString",
-            "description": "How the target relates to the subject, as a controlled-vocabulary value or a plain string label."
+            "description": "How the target relates to the subject, as a controlled-vocabulary value or a plain string label. Required: a typed link whose relationship is unstated carries no more information than a bare URL, which is what schemaorgProperties/labeledLink is for.",
+            "default": "missing"
           },
           "schema:target": {
             "type": "object",
@@ -1048,7 +1058,8 @@
           }
         },
         "required": [
-          "@type"
+          "@type",
+          "schema:linkRelationship"
         ]
       }
     },
@@ -1454,23 +1465,7 @@
           "type": "array",
           "description": "additional type assertions for the catalog record node. dcat:CatalogRecord is required.",
           "items": {
-            "anyOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "object",
-                "additionalProperties": false,
-                "required": [
-                  "@id"
-                ],
-                "properties": {
-                  "@id": {
-                    "type": "string"
-                  }
-                }
-              }
-            ]
+            "$ref": "#/$defs/cdifConceptOrTermOrString"
           },
           "contains": {
             "type": "object",
@@ -1683,7 +1678,7 @@
                                     },
                                     "schema:name": {
                                       "type": "string",
-                                      "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
+                                      "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic)."
                                     },
                                     "cdif:references": {
                                       "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
@@ -1843,23 +1838,7 @@
                                                 "schema:additionalType": {
                                                   "type": "array",
                                                   "items": {
-                                                    "anyOf": [
-                                                      {
-                                                        "type": "string"
-                                                      },
-                                                      {
-                                                        "type": "object",
-                                                        "additionalProperties": false,
-                                                        "required": [
-                                                          "@id"
-                                                        ],
-                                                        "properties": {
-                                                          "@id": {
-                                                            "type": "string"
-                                                          }
-                                                        }
-                                                      }
-                                                    ]
+                                                    "$ref": "#/$defs/cdifConceptOrTermOrString"
                                                   },
                                                   "contains": {
                                                     "type": "object",
@@ -1968,8 +1947,7 @@
                                     }
                                   },
                                   "required": [
-                                    "@type",
-                                    "cdif:references"
+                                    "@type"
                                   ]
                                 },
                                 {
@@ -2073,11 +2051,11 @@
                                       "type": "string",
                                       "description": "A formal description of the set of values in human-readable language."
                                     },
-                                    "cdi:formatPattern": {
+                                    "cdif:formatPattern": {
                                       "type": "string",
                                       "description": "A pattern for a number as described in Unicode Locale Data Markup Language (LDML) (http://www.unicode.org/reports/tr35/tr35.html) Part 3: Numbers (http://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns) and Part 4. Dates (http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns) . Examples would be #,##0.### to describe the pattern for a decimal number, or yyyy.MM.dd G 'at' HH:mm:ss zzz for a datetime pattern."
                                     },
-                                    "cdi:logicalExpression": {
+                                    "cdif:logicalExpression": {
                                       "type": "string",
                                       "description": "A logical expression where the values of \"x\" making the expression true are the members of the set of valid values. For example, \"(all reals x such that x > 0)\" describes the real numbers greater than 0."
                                     },
@@ -2097,7 +2075,7 @@
                                       "type": "string",
                                       "description": "A string denoting the minimum possible value. From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"minimum: An atomic property that contains a single number or string that is the minimum valid value (inclusive); equivalent to minInclusive. The value of this property becomes the minimum annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
                                     },
-                                    "cdi:regularExpression": {
+                                    "cdif:regularExpression": {
                                       "type": "string",
                                       "description": "A regular expression where strings matching the expression belong to the set of valid values."
                                     }
@@ -2202,7 +2180,7 @@
                                   },
                                   "schema:name": {
                                     "type": "string",
-                                    "description": "Human understandable name (liguistic signifier, word, phrase, or mnemonic)."
+                                    "description": "Human understandable name (linguistic signifier, word, phrase, or mnemonic)."
                                   },
                                   "cdif:references": {
                                     "description": "CDIF codelist (skos:ConceptScheme) whose concepts define the allowed values of this enumeration domain.",
@@ -2362,23 +2340,7 @@
                                               "schema:additionalType": {
                                                 "type": "array",
                                                 "items": {
-                                                  "anyOf": [
-                                                    {
-                                                      "type": "string"
-                                                    },
-                                                    {
-                                                      "type": "object",
-                                                      "additionalProperties": false,
-                                                      "required": [
-                                                        "@id"
-                                                      ],
-                                                      "properties": {
-                                                        "@id": {
-                                                          "type": "string"
-                                                        }
-                                                      }
-                                                    }
-                                                  ]
+                                                  "$ref": "#/$defs/cdifConceptOrTermOrString"
                                                 },
                                                 "contains": {
                                                   "type": "object",
@@ -2487,8 +2449,7 @@
                                   }
                                 },
                                 "required": [
-                                  "@type",
-                                  "cdif:references"
+                                  "@type"
                                 ]
                               },
                               {
@@ -2592,11 +2553,11 @@
                                     "type": "string",
                                     "description": "A formal description of the set of values in human-readable language."
                                   },
-                                  "cdi:formatPattern": {
+                                  "cdif:formatPattern": {
                                     "type": "string",
                                     "description": "A pattern for a number as described in Unicode Locale Data Markup Language (LDML) (http://www.unicode.org/reports/tr35/tr35.html) Part 3: Numbers (http://www.unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns) and Part 4. Dates (http://www.unicode.org/reports/tr35/tr35-dates.html#Date_Format_Patterns) . Examples would be #,##0.### to describe the pattern for a decimal number, or yyyy.MM.dd G 'at' HH:mm:ss zzz for a datetime pattern."
                                   },
-                                  "cdi:logicalExpression": {
+                                  "cdif:logicalExpression": {
                                     "type": "string",
                                     "description": "A logical expression where the values of \"x\" making the expression true are the members of the set of valid values. For example, \"(all reals x such that x > 0)\" describes the real numbers greater than 0."
                                   },
@@ -2616,7 +2577,7 @@
                                     "type": "string",
                                     "description": "A string denoting the minimum possible value. From the W3C Recommendation \"Metadata Vocabulary for Tabular Data\" (https://www.w3.org/TR/tabular-metadata/) 5.11.2: \"minimum: An atomic property that contains a single number or string that is the minimum valid value (inclusive); equivalent to minInclusive. The value of this property becomes the minimum annotation for the described datatype. See Value Constraints in [tabular-data-model] for details.\""
                                   },
-                                  "cdi:regularExpression": {
+                                  "cdif:regularExpression": {
                                     "type": "string",
                                     "description": "A regular expression where strings matching the expression belong to the set of valid values."
                                   }
@@ -2702,27 +2663,7 @@
             "description": "Domain-specific type classifications for this place (e.g. facility type,laboratory classification, feature type).",
             "type": "array",
             "items": {
-              "anyOf": [
-                {
-                  "type": "string"
-                },
-                {
-                  "$ref": "#/$defs/DefinedTerm"
-                },
-                {
-                  "type": "object",
-                  "additionalProperties": false,
-                  "required": [
-                    "@id"
-                  ],
-                  "properties": {
-                    "@id": {
-                      "type": "string",
-                      "description": "reference to a term defined elsewhere"
-                    }
-                  }
-                }
-              ]
+              "$ref": "#/$defs/cdifConceptOrTermOrString"
             }
           },
           "schema:name": {
@@ -2892,7 +2833,10 @@
                   }
                 }
               }
-            }
+            },
+            "required": [
+              "geosparql:asWKT"
+            ]
           }
         },
         "anyOf": [
@@ -3220,19 +3164,8 @@
                     "description": "Identifier for this ComponentPosition node."
                   },
                   "cdi:indexes": {
-                    "title": "Object Reference",
-                    "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document. At dataset level (cdif:hasPrimaryKey) that is a cdi:InstanceVariable in schema:variableMeasured; at data-structure level (cdif:has_PrimaryKey, cdif:has_ForeignKey) it is a cdi:RepresentedVariable in the structure. The value is a bare objectReference either way: a key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists.",
-                    "type": "object",
-                    "properties": {
-                      "@id": {
-                        "type": "string",
-                        "description": "resolvable @id of the referenced node"
-                      }
-                    },
-                    "required": [
-                      "@id"
-                    ],
-                    "additionalProperties": false
+                    "$ref": "#/$defs/ObjectReference",
+                    "description": "The variable this position indexes -- an @id-reference to one declared elsewhere in the document. At dataset level (cdif:hasPrimaryKey) that is a cdi:InstanceVariable in schema:variableMeasured; at data-structure level (cdif:has_PrimaryKey, cdif:has_ForeignKey) it is a cdi:RepresentedVariable in the structure. The value is a bare objectReference either way: a key names variables that are defined once and referenced from the key, so an inline variable here would be a second copy of a node that already exists."
                   },
                   "cdi:value": {
                     "type": "integer",
@@ -3617,15 +3550,25 @@
       "type": "object",
       "properties": {
         "@type": {
+          "description": "Either construct, or both. A labeled link is a schema:CreativeWork at a URL; a dcat:Relationship is DCAT's association class for a typed relation to another resource. A node may declare both -- CDIF's own relation examples do -- but NEITHER IS REQUIRED TO ACCOMPANY THE OTHER.\nThat is the whole point of the anyOf. Until 2026-09-08 this block's Relation half required contains: dcat:Relationship while the labeled-link half required contains: schema:CreativeWork, and under allOf both applied to every instance, so an ordinary labeled link was unsatisfiable. Of profile-core's licenses the 29 plain strings and 1 @id-reference passed while the 10 that followed schema.org's own recommendation -- \"use schema:CreativeWork to provide a label (name) for the license\" -- failed. 412782113 fixed that by deleting the dcat:Relationship mandate outright, which left the JSON Schema with no notion of dcat:Relationship at all while rules.shacl went on targeting it as a class. A pure DCAT relation then met a SHACL requirement with no schema counterpart. This anyOf restores the type to the schema WITHOUT restoring the conjunction.",
           "default": "schema:CreativeWork",
           "type": "array",
           "items": {
             "type": "string"
           },
-          "contains": {
-            "const": "schema:CreativeWork"
-          },
-          "minItems": 1
+          "minItems": 1,
+          "anyOf": [
+            {
+              "contains": {
+                "const": "schema:CreativeWork"
+              }
+            },
+            {
+              "contains": {
+                "const": "dcat:Relationship"
+              }
+            }
+          ]
         },
         "schema:name": {
           "type": "string"
@@ -3638,19 +3581,88 @@
           "format": "uri"
         },
         "dcat:hadRole": {
-          "$ref": "#/$defs/cdifConceptOrTermOrString",
-          "description": "Role of the related resource as a SKOS Concept (DCAT canonical role slot). Present only on a link that expresses a relationship; a plain labeled link such as a license omits it."
+          "description": "Role of the related resource. Present only on a link that expresses a relationship; a plain labeled link such as a license omits it.\nDCAT's declared range is dcat:Role (dcat.ttl: rdfs:range dcat:Role, and dcat:Role rdfs:subClassOf skos:Concept), so the DCAT-native form is a node typed dcat:Role. That form was NOT accepted here before 2026-10-01: this property was cdifConceptOrTermOrString alone, which matches a bare string, a sealed @id reference, a schema:DefinedTerm or a skos:Concept -- none of which a dcat:Role-typed node satisfies, because JSON Schema does no subclass reasoning.\ndcat:Role is added as a branch rather than replacing the others, so the DCAT-native form becomes valid without invalidating anything already written. Note this leaves CDIF LOOSER than DCAT, deliberately: DCAT's range is dcat:Role alone, and CDIF also accepts a plain skos:Concept, a DefinedTerm, an @id reference and a string. That is the same both-forms stance taken on dcterms:relation, and it is a choice rather than an oversight -- do not read the extra branches as something not yet tightened.",
+          "anyOf": [
+            {
+              "description": "A dcat:Role -- DCAT's declared range for dcat:hadRole. Defined inline rather than as its own building block because nothing else in the register needs it yet; dcat:hadRole's domain is owl:unionOf [prov:Attribution, dcat:Relationship], so promote it to a block if a qualified attribution ever needs the same shape.\ndcat:Role rdfs:subClassOf skos:Concept, so the skos:prefLabel / skos:inScheme furniture of a concept is permitted alongside; it is not required here because DCAT states no cardinality constraints on the class -- dcat.ttl declares no rdfs:subClassOf and no owl:Restriction on dcat:Relationship, and the \"mandatory\" wording in the DCAT-3 document is prose in the spec tables rather than an axiom in the vocabulary.",
+              "type": "object",
+              "properties": {
+                "@id": {
+                  "type": "string",
+                  "description": "IRI of the role concept, ideally from a controlled vocabulary."
+                },
+                "@type": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "contains": {
+                    "const": "dcat:Role"
+                  },
+                  "minItems": 1
+                }
+              },
+              "required": [
+                "@type"
+              ]
+            },
+            {
+              "$ref": "#/$defs/cdifConceptOrTermOrString"
+            }
+          ]
         },
         "dcterms:relation": {
-          "type": "string",
-          "format": "uri",
-          "description": "URI of the related resource -- the DCAT canonical pointer to what is being related to, which is distinct from schema:url, the presentation URL of the link itself."
+          "description": "The related resource -- the DCAT canonical pointer to what is being related to, which is distinct from schema:url, the presentation URL of the link itself.\nAn @id reference is the RECOMMENDED form and a string is permitted, which is DCMI's own position: \"Recommended practice is to identify the related resource by means of a URI. If this is not possible or feasible, a string conforming to a formal identification system may be provided.\" DCMI declares no rdfs:range for this property, and of the 13 DCMI properties carrying an \"intended to be used with non-literal values\" restriction, this is deliberately not one. dcat.ttl does not re-declare or constrain it at all -- the only triple mentioning it in the whole DCAT vocabulary is `dcat:distribution rdfs:subPropertyOf dcterms:relation`.\nSo objectReference-only would be stricter than both DCAT and DCMI and would reject a form the specification sanctions. The anyOf matches how schema:additionalType is handled here: both forms valid, the object form used in examples and required only where a `contains` pins a specific value.\nIt was string-only until 2026-10-01, which rejected the @id form outright. Reported from outside by a PSDI validator taking a things-not-strings approach (profile-core#16): their DCAT catalogue mirrors the DCAT-3 spec examples and wrote {\"@id\": ...}, which failed both layers -- while CDIF's own documented URI serialization policy (agents.md) says URI values SHOULD be {\"@id\": ...}. The register required the one form its own policy argues against.",
+          "anyOf": [
+            {
+              "$ref": "#/$defs/ObjectReference"
+            },
+            {
+              "type": "string",
+              "format": "uri"
+            }
+          ]
         }
       },
       "required": [
-        "@type",
-        "schema:url"
+        "@type"
+      ],
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "@type"
+            ],
+            "properties": {
+              "@type": {
+                "contains": {
+                  "const": "schema:CreativeWork"
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "schema:url"
+            ]
+          }
+        }
       ]
+    },
+    "ObjectReference": {
+      "title": "Object Reference",
+      "description": "A reference to a node defined elsewhere, by its @id.",
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "resolvable @id of the referenced node"
+        }
+      },
+      "required": [
+        "@id"
+      ],
+      "additionalProperties": false
     },
     "Person": {
       "description": "schema for cdif profile of schema.org/Person",
@@ -4057,32 +4069,21 @@
           "description": "Essentially the same as schema:propertyID. References the concept(s) this variable measures or represents -- and nothing else. A RepresentedVariable is NOT a legal value: that link is cdif:isDefinedBy_RepresentedVariable, which is reference-only and carries the no-duplication rule. The RepresentedVariable branch was removed 2026-09-25. It never widened what could be *written*, because cdifConceptOrTerm's first branch is already a sealed {@id} reference, so it only ever admitted an inline RepresentedVariable node -- which framing produced and nothing authored. Keeping it cost the property its single value type, made it a partial exception to the CDIF convention of disambiguating polymorphic DDI-CDI role names by target, and left it not type-compatible with canonical cdi:uses, which is valued by a Concept. The RepresentedVariable branch is not new behaviour: it is what the rest of CDIF already documents and enforces. description.md calls cdif:uses \"concepts (or, under the Data Structure profile, the RepresentedVariable)\"; agents.md describes the InstanceVariable as \"a pointer (via cdif:uses) into a richer RepresentedVariable\"; the six NoDuplicate*Shape rules in cdifDataStructure traverse cdif:uses to reach that RepresentedVariable; and RepresentedVariableMustBeInstantiatedShape requires the link to exist. Only this schema said Concepts-only, and it was the outlier -- documents conforming to those rules could not be expressed here. A bare {@id} always matched via cdifConceptOrTerm; the branch is needed for the embedded form, because framing inlines a node whose @id is defined in the same document. cdif:isDefinedBy_RepresentedVariable remains the way to say that this InstanceVariable DEFERS its represented-variable-level properties to that RepresentedVariable; it is reference-only and carries the exclusivity rule. The cost is that cdif:uses no longer has a single value type, so it is a partial exception to the CDIF convention of disambiguating polymorphic DDI-CDI role names by target, and no longer strictly type-compatible with canonical cdi:uses, which is valued by a Concept."
         },
         "cdif:isDefinedBy_RepresentedVariable": {
-          "title": "Object Reference",
-          "description": "The RepresentedVariable this InstanceVariable instantiates. A reference only (@id, nothing else): the point of the link is that the represented-variable-level properties are defined once on the RepresentedVariable and NOT duplicated here, so an inline copy would defeat it. The equivalent link within a data structure is cdif:isDefinedBy_Variable on cdifDataStructureComponent -- a different name because it means something wider: it accepts an InstanceVariable as well (in DDI-CDI an InstanceVariable IS a RepresentedVariable), and accepts one inline, because a structure may define a variable that exists nowhere else. This property stays narrow: the RepresentedVariable an InstanceVariable instantiates, by reference.",
-          "type": "object",
-          "properties": {
-            "@id": {
-              "type": "string",
-              "description": "resolvable @id of the referenced node"
-            }
-          },
-          "required": [
-            "@id"
-          ],
-          "additionalProperties": false
+          "$ref": "#/$defs/ObjectReference",
+          "description": "The RepresentedVariable this InstanceVariable instantiates. A reference only (@id, nothing else): the point of the link is that the represented-variable-level properties are defined once on the RepresentedVariable and NOT duplicated here, so an inline copy would defeat it. The equivalent link within a data structure is cdif:isDefinedBy_Variable on cdifDataStructureComponent -- a different name because it means something wider: it accepts an InstanceVariable as well (in DDI-CDI an InstanceVariable IS a RepresentedVariable), and accepts one inline, because a structure may define a variable that exists nowhere else. This property stays narrow: the RepresentedVariable an InstanceVariable instantiates, by reference."
         },
-        "cdi:function": {
+        "cdif:function": {
           "type": "array",
           "items": {
             "$ref": "#/$defs/cdifConceptOrTermOrString"
           },
           "description": "Immutable characteristic of the variable such as geographic designator, weight, temporal designation, etc. (InstanceVariable.function)."
         },
-        "cdi:platformType": {
+        "cdif:platformType": {
           "$ref": "#/$defs/cdifConceptOrTermOrString",
           "description": "The application or technical system context in which the variable has been realized - typically a statistical processing package or processing environment (InstanceVariable.platformType)."
         },
-        "cdi:source": {
+        "cdif:source": {
           "anyOf": [
             {
               "type": "string"
@@ -4122,7 +4123,7 @@
             }
           ]
         },
-        "cdi:describedUnitOfMeasure": {
+        "cdif:describedUnitOfMeasure": {
           "description": "The unit in which the data values are measured, expressed as a controlled-vocabulary entry (RepresentedVariable.describedUnitOfMeasure). For a plain-string unit, use cdif:simpleUnitOfMeasure instead.",
           "anyOf": [
             {
@@ -4146,7 +4147,7 @@
             }
           ]
         },
-        "cdi:qualifies": {
+        "cdif:qualifies": {
           "type": "object",
           "required": [
             "@id"
@@ -4179,9 +4180,9 @@
             "properties": {
               "cdi:takesSubstantiveValuesFrom": false,
               "cdi:takesSentinelValuesFrom": false,
-              "cdi:hasIntendedDataType": false,
-              "cdi:describedUnitOfMeasure": false,
-              "cdi:unitOfMeasureKind": false,
+              "cdif:hasIntendedDataType": false,
+              "cdif:describedUnitOfMeasure": false,
+              "cdif:unitOfMeasureKind": false,
               "cdi:measures": false,
               "cdif:externalDefinition": false,
               "cdif:uses_Concept": false,
@@ -4267,7 +4268,47 @@
             }
           }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": [
+              "@type"
+            ],
+            "properties": {
+              "@type": {
+                "contains": {
+                  "const": "cdif:TextMapping"
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "cdif:index"
+            ]
+          }
+        },
+        {
+          "if": {
+            "required": [
+              "@type"
+            ],
+            "properties": {
+              "@type": {
+                "contains": {
+                  "const": "cdif:LocatorMapping"
+                }
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "cdi:locator"
+            ]
+          }
+        }
+      ]
     },
     "Concept": {
       "type": "object",
@@ -4632,7 +4673,7 @@
           },
           "minItems": 1
         },
-        "cdi:typeOfStatistic": {
+        "cdif:typeOfStatistic": {
           "$ref": "#/$defs/cdifConceptOrTermOrString",
           "description": "Controlled-vocabulary entry naming the kind of statistic — e.g. mean, median, count, sum, stdDev."
         },
@@ -4805,7 +4846,7 @@
             }
           ]
         },
-        "cdi:typeOfStatistic": {
+        "cdif:typeOfStatistic": {
           "$ref": "#/$defs/cdifConceptOrTermOrString",
           "description": "Controlled-vocabulary entry naming the kind of statistic."
         },

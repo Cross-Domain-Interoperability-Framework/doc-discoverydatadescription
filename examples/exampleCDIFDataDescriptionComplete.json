@@ -492,7 +492,7 @@
       "@type": [
         "cdi:Statistics"
       ],
-      "cdi:typeOfStatistic": {
+      "cdif:typeOfStatistic": {
         "@type": [
           "schema:DefinedTerm"
         ],
@@ -530,8 +530,8 @@
       ],
       "cdif:role": "UnitIdentifier",
       "cdif:physicalDataType": "date",
-      "cdi:hasIntendedDataType": "xsd:date",
-      "cdi:function": [
+      "cdif:hasIntendedDataType": "xsd:date",
+      "cdif:function": [
         "temporalDesignation"
       ],
       "cdif:uses": [
@@ -570,8 +570,8 @@
       "cdif:role": "Measure",
       "cdif:physicalDataType": "float64",
       "cdif:simpleUnitOfMeasure": "degree Celsius",
-      "cdi:hasIntendedDataType": "xsd:decimal",
-      "cdi:describedUnitOfMeasure": {
+      "cdif:hasIntendedDataType": "xsd:decimal",
+      "cdif:describedUnitOfMeasure": {
         "@type": [
           "schema:DefinedTerm"
         ],
@@ -579,8 +579,8 @@
         "schema:termCode": "CEL",
         "schema:inDefinedTermSet": "https://qudt.org/vocab/unit/"
       },
-      "cdi:platformType": "R statistical environment, v4.3",
-      "cdi:source": "Aggregated from NOAA ISD hourly air temperature.",
+      "cdif:platformType": "R statistical environment, v4.3",
+      "cdif:source": "Aggregated from NOAA ISD hourly air temperature.",
       "cdif:uses": [
         {
           "@type": [
@@ -605,7 +605,7 @@
             "@type": [
               "cdi:Statistics"
             ],
-            "cdi:typeOfStatistic": {
+            "cdif:typeOfStatistic": {
               "@type": [
                 "schema:DefinedTerm"
               ],
@@ -640,7 +640,7 @@
                   ],
                   "cdif:descriptiveText": "Month 01 of the observation year."
                 },
-                "cdi:typeOfStatistic": {
+                "cdif:typeOfStatistic": {
                   "@type": [
                     "schema:DefinedTerm"
                   ],
@@ -663,7 +663,7 @@
             "@type": [
               "cdi:Statistics"
             ],
-            "cdi:typeOfStatistic": {
+            "cdif:typeOfStatistic": {
               "@type": [
                 "schema:DefinedTerm"
               ],
@@ -697,7 +697,7 @@
           ],
           "cdi:classificationLevel": "Interval",
           "cdi:description": "Real-valued air temperature in degrees Celsius within plausible surface bounds.",
-          "cdi:identifier": {
+          "cdif:identifier": {
             "@type": [
               "schema:PropertyValue"
             ],
@@ -707,9 +707,9 @@
             "schema:value": "temperature-degC",
             "schema:url": "https://example.org/vacd/temperature-degC"
           },
-          "cdi:formatPattern": "#,##0.0",
-          "cdi:logicalExpression": "all reals x such that -90 <= x <= 60",
-          "cdi:regularExpression": "^-?\\d{1,2}(\\.\\d)?$",
+          "cdif:formatPattern": "#,##0.0",
+          "cdif:logicalExpression": "all reals x such that -90 <= x <= 60",
+          "cdif:regularExpression": "^-?\\d{1,2}(\\.\\d)?$",
           "cdi:minimumValueInclusive": "-90.0",
           "cdi:minimumValueExclusive": "-273.15",
           "cdi:maximumValueInclusive": "60.0",
@@ -781,7 +781,7 @@
       "schema:maxValue": 24.6,
       "cdif:role": "Measure",
       "cdif:physicalDataType": "float64",
-      "cdi:hasIntendedDataType": "xsd:decimal"
+      "cdif:hasIntendedDataType": "xsd:decimal"
     },
     {
       "@id": "ex:var/dailyMaxTemperature",
@@ -806,7 +806,7 @@
       "schema:maxValue": 38.9,
       "cdif:role": "Measure",
       "cdif:physicalDataType": "float64",
-      "cdi:hasIntendedDataType": "xsd:decimal"
+      "cdif:hasIntendedDataType": "xsd:decimal"
     },
     {
       "@id": "ex:var/qcFlag",
@@ -823,11 +823,11 @@
       ],
       "cdif:role": "Attribute",
       "cdif:physicalDataType": "string",
-      "cdi:hasIntendedDataType": "xsd:string",
-      "cdi:qualifies": {
+      "cdif:hasIntendedDataType": "xsd:string",
+      "cdif:qualifies": {
         "@id": "ex:var/dailyMeanTemperature"
       },
-      "cdi:platformType": "R statistical environment, v4.3",
+      "cdif:platformType": "R statistical environment, v4.3",
       "cdi:takesSubstantiveValuesFrom": {
         "@id": "ex:vd/qcFlag-substantive",
         "@type": [
