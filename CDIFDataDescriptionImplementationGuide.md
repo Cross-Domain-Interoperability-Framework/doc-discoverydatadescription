@@ -153,7 +153,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** Array of Statistic value objects
 - **Description:** The value of the identified type of statistic. May be repeated to provide unweighted or weighted values and different computation bases.
 
-### **cdi:typeOfStatistic**
+### **cdif:typeOfStatistic**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
@@ -235,7 +235,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** Array of Statistic value objects
 - **Description:** The value of the identified type of statistic. May be repeated to provide unweighted or weighted values and different computation bases.
 
-### **cdi:typeOfStatistic**
+### **cdif:typeOfStatistic**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
@@ -472,31 +472,31 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** [cdif:StatisticsCollection](#cdifstatisticscollection) or [object reference](#object-reference)
 - **Description:** The StatisticsCollection holding summary / category statistics for this InstanceVariable (InstanceVariable.isDescribedBy). `cdif:` namespaced and target-suffixed because the DDI-CDI `isDescribedBy` association is polymorphic.
 
-### **cdi:function**
+### **cdif:function**
 
 - **Cardinality:** Optional, Repeatable
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** Immutable characteristic of the variable such as geographic designator, weight, temporal designation, etc. (InstanceVariable.function).
 
-### **cdi:platformType**
+### **cdif:platformType**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
 - **Description:** The application or technical system context in which the variable has been realized -- typically a statistical processing package or processing environment (InstanceVariable.platformType).
 
-### **cdi:source**
+### **cdif:source**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference) or string
 - **Description:** Reference capturing provenance information for this InstanceVariable (InstanceVariable.source).
 
-### **cdi:hasIntendedDataType**
+### **cdif:hasIntendedDataType**
 
 - **Cardinality:** Optional
 - **Content:** [xsdDataType](#xsddatatype), [DefinedTerm](#defined-term), or [skos:Concept](#skosconcept)
 - **Description:** The physical datatype intended to be used for values of this variable. Supports the optional use of an external controlled vocabulary.Recommended values are XML Schema datatypes; see [xsdDataType](#xsddatatype)
 
-### **cdi:describedUnitOfMeasure**
+### **cdif:describedUnitOfMeasure**
 
 - **Cardinality:** Optional
 - **Content:** [DefinedTerm](#defined-term), [skos:Concept](#skosconcept), or string
@@ -514,7 +514,7 @@ At the Data Structure level, the result also carries `cdi:isStructuredBy` (an in
 - **Content:** [cdif:SubstantiveValueDomain](#cdifsubstantivevaluedomain) inline, or [object reference](#object-reference) (`@id` only)
 - **Description:** Specifies the set of substantive values for this variable - the set of valid, meaningful values
 
-### **cdi:qualifies**
+### **cdif:qualifies**
 
 - **Cardinality:** Optional
 - **Content:** [object reference](#object-reference)
