@@ -678,16 +678,24 @@ cdifd:cdifEnumerationDomainShape a sh:NodeShape ;
             sh:minCount 1 ;
             sh:path schema:name ;
             sh:severity sh:Warning ],
-        [ sh:message "A cdif:EnumerationDomain must carry cdif:references (a skos:ConceptScheme or @id-reference to the codification)" ;
+        [ sh:message "A cdif:EnumerationDomain should carry cdif:references (a skos:ConceptScheme or @id-reference to the codification); if it does not, schema:description must say what values the domain admits" ;
             sh:minCount 1 ;
             sh:path <https://w3id.org/cdif/references> ;
-            sh:severity sh:Violation ],
+            sh:severity sh:Warning ],
         [ sh:message "A cdif:EnumerationDomain may include a cdif:identifier (schema:identifier / PropertyValue)" ;
             sh:path <https://w3id.org/cdif/identifier> ;
             sh:severity sh:Info ],
         [ sh:message "A cdif:EnumerationDomain may include a cdif:purpose describing intent or use" ;
             sh:path <https://w3id.org/cdif/purpose> ;
             sh:severity sh:Info ] ;
+    sh:targetClass <https://w3id.org/cdif/EnumerationDomain> .
+
+cdifd:cdifEnumerationDomainValuesStatedShape a sh:NodeShape ;
+    sh:message "A cdif:EnumerationDomain must either carry cdif:references (the codelist whose concepts define its values) or schema:description (prose stating what values it admits). It carries neither, so nothing says what this domain enumerates." ;
+    sh:or ( [ sh:property [ sh:minCount 1 ;
+                        sh:path <https://w3id.org/cdif/references> ] ] [ sh:property [ sh:minCount 1 ;
+                        sh:path schema:description ] ] ) ;
+    sh:severity sh:Violation ;
     sh:targetClass <https://w3id.org/cdif/EnumerationDomain> .
 
 cdifd:cdifKeyShape a sh:NodeShape ;

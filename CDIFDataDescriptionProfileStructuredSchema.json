@@ -43,7 +43,9 @@
           "schema:MediaObject"
         ]
       },
-      "default": "schema:Dataset",
+      "default": [
+        "schema:Dataset"
+      ],
       "minItems": 1,
       "contains": {
         "const": "schema:Dataset"
@@ -238,6 +240,54 @@
                     "type": "string",
                     "description": "File size of this distribution, e.g. '2.5 MB' or a byte count. Per schema.org/contentSize."
                   },
+                  "schema:width": {
+                    "type": "object",
+                    "description": "Pixel width of this distribution when it is a single raster file, as a QuantitativeValue. schema:width has schema:MediaObject in its domain. A QuantitativeValue rather than a bare number because the same property carries physical dimensions elsewhere, so the unit has to be stated. (schema:contentSize above is a plain string for historical reasons; that inconsistency is left alone rather than widened.)",
+                    "properties": {
+                      "@type": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "contains": {
+                          "const": "schema:QuantitativeValue"
+                        },
+                        "minItems": 1
+                      },
+                      "schema:value": {
+                        "type": "number",
+                        "description": "Width in pixels."
+                      },
+                      "schema:unitText": {
+                        "type": "string",
+                        "description": "Unit of measure, e.g. 'pixel'."
+                      }
+                    }
+                  },
+                  "schema:height": {
+                    "type": "object",
+                    "description": "Pixel height of this distribution when it is a single raster file, as a QuantitativeValue. schema:height has schema:MediaObject in its domain. A QuantitativeValue rather than a bare number because the same property carries physical dimensions elsewhere, so the unit has to be stated. (schema:contentSize above is a plain string for historical reasons; that inconsistency is left alone rather than widened.)",
+                    "properties": {
+                      "@type": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "contains": {
+                          "const": "schema:QuantitativeValue"
+                        },
+                        "minItems": 1
+                      },
+                      "schema:value": {
+                        "type": "number",
+                        "description": "Height in pixels."
+                      },
+                      "schema:unitText": {
+                        "type": "string",
+                        "description": "Unit of measure, e.g. 'pixel'."
+                      }
+                    }
+                  },
                   "spdx:checksum": {
                     "type": "object",
                     "description": "A string value calculated from the content of the resource representation, used to test if content has been modified. The checksum is a property of a particular distribution/DataDownload.",
@@ -404,7 +454,9 @@
                       "properties": {
                         "@type": {
                           "description": "The type of action. Must be schema:Action or one of its subtypes.",
-                          "default": "schema:Action",
+                          "default": [
+                            "schema:Action"
+                          ],
                           "type": "array",
                           "items": {
                             "type": "string"
@@ -437,7 +489,9 @@
                           "description": "specifies the request target location and request syntax. Documentation of the URL end point and syntax to invoke the service. This schema doesn't handle post requests.",
                           "properties": {
                             "@type": {
-                              "default": "schema:EntryPoint",
+                              "default": [
+                                "schema:EntryPoint"
+                              ],
                               "type": "array",
                               "items": {
                                 "type": "string"
@@ -540,7 +594,9 @@
                           "description": "The entity upon which the action is carried out, whose state is kept intact or changed. This is an open ended class for general description of Actions. When schema:Action (or a subclass) is used to describe operations for a WebAPI distribution, the object is implicitly the resource that is the subject of the containing metadata record, so this property would be superfluous.",
                           "properties": {
                             "@type": {
-                              "default": "schema:Thing",
+                              "default": [
+                                "schema:Thing"
+                              ],
                               "type": "array",
                               "items": {
                                 "type": "string"
@@ -562,7 +618,9 @@
                                 "type": "string"
                               },
                               "@type": {
-                                "default": "schema:PropertyValueSpecification",
+                                "default": [
+                                  "schema:PropertyValueSpecification"
+                                ],
                                 "type": "array",
                                 "items": {
                                   "type": "string"
@@ -1013,7 +1071,9 @@
         "type": "object",
         "properties": {
           "@type": {
-            "default": "schema:LinkRole",
+            "default": [
+              "schema:LinkRole"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1033,7 +1093,9 @@
             "description": "The entry point being linked to. Deliberately not sealed: real targets also carry schema:httpMethod, schema:urlTemplate, schema:contentType and domain-specific properties, and JSON-LD is open-world.",
             "properties": {
               "@type": {
-                "default": "schema:EntryPoint",
+                "default": [
+                  "schema:EntryPoint"
+                ],
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -1159,7 +1221,9 @@
             "type": "object",
             "properties": {
               "@type": {
-                "default": "schema:Role",
+                "default": [
+                  "schema:Role"
+                ],
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -1267,7 +1331,9 @@
             "description": "URI identifier for this funding record"
           },
           "@type": {
-            "default": "schema:MonetaryGrant",
+            "default": [
+              "schema:MonetaryGrant"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -1557,7 +1623,9 @@
               "description": "identifier for the graph node."
             },
             "@type": {
-              "default": "schema:DataCatalog",
+              "default": [
+                "schema:DataCatalog"
+              ],
               "type": "array",
               "items": {
                 "type": "string"
@@ -1944,11 +2012,27 @@
                                     "cdif:purpose": {
                                       "type": "string",
                                       "description": "Intent or reason for the object/the description of the object."
+                                    },
+                                    "schema:description": {
+                                      "type": "string",
+                                      "description": "Prose statement of the values this domain admits. Required when cdif:references is absent, so that a domain naming no codelist still says what it enumerates."
                                     }
                                   },
                                   "required": [
                                     "@type"
-                                  ]
+                                  ],
+                                  "if": {
+                                    "not": {
+                                      "required": [
+                                        "cdif:references"
+                                      ]
+                                    }
+                                  },
+                                  "then": {
+                                    "required": [
+                                      "schema:description"
+                                    ]
+                                  }
                                 },
                                 {
                                   "type": "object",
@@ -2446,11 +2530,27 @@
                                   "cdif:purpose": {
                                     "type": "string",
                                     "description": "Intent or reason for the object/the description of the object."
+                                  },
+                                  "schema:description": {
+                                    "type": "string",
+                                    "description": "Prose statement of the values this domain admits. Required when cdif:references is absent, so that a domain naming no codelist still says what it enumerates."
                                   }
                                 },
                                 "required": [
                                   "@type"
-                                ]
+                                ],
+                                "if": {
+                                  "not": {
+                                    "required": [
+                                      "cdif:references"
+                                    ]
+                                  }
+                                },
+                                "then": {
+                                  "required": [
+                                    "schema:description"
+                                  ]
+                                }
                               },
                               {
                                 "type": "object",
@@ -2649,7 +2749,9 @@
         "type": "object",
         "properties": {
           "@type": {
-            "default": "schema:Place",
+            "default": [
+              "schema:Place"
+            ],
             "type": "array",
             "items": {
               "type": "string"
@@ -2710,7 +2812,9 @@
                 "description": "A point location. Point locations are recommended for data that is associated with specific sample locations, particularly if these are widely spaced such that an enclosing bounding box would be a misleading representation of the spatial location. Be aware that some client applications might only index or display bounding box extents or a single point location.",
                 "properties": {
                   "@type": {
-                    "default": "schema:GeoCoordinates",
+                    "default": [
+                      "schema:GeoCoordinates"
+                    ],
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2742,7 +2846,9 @@
                 "description": "A schema:GeoShape bounding box. The geometry is described with a set of latitude/longitude pairs (in that order).The documentation for schema:GeoShape states 'Either whitespace or commas can be used to separate latitude and longitude; whitespace should be used when writing a list of several such points.'",
                 "properties": {
                   "@type": {
-                    "default": "schema:GeoShape",
+                    "default": [
+                      "schema:GeoShape"
+                    ],
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2767,7 +2873,9 @@
                 "description": "A schema:GeoShape curvilinear trace, for resource related to a linear trace like a ship track or airplane flight line",
                 "properties": {
                   "@type": {
-                    "default": "schema:GeoShape",
+                    "default": [
+                      "schema:GeoShape"
+                    ],
                     "type": "array",
                     "items": {
                       "type": "string"
@@ -2874,7 +2982,9 @@
             "description": "a w3c time proper interval with bounds that are named time ordinal eras with identifier, e.g. geologic age. This is a SOSO schema.org extension",
             "properties": {
               "@type": {
-                "default": "time:ProperInterval",
+                "default": [
+                  "time:ProperInterval"
+                ],
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -2936,7 +3046,9 @@
                 "description": "Must exactly match the specified @context object."
               },
               "@type": {
-                "default": "time:ProperInterval",
+                "default": [
+                  "time:ProperInterval"
+                ],
                 "type": "array",
                 "items": {
                   "type": "string"
@@ -2967,7 +3079,9 @@
                     "type": "object",
                     "properties": {
                       "@type": {
-                        "default": "time:TimePosition",
+                        "default": [
+                          "time:TimePosition"
+                        ],
                         "type": "array",
                         "items": {
                           "type": "string"
@@ -3011,7 +3125,9 @@
                     "type": "object",
                     "properties": {
                       "@type": {
-                        "default": "time:TimePosition",
+                        "default": [
+                          "time:TimePosition"
+                        ],
                         "type": "array",
                         "items": {
                           "type": "string"
@@ -3551,7 +3667,9 @@
       "properties": {
         "@type": {
           "description": "Either construct, or both. A labeled link is a schema:CreativeWork at a URL; a dcat:Relationship is DCAT's association class for a typed relation to another resource. A node may declare both -- CDIF's own relation examples do -- but NEITHER IS REQUIRED TO ACCOMPANY THE OTHER.\nThat is the whole point of the anyOf. Until 2026-09-08 this block's Relation half required contains: dcat:Relationship while the labeled-link half required contains: schema:CreativeWork, and under allOf both applied to every instance, so an ordinary labeled link was unsatisfiable. Of profile-core's licenses the 29 plain strings and 1 @id-reference passed while the 10 that followed schema.org's own recommendation -- \"use schema:CreativeWork to provide a label (name) for the license\" -- failed. 412782113 fixed that by deleting the dcat:Relationship mandate outright, which left the JSON Schema with no notion of dcat:Relationship at all while rules.shacl went on targeting it as a class. A pure DCAT relation then met a SHACL requirement with no schema counterpart. This anyOf restores the type to the schema WITHOUT restoring the conjunction.",
-          "default": "schema:CreativeWork",
+          "default": [
+            "schema:CreativeWork"
+          ],
           "type": "array",
           "items": {
             "type": "string"
@@ -3686,7 +3804,8 @@
           "description": "string label for person that is meaningful for human users, should format consistently. Recommend 'Family Name, Given name' format."
         },
         "schema:description": {
-          "type": "string"
+          "type": "string",
+          "description": "additional information about the agent or their relation to the described resource"
         },
         "schema:identifier": {
           "description": "identifier for person, recommend ORCID",
@@ -3712,7 +3831,9 @@
           "description": "restrict to email only. Schema.org allows telephone and postal contacts as well",
           "properties": {
             "@type": {
-              "default": "schema:ContactPoint",
+              "default": [
+                "schema:ContactPoint"
+              ],
               "type": "array",
               "items": {
                 "type": "string"
@@ -3784,7 +3905,9 @@
           "type": "string"
         },
         "@type": {
-          "default": "schema:Organization",
+          "default": [
+            "schema:Organization"
+          ],
           "type": "array",
           "items": {
             "anyOf": [
@@ -3825,7 +3948,8 @@
           "description": "other labels by which the organization might be known"
         },
         "schema:description": {
-          "type": "string"
+          "type": "string",
+          "description": "additional information about the agent or their relation to the described resource"
         },
         "schema:identifier": {
           "description": "identifier for organization",
@@ -4809,10 +4933,18 @@
                   "minItems": 1
                 },
                 "cdif:name": {
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  },
+                  "anyOf": [
+                    {
+                      "type": "string"
+                    },
+                    {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      },
+                      "minItems": 1
+                    }
+                  ],
                   "description": "Human-understandable name(s). CDIF-simplified from DDI-CDI Category.name (ObjectName) to plain strings."
                 },
                 "cdif:descriptiveText": {

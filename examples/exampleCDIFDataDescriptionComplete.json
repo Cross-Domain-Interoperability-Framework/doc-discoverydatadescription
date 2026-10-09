@@ -6,7 +6,6 @@
     "spdx": "http://spdx.org/rdf/terms#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "cdif": "https://w3id.org/cdif/",
-    "csvw": "http://www.w3.org/ns/csvw#",
     "dqv": "http://www.w3.org/ns/dqv#",
     "skos": "http://www.w3.org/2004/02/skos/core#",
     "time": "http://www.w3.org/2006/time#",
@@ -322,9 +321,9 @@
         "text/csv"
       ],
       "cdi:isDelimited": true,
-      "csvw:delimiter": ",",
-      "csvw:header": true,
-      "csvw:headerRowCount": 1,
+      "cdi:delimiter": ",",
+      "cdi:hasHeader": true,
+      "cdi:headerRowCount": 1,
       "spdx:checksum": {
         "@type": [
           "spdx:Checksum"
