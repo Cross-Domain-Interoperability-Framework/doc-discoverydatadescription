@@ -863,7 +863,10 @@
                       ],
                       "description": "Which spaces to remove from a data value (DDI-CDI TabularTextDataSet.trim, TrimValues enumeration)."
                     }
-                  }
+                  },
+                  "required": [
+                    "cdif:hasPhysicalMapping"
+                  ]
                 }
               },
               {

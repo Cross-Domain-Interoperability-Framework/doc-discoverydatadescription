@@ -1,0 +1,151 @@
+{
+  "@context": {
+    "schema": "http://schema.org/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "dcat": "http://www.w3.org/ns/dcat#",
+    "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "ex": "https://example.org/",
+    "cdif": "https://w3id.org/cdif/"
+  },
+  "@id": "ex:gom-water-quality-wide-2025",
+  "@type": [
+    "schema:Dataset"
+  ],
+  "schema:name": "Gulf of Maine water-quality monitoring stations, 2025 (wide form)",
+  "schema:identifier": "https://doi.org/10.5281/zenodo.5151515",
+  "schema:dateModified": "2025-10-20",
+  "schema:license": [
+    "https://creativecommons.org/licenses/by/4.0/"
+  ],
+  "schema:distribution": [
+    {
+      "@type": [
+        "schema:DataDownload",
+        "cdi:TabularTextDataSet"
+      ],
+      "schema:contentUrl": "https://example.org/data/gom-water-quality-wide-2025.csv",
+      "schema:encodingFormat": [
+        "text/csv"
+      ],
+      "cdif:hasPhysicalMapping": [
+        {
+          "cdif:index": 0,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-station"
+          }
+        },
+        {
+          "cdif:index": 1,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-sample-date"
+          }
+        },
+        {
+          "cdif:index": 2,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-ph"
+          }
+        },
+        {
+          "cdif:index": 3,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-temperature"
+          }
+        },
+        {
+          "cdif:index": 4,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-salinity"
+          }
+        },
+        {
+          "cdif:index": 5,
+          "cdif:formats_InstanceVariable": {
+            "@id": "ex:var-oxygen"
+          }
+        }
+      ]
+    }
+  ],
+  "schema:variableMeasured": [
+    {
+      "@id": "ex:var-station",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "station_id",
+      "cdif:physicalDataType": "string"
+    },
+    {
+      "@id": "ex:var-sample-date",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "sample_date",
+      "cdif:physicalDataType": "date"
+    },
+    {
+      "@id": "ex:var-ph",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "ph",
+      "cdif:physicalDataType": "float64"
+    },
+    {
+      "@id": "ex:var-temperature",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "temperature",
+      "cdif:physicalDataType": "float64"
+    },
+    {
+      "@id": "ex:var-salinity",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "salinity",
+      "cdif:physicalDataType": "float64"
+    },
+    {
+      "@id": "ex:var-oxygen",
+      "@type": [
+        "schema:PropertyValue",
+        "cdi:InstanceVariable"
+      ],
+      "schema:name": "dissolved_oxygen",
+      "cdif:physicalDataType": "float64"
+    }
+  ],
+  "schema:subjectOf": {
+    "@id": "ex:gom-water-quality-wide-2025/catalog-record",
+    "@type": [
+      "schema:Dataset"
+    ],
+    "schema:additionalType": [
+      {
+        "@id": "dcat:CatalogRecord"
+      }
+    ],
+    "schema:about": {
+      "@id": "ex:gom-water-quality-wide-2025"
+    },
+    "dcterms:conformsTo": [
+      {
+        "@id": "https://w3id.org/cdif/core/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/discovery/1.1"
+      },
+      {
+        "@id": "https://w3id.org/cdif/data_description/1.1"
+      }
+    ]
+  }
+}
