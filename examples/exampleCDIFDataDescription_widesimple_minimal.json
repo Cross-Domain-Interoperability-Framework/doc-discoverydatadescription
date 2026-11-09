@@ -3,6 +3,7 @@
     "schema": "http://schema.org/",
     "dcterms": "http://purl.org/dc/terms/",
     "dcat": "http://www.w3.org/ns/dcat#",
+    "prov": "http://www.w3.org/ns/prov#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
     "ex": "https://example.org/",
     "cdif": "https://w3id.org/cdif/"
