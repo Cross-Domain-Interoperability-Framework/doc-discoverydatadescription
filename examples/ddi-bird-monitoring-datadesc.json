@@ -5,6 +5,7 @@
     "dcat": "http://www.w3.org/ns/dcat#",
     "prov": "http://www.w3.org/ns/prov#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
     "csvw": "http://www.w3.org/ns/csvw#",
     "spdx": "http://spdx.org/rdf/terms#",
     "cdifq": "http://crossdomaininteroperability.org/cdifq/"
@@ -63,7 +64,7 @@
       "schema:name": "i.S.Latta",
       "schema:description": "i.S.Latta",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Dimension",
       "schema:minValue": 33.0,
       "schema:maxValue": 459.0
     },
@@ -76,7 +77,7 @@
       "schema:name": "name",
       "schema:description": "name",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -87,7 +88,7 @@
       "schema:name": "order",
       "schema:description": "order",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -98,7 +99,7 @@
       "schema:name": "family",
       "schema:description": "family",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -109,7 +110,7 @@
       "schema:name": "genus",
       "schema:description": "genus",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -120,7 +121,7 @@
       "schema:name": "spp",
       "schema:description": "spp",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -131,7 +132,7 @@
       "schema:name": "status",
       "schema:description": "status",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -142,7 +143,7 @@
       "schema:name": "mig.E.L",
       "schema:description": "mig.E.L",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -153,7 +154,7 @@
       "schema:name": "hab.prime",
       "schema:description": "hab.prime",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -164,7 +165,7 @@
       "schema:name": "hab.breadth",
       "schema:description": "hab.breadth",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 7.0
     },
@@ -177,7 +178,7 @@
       "schema:name": "sense",
       "schema:description": "sense",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -188,7 +189,7 @@
       "schema:name": "cons.priority",
       "schema:description": "cons.priority",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.0,
       "schema:maxValue": 4.0
     },
@@ -201,7 +202,7 @@
       "schema:name": "forage.guilde",
       "schema:description": "forage.guilde",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -212,7 +213,7 @@
       "schema:name": "forage.strata",
       "schema:description": "forage.strata",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -223,7 +224,7 @@
       "schema:name": "month",
       "schema:description": "month",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -234,7 +235,7 @@
       "schema:name": "sum.05to14",
       "schema:description": "sum.05to14",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 231.0
     },
@@ -247,7 +248,7 @@
       "schema:name": "yrs.not.obs",
       "schema:description": "yrs.not.obs",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 9.0
     },
@@ -260,7 +261,7 @@
       "schema:name": "max",
       "schema:description": "max",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 76.0
     },
@@ -273,7 +274,7 @@
       "schema:name": "min",
       "schema:description": "min",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 12.0
     },
@@ -286,7 +287,7 @@
       "schema:name": "variable",
       "schema:description": "variable",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Descriptor"
     },
     {
       "@type": [
@@ -297,7 +298,7 @@
       "schema:name": "N",
       "schema:description": "N",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "ReferenceVariable",
       "schema:minValue": 0.0,
       "schema:maxValue": 76.0
     },
@@ -310,7 +311,7 @@
       "schema:name": "var",
       "schema:description": "var",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -321,7 +322,7 @@
       "schema:name": "year",
       "schema:description": "year",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Dimension",
       "schema:minValue": 2005.0,
       "schema:maxValue": 2014.0
     },
@@ -334,7 +335,7 @@
       "schema:name": "year.cent",
       "schema:description": "year.cent",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": -4.5,
       "schema:maxValue": 4.5
     },
@@ -347,7 +348,7 @@
       "schema:name": "i",
       "schema:description": "i",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "UnitIdentifier",
       "schema:minValue": 1.0,
       "schema:maxValue": 2000.0
     },
@@ -360,7 +361,7 @@
       "schema:name": "mig.elevYN",
       "schema:description": "mig.elevYN",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -371,7 +372,7 @@
       "schema:name": "hab.breadth2",
       "schema:description": "hab.breadth2",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 2.0,
       "schema:maxValue": 5.0
     },
@@ -384,7 +385,7 @@
       "schema:name": "sense2",
       "schema:description": "sense2",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -395,7 +396,7 @@
       "schema:name": "forage.guilde2",
       "schema:description": "forage.guilde2",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -406,7 +407,7 @@
       "schema:name": "canopy.ob.YN",
       "schema:description": "canopy.ob.YN",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -417,7 +418,7 @@
       "schema:name": "canopy.use.YN",
       "schema:description": "canopy.use.YN",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -428,7 +429,7 @@
       "schema:name": "strata.max",
       "schema:description": "strata.max",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -439,7 +440,7 @@
       "schema:name": "i.S.Latta",
       "schema:description": "i.S.Latta",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "UnitIdentifier",
       "schema:minValue": 33.0,
       "schema:maxValue": 459.0
     },
@@ -452,7 +453,7 @@
       "schema:name": "name",
       "schema:description": "name",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -463,7 +464,7 @@
       "schema:name": "order",
       "schema:description": "order",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -474,7 +475,7 @@
       "schema:name": "family",
       "schema:description": "family",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -485,7 +486,7 @@
       "schema:name": "subfam",
       "schema:description": "subfam",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -496,7 +497,7 @@
       "schema:name": "genus",
       "schema:description": "genus",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -507,7 +508,7 @@
       "schema:name": "spp",
       "schema:description": "spp",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -518,7 +519,7 @@
       "schema:name": "group.gen",
       "schema:description": "group.gen",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -529,7 +530,7 @@
       "schema:name": "status",
       "schema:description": "status",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -540,7 +541,7 @@
       "schema:name": "mig.E.L",
       "schema:description": "mig.E.L",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -551,7 +552,7 @@
       "schema:name": "hab.prime",
       "schema:description": "hab.prime",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -562,7 +563,7 @@
       "schema:name": "hab.breadth",
       "schema:description": "hab.breadth",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 7.0
     },
@@ -575,7 +576,7 @@
       "schema:name": "sense",
       "schema:description": "sense",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -586,7 +587,7 @@
       "schema:name": "cons.priority",
       "schema:description": "cons.priority",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.0,
       "schema:maxValue": 4.0
     },
@@ -599,7 +600,7 @@
       "schema:name": "forage.guilde",
       "schema:description": "forage.guilde",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -610,7 +611,7 @@
       "schema:name": "forage.strata",
       "schema:description": "forage.strata",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -621,7 +622,7 @@
       "schema:name": "month",
       "schema:description": "month",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -632,7 +633,7 @@
       "schema:name": "n.05",
       "schema:description": "n.05",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 28.0
     },
@@ -645,7 +646,7 @@
       "schema:name": "n.06",
       "schema:description": "n.06",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 17.0
     },
@@ -658,7 +659,7 @@
       "schema:name": "n.07",
       "schema:description": "n.07",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 14.0
     },
@@ -671,7 +672,7 @@
       "schema:name": "n.08",
       "schema:description": "n.08",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 37.0
     },
@@ -684,7 +685,7 @@
       "schema:name": "n.09",
       "schema:description": "n.09",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 36.0
     },
@@ -697,7 +698,7 @@
       "schema:name": "n.10",
       "schema:description": "n.10",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 76.0
     },
@@ -710,7 +711,7 @@
       "schema:name": "n.11",
       "schema:description": "n.11",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 30.0
     },
@@ -723,7 +724,7 @@
       "schema:name": "n.12",
       "schema:description": "n.12",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 23.0
     },
@@ -736,7 +737,7 @@
       "schema:name": "n.13",
       "schema:description": "n.13",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 45.0
     },
@@ -749,7 +750,7 @@
       "schema:name": "n.14",
       "schema:description": "n.14",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 36.0
     },
@@ -762,7 +763,7 @@
       "schema:name": "sum.05to14",
       "schema:description": "sum.05to14",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 231.0
     },
@@ -775,7 +776,7 @@
       "schema:name": "max",
       "schema:description": "max",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 76.0
     },
@@ -788,7 +789,7 @@
       "schema:name": "min",
       "schema:description": "min",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 12.0
     },
@@ -801,7 +802,7 @@
       "schema:name": "range",
       "schema:description": "range",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 70.0
     },
@@ -814,7 +815,7 @@
       "schema:name": "min.0",
       "schema:description": "min.0",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -825,7 +826,7 @@
       "schema:name": "max.1",
       "schema:description": "max.1",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -836,7 +837,7 @@
       "schema:name": "sd",
       "schema:description": "sd",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.316227766,
       "schema:maxValue": 23.25902283
     },
@@ -849,7 +850,7 @@
       "schema:name": "yrs.not.obs",
       "schema:description": "yrs.not.obs",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 9.0
     },
@@ -862,7 +863,7 @@
       "schema:name": "yr.max.occ",
       "schema:description": "yr.max.occ",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 10.0
     },
@@ -875,7 +876,7 @@
       "schema:name": "yr.min.occ",
       "schema:description": "yr.min.occ",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 10.0
     },
@@ -888,7 +889,7 @@
       "schema:name": "hab.breadth2",
       "schema:description": "hab.breadth2",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 2.0,
       "schema:maxValue": 5.0
     },
@@ -901,7 +902,7 @@
       "schema:name": "sense2",
       "schema:description": "sense2",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -912,7 +913,7 @@
       "schema:name": "forage.guilde2",
       "schema:description": "forage.guilde2",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -923,7 +924,7 @@
       "schema:name": "ExplanationofcolumnsindatausedinLattaetal2017.Long-termmonitoringrevealsanavianspeciescreditinsecondaryforestpatchesofCostaRica.PeerJ.",
       "schema:description": "ExplanationofcolumnsindatausedinLattaetal2017.Long-termmonitoringrevealsanavianspeciescreditinsecondaryforestpatchesofCostaRica.PeerJ.",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "UnitIdentifier"
     },
     {
       "@type": [
@@ -934,7 +935,7 @@
       "schema:name": "B",
       "schema:description": "B",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -945,7 +946,7 @@
       "schema:name": "i",
       "schema:description": "i",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "UnitIdentifier",
       "schema:minValue": 2.0,
       "schema:maxValue": 456.0
     },
@@ -958,7 +959,7 @@
       "schema:name": "spp",
       "schema:description": "spp",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Dimension"
     },
     {
       "@type": [
@@ -969,7 +970,7 @@
       "schema:name": "age",
       "schema:description": "age",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Dimension"
     },
     {
       "@type": [
@@ -980,7 +981,7 @@
       "schema:name": "month",
       "schema:description": "month",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Dimension"
     },
     {
       "@type": [
@@ -991,7 +992,7 @@
       "schema:name": "count",
       "schema:description": "count",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 161.0
     },
@@ -1004,7 +1005,7 @@
       "schema:name": "name",
       "schema:description": "name",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -1015,7 +1016,7 @@
       "schema:name": "code",
       "schema:description": "code",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "UnitIdentifier"
     },
     {
       "@type": [
@@ -1026,7 +1027,7 @@
       "schema:name": "order",
       "schema:description": "order",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     }
   ],
   "schema:distribution": [
@@ -1053,260 +1054,260 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "d1ae5e493f6a53726122f09feb2055bf"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "i.S.Latta",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698622"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698645"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "name",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698586"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698647"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "order",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698585"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698660"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "family",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698633"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698644"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "genus",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698606"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698635"
           }
         },
         {
-          "cdi:index": 5,
+          "cdif:index": 5,
           "schema:name": "spp",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698591"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698639"
           }
         },
         {
-          "cdi:index": 6,
+          "cdif:index": 6,
           "schema:name": "status",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698609"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698641"
           }
         },
         {
-          "cdi:index": 7,
+          "cdif:index": 7,
           "schema:name": "mig.E.L",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698608"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698651"
           }
         },
         {
-          "cdi:index": 8,
+          "cdif:index": 8,
           "schema:name": "hab.prime",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698603"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698648"
           }
         },
         {
-          "cdi:index": 9,
+          "cdif:index": 9,
           "schema:name": "hab.breadth",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698601"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698666"
           }
         },
         {
-          "cdi:index": 10,
+          "cdif:index": 10,
           "schema:name": "sense",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698597"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698658"
           }
         },
         {
-          "cdi:index": 11,
+          "cdif:index": 11,
           "schema:name": "cons.priority",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698624"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698652"
           }
         },
         {
-          "cdi:index": 12,
+          "cdif:index": 12,
           "schema:name": "forage.guilde",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698621"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698653"
           }
         },
         {
-          "cdi:index": 13,
+          "cdif:index": 13,
           "schema:name": "forage.strata",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698598"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698664"
           }
         },
         {
-          "cdi:index": 14,
+          "cdif:index": 14,
           "schema:name": "month",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698588"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698654"
           }
         },
         {
-          "cdi:index": 15,
+          "cdif:index": 15,
           "schema:name": "sum.05to14",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698602"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698662"
           }
         },
         {
-          "cdi:index": 16,
+          "cdif:index": 16,
           "schema:name": "yrs.not.obs",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698605"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698646"
           }
         },
         {
-          "cdi:index": 17,
+          "cdif:index": 17,
           "schema:name": "max",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698628"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698659"
           }
         },
         {
-          "cdi:index": 18,
+          "cdif:index": 18,
           "schema:name": "min",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698617"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698642"
           }
         },
         {
-          "cdi:index": 19,
+          "cdif:index": 19,
           "schema:name": "variable",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698661"
           }
         },
         {
-          "cdi:index": 20,
+          "cdif:index": 20,
           "schema:name": "N",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698640"
           }
         },
         {
-          "cdi:index": 21,
+          "cdif:index": 21,
           "schema:name": "var",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698649"
           }
         },
         {
-          "cdi:index": 22,
+          "cdif:index": 22,
           "schema:name": "year",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698637"
           }
         },
         {
-          "cdi:index": 23,
+          "cdif:index": 23,
           "schema:name": "year.cent",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698638"
           }
         },
         {
-          "cdi:index": 24,
+          "cdif:index": 24,
           "schema:name": "i",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698592"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698650"
           }
         },
         {
-          "cdi:index": 25,
+          "cdif:index": 25,
           "schema:name": "mig.elevYN",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698655"
           }
         },
         {
-          "cdi:index": 26,
+          "cdif:index": 26,
           "schema:name": "hab.breadth2",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698596"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698663"
           }
         },
         {
-          "cdi:index": 27,
+          "cdif:index": 27,
           "schema:name": "sense2",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698629"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698643"
           }
         },
         {
-          "cdi:index": 28,
+          "cdif:index": 28,
           "schema:name": "forage.guilde2",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698600"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698656"
           }
         },
         {
-          "cdi:index": 29,
+          "cdif:index": 29,
           "schema:name": "canopy.ob.YN",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698665"
           }
         },
         {
-          "cdi:index": 30,
+          "cdif:index": 30,
           "schema:name": "canopy.use.YN",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698657"
           }
         },
         {
-          "cdi:index": 31,
+          "cdif:index": 31,
           "schema:name": "strata.max",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698636"
           }
         }
@@ -1335,324 +1336,324 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "3471ca553254b9041ce69410307be631"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "i.S.Latta",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698622"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "name",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698586"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698615"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "order",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698585"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698618"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "family",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698633"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "subfam",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698612"
           }
         },
         {
-          "cdi:index": 5,
+          "cdif:index": 5,
           "schema:name": "genus",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698606"
           }
         },
         {
-          "cdi:index": 6,
+          "cdif:index": 6,
           "schema:name": "spp",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698591"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698626"
           }
         },
         {
-          "cdi:index": 7,
+          "cdif:index": 7,
           "schema:name": "group.gen",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698631"
           }
         },
         {
-          "cdi:index": 8,
+          "cdif:index": 8,
           "schema:name": "status",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698609"
           }
         },
         {
-          "cdi:index": 9,
+          "cdif:index": 9,
           "schema:name": "mig.E.L",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698608"
           }
         },
         {
-          "cdi:index": 10,
+          "cdif:index": 10,
           "schema:name": "hab.prime",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698603"
           }
         },
         {
-          "cdi:index": 11,
+          "cdif:index": 11,
           "schema:name": "hab.breadth",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698601"
           }
         },
         {
-          "cdi:index": 12,
+          "cdif:index": 12,
           "schema:name": "sense",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698597"
           }
         },
         {
-          "cdi:index": 13,
+          "cdif:index": 13,
           "schema:name": "cons.priority",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698624"
           }
         },
         {
-          "cdi:index": 14,
+          "cdif:index": 14,
           "schema:name": "forage.guilde",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698621"
           }
         },
         {
-          "cdi:index": 15,
+          "cdif:index": 15,
           "schema:name": "forage.strata",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698598"
           }
         },
         {
-          "cdi:index": 16,
+          "cdif:index": 16,
           "schema:name": "month",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v17698588"
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v17698627"
           }
         },
         {
-          "cdi:index": 17,
+          "cdif:index": 17,
           "schema:name": "n.05",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698610"
           }
         },
         {
-          "cdi:index": 18,
+          "cdif:index": 18,
           "schema:name": "n.06",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698625"
           }
         },
         {
-          "cdi:index": 19,
+          "cdif:index": 19,
           "schema:name": "n.07",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698614"
           }
         },
         {
-          "cdi:index": 20,
+          "cdif:index": 20,
           "schema:name": "n.08",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698630"
           }
         },
         {
-          "cdi:index": 21,
+          "cdif:index": 21,
           "schema:name": "n.09",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698613"
           }
         },
         {
-          "cdi:index": 22,
+          "cdif:index": 22,
           "schema:name": "n.10",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698616"
           }
         },
         {
-          "cdi:index": 23,
+          "cdif:index": 23,
           "schema:name": "n.11",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698632"
           }
         },
         {
-          "cdi:index": 24,
+          "cdif:index": 24,
           "schema:name": "n.12",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698611"
           }
         },
         {
-          "cdi:index": 25,
+          "cdif:index": 25,
           "schema:name": "n.13",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698607"
           }
         },
         {
-          "cdi:index": 26,
+          "cdif:index": 26,
           "schema:name": "n.14",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698604"
           }
         },
         {
-          "cdi:index": 27,
+          "cdif:index": 27,
           "schema:name": "sum.05to14",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698602"
           }
         },
         {
-          "cdi:index": 28,
+          "cdif:index": 28,
           "schema:name": "max",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698628"
           }
         },
         {
-          "cdi:index": 29,
+          "cdif:index": 29,
           "schema:name": "min",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698617"
           }
         },
         {
-          "cdi:index": 30,
+          "cdif:index": 30,
           "schema:name": "range",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698623"
           }
         },
         {
-          "cdi:index": 31,
+          "cdif:index": 31,
           "schema:name": "min.0",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698595"
           }
         },
         {
-          "cdi:index": 32,
+          "cdif:index": 32,
           "schema:name": "max.1",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698620"
           }
         },
         {
-          "cdi:index": 33,
+          "cdif:index": 33,
           "schema:name": "sd",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698619"
           }
         },
         {
-          "cdi:index": 34,
+          "cdif:index": 34,
           "schema:name": "yrs.not.obs",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698605"
           }
         },
         {
-          "cdi:index": 35,
+          "cdif:index": 35,
           "schema:name": "yr.max.occ",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698634"
           }
         },
         {
-          "cdi:index": 36,
+          "cdif:index": 36,
           "schema:name": "yr.min.occ",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698599"
           }
         },
         {
-          "cdi:index": 37,
+          "cdif:index": 37,
           "schema:name": "hab.breadth2",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698596"
           }
         },
         {
-          "cdi:index": 38,
+          "cdif:index": 38,
           "schema:name": "sense2",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698629"
           }
         },
         {
-          "cdi:index": 39,
+          "cdif:index": 39,
           "schema:name": "forage.guilde2",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698600"
           }
         }
@@ -1681,20 +1682,20 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "f5184f72627f9eef63d650663df71c1f"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "ExplanationofcolumnsindatausedinLattaetal2017.Long-termmonitoringrevealsanavianspeciescreditinsecondaryforestpatchesofCostaRica.PeerJ.",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698594"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "B",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698593"
           }
         }
@@ -1723,44 +1724,44 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "a5a0fbff25a61f7f3dccaeec8a044457"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "i",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698592"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "spp",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698591"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "age",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698590"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "month",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698588"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "count",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698589"
           }
         }
@@ -1789,28 +1790,28 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "a0132b5643422814c3bc852c47906f01"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "name",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698586"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "code",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698587"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "order",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v17698585"
           }
         }

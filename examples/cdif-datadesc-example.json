@@ -5,6 +5,7 @@
     "geosparql": "http://www.opengis.net/ont/geosparql#",
     "spdx": "http://spdx.org/rdf/terms#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
     "csvw": "http://www.w3.org/ns/csvw#",
     "cdifq": "http://crossdomaininteroperability.org/cdifq/",
     "xsd": "http://www.w3.org/2001/XMLSchema#",
@@ -325,20 +326,20 @@
       "csvw:headerRowCount": 1,
       "cdifq:nRows": 461,
       "cdifq:nColumns": 2,
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "SiO2_wt_pct",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#var-SiO2"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "Al2O3_wt_pct",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#var-Al2O3"
           }
         }
@@ -368,22 +369,22 @@
         "spdx:algorithm": "SHA256",
         "spdx:checksumValue": "f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5d4c3b2a1f6e5"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "SiO2",
-          "cdi:physicalDataType": "xsd:decimal",
+          "cdif:physicalDataType": "xsd:decimal",
           "cdi:locator": "/geochemistry/SiO2",
-          "cdi:formats_InstanceVariable": {
+          "cdif:formats_InstanceVariable": {
             "@id": "#var-SiO2"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "Al2O3",
-          "cdi:physicalDataType": "xsd:decimal",
+          "cdif:physicalDataType": "xsd:decimal",
           "cdi:locator": "/geochemistry/Al2O3",
-          "cdi:formats_InstanceVariable": {
+          "cdif:formats_InstanceVariable": {
             "@id": "#var-Al2O3"
           }
         }
@@ -513,8 +514,8 @@
       "schema:minValue": 45.2,
       "schema:maxValue": 77.8,
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
-      "cdi:physicalDataType": [
+      "cdif:role": "Measure",
+      "cdif:physicalDataType": [
         "xsd:decimal"
       ]
     },
@@ -551,8 +552,8 @@
       "schema:minValue": 12.1,
       "schema:maxValue": 21.4,
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
-      "cdi:physicalDataType": [
+      "cdif:role": "Measure",
+      "cdif:physicalDataType": [
         "xsd:decimal"
       ]
     }

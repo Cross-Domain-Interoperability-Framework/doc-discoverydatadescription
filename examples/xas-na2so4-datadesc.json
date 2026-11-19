@@ -5,6 +5,7 @@
     "dcat": "http://www.w3.org/ns/dcat#",
     "prov": "http://www.w3.org/ns/prov#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
     "csvw": "http://www.w3.org/ns/csvw#",
     "spdx": "http://spdx.org/rdf/terms#",
     "geosparql": "http://www.opengis.net/ont/geosparql#",
@@ -65,28 +66,28 @@
       "csvw:headerRowCount": 27,
       "cdifq:nRows": 469,
       "cdifq:nColumns": 3,
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "energy",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "xas:monochromatorEnergyVariable"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "itrans",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "xas:transmittedIntensityVariable"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "i0",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "xas:incidentIntensityVariable"
           }
         }
@@ -147,16 +148,16 @@
         }
       ],
       "schema:unitText": "eV",
-      "cdi:identifier": "should be URI from nexusFormat organization",
-      "cdi:physicalDataType": [
+      "cdif:identifier": "should be URI from nexusFormat organization",
+      "cdif:physicalDataType": [
         "https://www.w3.org/TR/xmlschema-2/#decimal"
       ],
       "cdi:simpleUnitOfMeasure": "eV",
-      "cdi:uses": [
+      "cdif:uses": [
         "xas:Monochromator_Energy"
       ],
-      "cdi:name": "energy",
-      "cdi:displayLabel": "monochromator energy"
+      "cdif:name": "energy",
+      "cdif:displayLabel": "monochromator energy"
     },
     {
       "@id": "xas:incidentIntensityVariable",
@@ -178,15 +179,15 @@
       "schema:measurementTechnique": {
         "@id": "xas:Detector10cmN2"
       },
-      "cdi:identifier": "should be URI from nexusFormat organization",
-      "cdi:physicalDataType": [
+      "cdif:identifier": "should be URI from nexusFormat organization",
+      "cdif:physicalDataType": [
         "https://www.w3.org/TR/xmlschema-2/#decimal"
       ],
-      "cdi:uses": [
+      "cdif:uses": [
         "xas:Incident_Intensity"
       ],
-      "cdi:name": "i0",
-      "cdi:displayLabel": "monitor intensity"
+      "cdif:name": "i0",
+      "cdif:displayLabel": "monitor intensity"
     },
     {
       "@id": "xas:transmittedIntensityVariable",
@@ -208,15 +209,15 @@
       "schema:measurementTechnique": {
         "@id": "xas:Detector10cmN2"
       },
-      "cdi:physicalDataType": [
+      "cdif:physicalDataType": [
         "https://www.w3.org/TR/xmlschema-2/#decimal"
       ],
-      "cdi:identifier": "should be URI from nexusFormat organization",
-      "cdi:uses": [
+      "cdif:identifier": "should be URI from nexusFormat organization",
+      "cdif:uses": [
         "xas:Transmitted_Intensity"
       ],
-      "cdi:name": "itrans",
-      "cdi:displayLabel": "transmission intensity"
+      "cdif:name": "itrans",
+      "cdif:displayLabel": "transmission intensity"
     }
   ],
   "schema:subjectOf": {

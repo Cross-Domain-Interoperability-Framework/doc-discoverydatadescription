@@ -5,6 +5,7 @@
     "dcat": "http://www.w3.org/ns/dcat#",
     "prov": "http://www.w3.org/ns/prov#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
     "csvw": "http://www.w3.org/ns/csvw#",
     "spdx": "http://spdx.org/rdf/terms#",
     "cdifq": "http://crossdomaininteroperability.org/cdifq/"
@@ -54,7 +55,7 @@
       "schema:name": "Country",
       "schema:description": "Country",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Dimension"
     },
     {
       "@type": [
@@ -65,7 +66,7 @@
       "schema:name": "Year",
       "schema:description": "Year",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Dimension",
       "schema:minValue": 2003.0,
       "schema:maxValue": 2023.0
     },
@@ -78,7 +79,7 @@
       "schema:name": "Temperature (°C)",
       "schema:description": "Temperature (°C)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 15.02841633,
       "schema:maxValue": 29.82225973
     },
@@ -91,7 +92,7 @@
       "schema:name": "Precipitation (mm)",
       "schema:description": "Precipitation (mm)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 512.3340491,
       "schema:maxValue": 2998.466074
     },
@@ -104,7 +105,7 @@
       "schema:name": "Zoonotic Cases",
       "schema:description": "Zoonotic Cases",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 74.0,
       "schema:maxValue": 128.0
     },
@@ -117,7 +118,7 @@
       "schema:name": "Population Density (per km^2)",
       "schema:description": "Population Density (per km^2)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 51.28098631,
       "schema:maxValue": 498.1982563
     },
@@ -130,7 +131,7 @@
       "schema:name": "Urbanization Rate (%)",
       "schema:description": "Urbanization Rate (%)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 30.28221257,
       "schema:maxValue": 89.90642288
     }
@@ -159,60 +160,60 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "e2eea0c9c64439411153c4cefd172374"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "Country",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797335"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "Year",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797332"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "Temperature (°C)",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797336"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "Precipitation (mm)",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797334"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "Zoonotic Cases",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797330"
           }
         },
         {
-          "cdi:index": 5,
+          "cdif:index": 5,
           "schema:name": "Population Density (per km^2)",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797333"
           }
         },
         {
-          "cdi:index": 6,
+          "cdif:index": 6,
           "schema:name": "Urbanization Rate (%)",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v33797331"
           }
         }

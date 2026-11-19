@@ -5,6 +5,7 @@
     "dcat": "http://www.w3.org/ns/dcat#",
     "prov": "http://www.w3.org/ns/prov#",
     "cdi": "http://ddialliance.org/Specification/DDI-CDI/1.0/RDF/",
+    "cdif": "https://w3id.org/cdif/",
     "csvw": "http://www.w3.org/ns/csvw#",
     "spdx": "http://spdx.org/rdf/terms#",
     "cdifq": "http://crossdomaininteroperability.org/cdifq/"
@@ -52,7 +53,7 @@
       "schema:name": "iso3n",
       "schema:description": "Country (ISO3n)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Dimension",
       "schema:minValue": 36.0,
       "schema:maxValue": 840.0
     },
@@ -65,7 +66,10 @@
       "schema:name": "ccode",
       "schema:description": "ccode",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Attribute",
+      "cdif:qualifies": {
+        "@id": "#v31187113"
+      }
     },
     {
       "@type": [
@@ -76,7 +80,7 @@
       "schema:name": "year",
       "schema:description": "Year",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Dimension",
       "schema:minValue": 2009.0,
       "schema:maxValue": 2019.0
     },
@@ -89,7 +93,7 @@
       "schema:name": "cash_ipolate",
       "schema:description": "Cash usage (percent)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 8.0,
       "schema:maxValue": 91.375
     },
@@ -102,7 +106,7 @@
       "schema:name": "wage_ctrlstr_ipolate",
       "schema:description": "Control wage",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1785.69384765625,
       "schema:maxValue": 72851.6484375
     },
@@ -115,7 +119,7 @@
       "schema:name": "wage_cashier_ipolate",
       "schema:description": "Cashier wage (USD)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1526.3671875,
       "schema:maxValue": 60255.3203125
     },
@@ -128,7 +132,7 @@
       "schema:name": "wage_cashier_usd",
       "schema:description": "Cashier annual earnings (USD)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1526.3671875,
       "schema:maxValue": 60255.3203125
     },
@@ -141,7 +145,7 @@
       "schema:name": "gdp_retail_propn",
       "schema:description": "Retail (percent GDP)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 2.4590163230895996,
       "schema:maxValue": 6.953507423400879
     },
@@ -154,7 +158,7 @@
       "schema:name": "tax",
       "schema:description": "Corporate income tax rate (percent)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 15.0,
       "schema:maxValue": 35.0
     },
@@ -167,7 +171,7 @@
       "schema:name": "gdp_pc",
       "schema:description": "GDP per capita (USD'000)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 12.431816101074219,
       "schema:maxValue": 102.9134521484375
     },
@@ -180,7 +184,7 @@
       "schema:name": "popn_mm",
       "schema:description": "Population (mill)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.3145450353622437,
       "schema:maxValue": 328.2395324707031
     },
@@ -193,7 +197,7 @@
       "schema:name": "id",
       "schema:description": "group(session id_session)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "UnitIdentifier",
       "schema:minValue": 1.0,
       "schema:maxValue": 125.0
     },
@@ -206,7 +210,7 @@
       "schema:name": "session",
       "schema:description": "(first) session",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 6.0
     },
@@ -219,7 +223,7 @@
       "schema:name": "total_excess",
       "schema:description": "(first) total_excess",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 339.1000061035156
     },
@@ -232,7 +236,7 @@
       "schema:name": "correct_ans",
       "schema:description": "Correct transactions",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 35.0,
       "schema:maxValue": 200.0
     },
@@ -245,7 +249,7 @@
       "schema:name": "total_ans",
       "schema:description": "Total transactions",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 39.0,
       "schema:maxValue": 200.0
     },
@@ -258,7 +262,7 @@
       "schema:name": "rmssd",
       "schema:description": "HRV (RMSSD)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.291621685028076,
       "schema:maxValue": 188.1981201171875
     },
@@ -271,7 +275,7 @@
       "schema:name": "rmssd_base",
       "schema:description": "Baseline HRV (RMSSD)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.250053644180298,
       "schema:maxValue": 203.47647094726562
     },
@@ -283,7 +287,7 @@
       "@id": "#v31187139",
       "schema:name": "rmssd_1",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.250235080718994,
       "schema:maxValue": 281.38873291015625
     },
@@ -295,7 +299,7 @@
       "@id": "#v31187121",
       "schema:name": "rmssd_2",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.186089038848877,
       "schema:maxValue": 186.80165100097656
     },
@@ -307,7 +311,7 @@
       "@id": "#v31187133",
       "schema:name": "rmssd_3",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.434569835662842,
       "schema:maxValue": 177.6093292236328
     },
@@ -319,7 +323,7 @@
       "@id": "#v31187128",
       "schema:name": "rmssd_math",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 3.0907034873962402,
       "schema:maxValue": 168.68333435058594
     },
@@ -332,7 +336,7 @@
       "schema:name": "math",
       "schema:description": "Math score",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 6.0
     },
@@ -345,7 +349,7 @@
       "schema:name": "confidence",
       "schema:description": "Confidence score",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 100.0
     },
@@ -358,7 +362,7 @@
       "schema:name": "risk",
       "schema:description": "Risk aversion",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 10.0
     },
@@ -371,7 +375,7 @@
       "schema:name": "male",
       "schema:description": "Male",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -384,7 +388,7 @@
       "schema:name": "retail_exp",
       "schema:description": "retail_exp",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -397,7 +401,7 @@
       "schema:name": "retailexpmths",
       "schema:description": "Retail experience (months)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 60.0
     },
@@ -409,7 +413,7 @@
       "@id": "#v31187127",
       "schema:name": "extraversion",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.5,
       "schema:maxValue": 4.25
     },
@@ -421,7 +425,7 @@
       "@id": "#v31187143",
       "schema:name": "agreeableness",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 2.3333332538604736,
       "schema:maxValue": 4.777777671813965
     },
@@ -433,7 +437,7 @@
       "@id": "#v31187123",
       "schema:name": "conscientiousness",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.3333333730697632,
       "schema:maxValue": 4.44444465637207
     },
@@ -445,7 +449,7 @@
       "@id": "#v31187122",
       "schema:name": "neuroticism",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.75,
       "schema:maxValue": 4.75
     },
@@ -457,7 +461,7 @@
       "@id": "#v31187126",
       "schema:name": "openness",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.600000023841858,
       "schema:maxValue": 4.800000190734863
     },
@@ -469,7 +473,7 @@
       "@id": "#v31187131",
       "schema:name": "cash",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -481,7 +485,7 @@
       "@id": "#v31187136",
       "schema:name": "rmssd_delta",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": -0.8191816210746765,
       "schema:maxValue": 0.9411714673042297
     },
@@ -494,7 +498,7 @@
       "schema:name": "age",
       "schema:description": "Age (years)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 17.0,
       "schema:maxValue": 24.0
     },
@@ -507,7 +511,7 @@
       "schema:name": "cashier",
       "schema:description": "group(cashierid)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "UnitIdentifier",
       "schema:minValue": 1.0,
       "schema:maxValue": 126.0
     },
@@ -520,7 +524,7 @@
       "schema:name": "relwage",
       "schema:description": "Wage premium",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": -40.0,
       "schema:maxValue": 40.0
     },
@@ -533,7 +537,7 @@
       "schema:name": "choice",
       "schema:description": "Prefer cash",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -546,7 +550,7 @@
       "schema:name": "risk",
       "schema:description": "Risk (PCA)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": -1.406009554862976,
       "schema:maxValue": 3.1519484519958496
     },
@@ -559,7 +563,7 @@
       "schema:name": "passion",
       "schema:description": "Passionate",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 5.0
     },
@@ -572,7 +576,7 @@
       "schema:name": "stress",
       "schema:description": "Stressful",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 5.0
     },
@@ -585,7 +589,7 @@
       "schema:name": "satisfy",
       "schema:description": "Satisfied",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 5.0
     },
@@ -598,7 +602,7 @@
       "schema:name": "attitude",
       "schema:description": "Job satisfaction",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": -7.656647682189941,
       "schema:maxValue": 2.4610908031463623
     },
@@ -611,7 +615,7 @@
       "schema:name": "foreign",
       "schema:description": "Foreigner",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -624,7 +628,7 @@
       "schema:name": "tenure",
       "schema:description": "Tenure",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 20.0
     },
@@ -637,7 +641,7 @@
       "schema:name": "tenure_ln",
       "schema:description": "Tenure (log)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 2.995732307434082
     },
@@ -650,7 +654,7 @@
       "schema:name": "age",
       "schema:description": "Age",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 20.0,
       "schema:maxValue": 62.0
     },
@@ -663,7 +667,7 @@
       "schema:name": "age_ln",
       "schema:description": "Age (log)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 2.995732307434082,
       "schema:maxValue": 4.127134323120117
     },
@@ -676,7 +680,7 @@
       "schema:name": "eduyr",
       "schema:description": "Education",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 6.0,
       "schema:maxValue": 15.0
     },
@@ -689,7 +693,7 @@
       "schema:name": "eduyr_ln",
       "schema:description": "Education (log)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.7917594909667969,
       "schema:maxValue": 2.70805025100708
     },
@@ -702,7 +706,7 @@
       "schema:name": "bmi",
       "schema:description": "Body mass index",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 15.431503295898438,
       "schema:maxValue": 41.91434097290039
     },
@@ -715,7 +719,7 @@
       "schema:name": "exper",
       "schema:description": "Cashier exper.",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 20.0
     },
@@ -728,7 +732,7 @@
       "schema:name": "exper_ln",
       "schema:description": "Cashier exper. (log)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 2.995732307434082
     },
@@ -741,7 +745,7 @@
       "schema:name": "selfpay",
       "schema:description": "Ever scan-only",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -754,7 +758,7 @@
       "schema:name": "edulv",
       "schema:description": "edulv",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -765,7 +769,7 @@
       "schema:name": "jobstart",
       "schema:description": "jobstart",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 199904.0,
       "schema:maxValue": 201804.0
     },
@@ -778,7 +782,7 @@
       "schema:name": "cashierstart",
       "schema:description": "cashierstart",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 199904.0,
       "schema:maxValue": 201803.0
     },
@@ -791,7 +795,7 @@
       "schema:name": "selfpaystart",
       "schema:description": "selfpaystart",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 201805.0
     },
@@ -804,7 +808,7 @@
       "schema:name": "mode_pref",
       "schema:description": "Payment mode preference",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 2.0
     },
@@ -817,7 +821,7 @@
       "schema:name": "risk1",
       "schema:description": "Risk (self report)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 10.0
     },
@@ -830,7 +834,7 @@
       "schema:name": "risk2",
       "schema:description": "Risk (wage)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 5.0
     },
@@ -843,7 +847,7 @@
       "schema:name": "risk3",
       "schema:description": "Risk (rent)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 5.0
     },
@@ -856,7 +860,7 @@
       "schema:name": "wage_premium",
       "schema:description": "wage_premium",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -867,7 +871,7 @@
       "schema:name": "reason_card",
       "schema:description": "Reason card",
       "cdi:intendedDataType": "xsd:string",
-      "cdi:role": "AttributeComponent"
+      "cdif:role": "Measure"
     },
     {
       "@type": [
@@ -878,7 +882,7 @@
       "schema:name": "store",
       "schema:description": "store",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 1.0,
       "schema:maxValue": 15.0
     },
@@ -891,7 +895,7 @@
       "schema:name": "local",
       "schema:description": "Local",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -904,7 +908,7 @@
       "schema:name": "viet",
       "schema:description": "Vietnam",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -917,7 +921,7 @@
       "schema:name": "prc",
       "schema:description": "PRChina",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -930,7 +934,7 @@
       "schema:name": "mal",
       "schema:description": "Malaysia",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -943,7 +947,10 @@
       "schema:name": "inconsistent",
       "schema:description": "Inconsistent",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Attribute",
+      "cdif:qualifies": {
+        "@id": "#v31187164"
+      },
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     },
@@ -956,7 +963,7 @@
       "schema:name": "risk2aversion",
       "schema:description": "Risk aversion (wage)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 4.0
     },
@@ -969,7 +976,7 @@
       "schema:name": "risk3aversion",
       "schema:description": "Risk aversion (rent)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Measure",
       "schema:minValue": 0.0,
       "schema:maxValue": 4.0
     },
@@ -982,7 +989,7 @@
       "schema:name": "riskaversion",
       "schema:description": "Risk aversion (PCA)",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "MeasureComponent",
+      "cdif:role": "Measure",
       "schema:minValue": -3.1519484519958496,
       "schema:maxValue": 1.406009554862976
     },
@@ -995,7 +1002,10 @@
       "schema:name": "risk_miss",
       "schema:description": "Risk missing",
       "cdi:intendedDataType": "xsd:decimal",
-      "cdi:role": "AttributeComponent",
+      "cdif:role": "Attribute",
+      "cdif:qualifies": {
+        "@id": "#v31187150"
+      },
       "schema:minValue": 0.0,
       "schema:maxValue": 1.0
     }
@@ -1024,92 +1034,92 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "43b7b59291314b274aba23ea35d95f6b"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "iso3n",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187113"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "ccode",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187114"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "year",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187118"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "cash_ipolate",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187111"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "wage_ctrlstr_ipolate",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187120"
           }
         },
         {
-          "cdi:index": 5,
+          "cdif:index": 5,
           "schema:name": "wage_cashier_ipolate",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187110"
           }
         },
         {
-          "cdi:index": 6,
+          "cdif:index": 6,
           "schema:name": "wage_cashier_usd",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187115"
           }
         },
         {
-          "cdi:index": 7,
+          "cdif:index": 7,
           "schema:name": "gdp_retail_propn",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187112"
           }
         },
         {
-          "cdi:index": 8,
+          "cdif:index": 8,
           "schema:name": "tax",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187119"
           }
         },
         {
-          "cdi:index": 9,
+          "cdif:index": 9,
           "schema:name": "gdp_pc",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187116"
           }
         },
         {
-          "cdi:index": 10,
+          "cdif:index": 10,
           "schema:name": "popn_mm",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187117"
           }
         }
@@ -1138,205 +1148,205 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "6eec2cd897fe8b91307c79d69385f4a9"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "id",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187145"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "session",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187140"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "total_excess",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187125"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "correct_ans",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187142"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "total_ans",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187135"
           }
         },
         {
-          "cdi:index": 5,
+          "cdif:index": 5,
           "schema:name": "rmssd",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187124"
           }
         },
         {
-          "cdi:index": 6,
+          "cdif:index": 6,
           "schema:name": "rmssd_base",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187137"
           }
         },
         {
-          "cdi:index": 7,
+          "cdif:index": 7,
           "schema:name": "rmssd_1",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187139"
           }
         },
         {
-          "cdi:index": 8,
+          "cdif:index": 8,
           "schema:name": "rmssd_2",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187121"
           }
         },
         {
-          "cdi:index": 9,
+          "cdif:index": 9,
           "schema:name": "rmssd_3",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187133"
           }
         },
         {
-          "cdi:index": 10,
+          "cdif:index": 10,
           "schema:name": "rmssd_math",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187128"
           }
         },
         {
-          "cdi:index": 11,
+          "cdif:index": 11,
           "schema:name": "math",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187130"
           }
         },
         {
-          "cdi:index": 12,
+          "cdif:index": 12,
           "schema:name": "confidence",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187141"
           }
         },
         {
-          "cdi:index": 13,
+          "cdif:index": 13,
           "schema:name": "risk",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v31187150"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v31187138"
           }
         },
         {
-          "cdi:index": 14,
+          "cdif:index": 14,
           "schema:name": "male",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187132"
           }
         },
         {
-          "cdi:index": 15,
+          "cdif:index": 15,
           "schema:name": "retail_exp",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187134"
           }
         },
         {
-          "cdi:index": 16,
+          "cdif:index": 16,
           "schema:name": "retailexpmths",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187129"
           }
         },
         {
-          "cdi:index": 17,
+          "cdif:index": 17,
           "schema:name": "extraversion",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187127"
           }
         },
         {
-          "cdi:index": 18,
+          "cdif:index": 18,
           "schema:name": "agreeableness",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187143"
           }
         },
         {
-          "cdi:index": 19,
+          "cdif:index": 19,
           "schema:name": "conscientiousness",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187123"
           }
         },
         {
-          "cdi:index": 20,
+          "cdif:index": 20,
           "schema:name": "neuroticism",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187122"
           }
         },
         {
-          "cdi:index": 21,
+          "cdif:index": 21,
           "schema:name": "openness",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187126"
           }
         },
         {
-          "cdi:index": 22,
+          "cdif:index": 22,
           "schema:name": "cash",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187131"
           }
         },
         {
-          "cdi:index": 23,
+          "cdif:index": 23,
           "schema:name": "rmssd_delta",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187136"
           }
         },
         {
-          "cdi:index": 24,
+          "cdif:index": 24,
           "schema:name": "age",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
-            "@id": "#v31187162"
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
+            "@id": "#v31187144"
           }
         }
       ]
@@ -1364,316 +1374,316 @@
         "spdx:algorithm": "MD5",
         "spdx:checksumValue": "b14a52aefc928542451e5f266a560927"
       },
-      "cdi:hasPhysicalMapping": [
+      "cdif:hasPhysicalMapping": [
         {
-          "cdi:index": 0,
+          "cdif:index": 0,
           "schema:name": "cashier",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187182"
           }
         },
         {
-          "cdi:index": 1,
+          "cdif:index": 1,
           "schema:name": "relwage",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187176"
           }
         },
         {
-          "cdi:index": 2,
+          "cdif:index": 2,
           "schema:name": "choice",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187165"
           }
         },
         {
-          "cdi:index": 3,
+          "cdif:index": 3,
           "schema:name": "risk",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187150"
           }
         },
         {
-          "cdi:index": 4,
+          "cdif:index": 4,
           "schema:name": "passion",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187153"
           }
         },
         {
-          "cdi:index": 5,
+          "cdif:index": 5,
           "schema:name": "stress",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187146"
           }
         },
         {
-          "cdi:index": 6,
+          "cdif:index": 6,
           "schema:name": "satisfy",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187170"
           }
         },
         {
-          "cdi:index": 7,
+          "cdif:index": 7,
           "schema:name": "attitude",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187168"
           }
         },
         {
-          "cdi:index": 8,
+          "cdif:index": 8,
           "schema:name": "foreign",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187179"
           }
         },
         {
-          "cdi:index": 9,
+          "cdif:index": 9,
           "schema:name": "tenure",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187156"
           }
         },
         {
-          "cdi:index": 10,
+          "cdif:index": 10,
           "schema:name": "tenure_ln",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187157"
           }
         },
         {
-          "cdi:index": 11,
+          "cdif:index": 11,
           "schema:name": "age",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187162"
           }
         },
         {
-          "cdi:index": 12,
+          "cdif:index": 12,
           "schema:name": "age_ln",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187147"
           }
         },
         {
-          "cdi:index": 13,
+          "cdif:index": 13,
           "schema:name": "eduyr",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187171"
           }
         },
         {
-          "cdi:index": 14,
+          "cdif:index": 14,
           "schema:name": "eduyr_ln",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187163"
           }
         },
         {
-          "cdi:index": 15,
+          "cdif:index": 15,
           "schema:name": "bmi",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187155"
           }
         },
         {
-          "cdi:index": 16,
+          "cdif:index": 16,
           "schema:name": "exper",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187181"
           }
         },
         {
-          "cdi:index": 17,
+          "cdif:index": 17,
           "schema:name": "exper_ln",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187160"
           }
         },
         {
-          "cdi:index": 18,
+          "cdif:index": 18,
           "schema:name": "selfpay",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187183"
           }
         },
         {
-          "cdi:index": 19,
+          "cdif:index": 19,
           "schema:name": "edulv",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187175"
           }
         },
         {
-          "cdi:index": 20,
+          "cdif:index": 20,
           "schema:name": "jobstart",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187159"
           }
         },
         {
-          "cdi:index": 21,
+          "cdif:index": 21,
           "schema:name": "cashierstart",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187177"
           }
         },
         {
-          "cdi:index": 22,
+          "cdif:index": 22,
           "schema:name": "selfpaystart",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187149"
           }
         },
         {
-          "cdi:index": 23,
+          "cdif:index": 23,
           "schema:name": "mode_pref",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187184"
           }
         },
         {
-          "cdi:index": 24,
+          "cdif:index": 24,
           "schema:name": "risk1",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187172"
           }
         },
         {
-          "cdi:index": 25,
+          "cdif:index": 25,
           "schema:name": "risk2",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187166"
           }
         },
         {
-          "cdi:index": 26,
+          "cdif:index": 26,
           "schema:name": "risk3",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187161"
           }
         },
         {
-          "cdi:index": 27,
+          "cdif:index": 27,
           "schema:name": "wage_premium",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187180"
           }
         },
         {
-          "cdi:index": 28,
+          "cdif:index": 28,
           "schema:name": "reason_card",
-          "cdi:physicalDataType": "xsd:string",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:string",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187169"
           }
         },
         {
-          "cdi:index": 29,
+          "cdif:index": 29,
           "schema:name": "store",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187151"
           }
         },
         {
-          "cdi:index": 30,
+          "cdif:index": 30,
           "schema:name": "local",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187174"
           }
         },
         {
-          "cdi:index": 31,
+          "cdif:index": 31,
           "schema:name": "viet",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187158"
           }
         },
         {
-          "cdi:index": 32,
+          "cdif:index": 32,
           "schema:name": "prc",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187148"
           }
         },
         {
-          "cdi:index": 33,
+          "cdif:index": 33,
           "schema:name": "mal",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187167"
           }
         },
         {
-          "cdi:index": 34,
+          "cdif:index": 34,
           "schema:name": "inconsistent",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187154"
           }
         },
         {
-          "cdi:index": 35,
+          "cdif:index": 35,
           "schema:name": "risk2aversion",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187164"
           }
         },
         {
-          "cdi:index": 36,
+          "cdif:index": 36,
           "schema:name": "risk3aversion",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187178"
           }
         },
         {
-          "cdi:index": 37,
+          "cdif:index": 37,
           "schema:name": "riskaversion",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187173"
           }
         },
         {
-          "cdi:index": 38,
+          "cdif:index": 38,
           "schema:name": "risk_miss",
-          "cdi:physicalDataType": "xsd:decimal",
-          "cdi:formats_InstanceVariable": {
+          "cdif:physicalDataType": "xsd:decimal",
+          "cdif:formats_InstanceVariable": {
             "@id": "#v31187152"
           }
         }
