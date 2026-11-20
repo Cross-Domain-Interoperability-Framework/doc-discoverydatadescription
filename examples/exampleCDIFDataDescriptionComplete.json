@@ -710,9 +710,7 @@
           "cdif:logicalExpression": "all reals x such that -90 <= x <= 60",
           "cdif:regularExpression": "^-?\\d{1,2}(\\.\\d)?$",
           "cdi:minimumValueInclusive": "-90.0",
-          "cdi:minimumValueExclusive": "-273.15",
-          "cdi:maximumValueInclusive": "60.0",
-          "cdi:maximumValueExclusive": "100.0"
+          "cdi:maximumValueInclusive": "60.0"
         }
       },
       "cdi:takesSentinelValuesFrom": [
